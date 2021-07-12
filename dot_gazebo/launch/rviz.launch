@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
 
-  <param name="robot_description" command="cat '$(find test_bot)/urdf/Bot/model.sdf'"/>
+  <param name="robot_description" command="cat '$(find dot_description)/urdf/Bot/model.sdf'"/>
 
   <!-- send fake joint values -->
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">

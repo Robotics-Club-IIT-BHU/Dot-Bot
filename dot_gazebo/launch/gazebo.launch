@@ -2,19 +2,20 @@
 <launch>
 
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find dot_gazebo)/world/ps1/ps1_final.world" />
         <arg name="paused" value="false"/>
         <arg name="use_sim_time" value="true"/>
         <arg name="gui" value="true"/>
         <arg name="headless" value="false"/>
         <arg name="debug" value="false"/>
     </include>
-    <param name="robot_description" command="cat '$(find test_bot)/urdf/bot.urdf'" />
+    <param name="robot_description" command="cat '$(find dot_description)/urdf/bot.urdf'" />
 
-    <arg name="x" default="0"/>
-    <arg name="y" default="0"/>
+    <arg name="x" default="2"/>
+    <arg name="y" default="2"/>
     <arg name="z" default="0.5"/>
 
     <node name="mybot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
-          args="-urdf -param robot_description -model m2wr -x $(arg x) -y $(arg y) -z $(arg z)" />
-    <include file="$(find test_bot)/launch/bot_control.launch" />
+          args="-urdf -param robot_description -model dot -x $(arg x) -y $(arg y) -z $(arg z)" />
+    <include file="$(find dot_control)/launch/bring_up.launch" />
 </launch>

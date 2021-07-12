@@ -1,10 +1,10 @@
 <?xml version="1.0" ?>
 
-<robot name="m2wr" xmlns:xacro="https://www.ros.org/wiki/xacro" >
+<robot name="dot" xmlns:xacro="https://www.ros.org/wiki/xacro" >
 
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-      <robotNamespace>/m2wr</robotNamespace>
+      <robotNamespace>/dot</robotNamespace>
     </plugin>
   </gazebo>    
     
