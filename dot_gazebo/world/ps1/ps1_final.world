@@ -89,7 +89,7 @@
       </link>
       <pose>0.046072 -4.9e-05 0 0 -0 0</pose>
     </model>
-    <light name='user_point_light_0' type='point'>
+    <!-- <light name='user_point_light_0' type='point'>
       <pose>0.103331 -0.089498 1 0 -0 0</pose>
       <diffuse>0.5 0.5 0.5 1</diffuse>
       <specular>0.1 0.1 0.1 1</specular>
@@ -114,7 +114,7 @@
       </attenuation>
       <cast_shadows>0</cast_shadows>
       <direction>0 0 -1</direction>
-    </light>
+    </light> -->
     <model name='wall_01'>
       <link name='link'>
         <inertial>
@@ -315,15 +315,15 @@
       <light name='sun'>
         <pose>0 0 10 0 -0 0</pose>
       </light>
-      <light name='user_point_light_0'>
+      <!-- <light name='user_point_light_0'>
         <pose>0.103331 -0.089498 1 0 -0 0</pose>
       </light>
       <light name='user_point_light_1'>
         <pose>0.084305 -0.102184 1 0 -0 0</pose>
-      </light>
-      <light name='user_point_light_2'>
+      </light> -->
+      <!-- <light name='user_point_light_2'>
         <pose>2.44918 4 1 0 -0 0</pose>
-      </light>
+      </light> -->
     </state>
     <model name='wall_01_1'>
       <link name='link'>
@@ -741,7 +741,7 @@
         <kinematic>0</kinematic>
       </link>
     </model>
-    <light name='user_point_light_2' type='point'>
+    <!-- <light name='user_point_light_2' type='point'>
       <pose>2.44918 4 1 0 -0 0</pose>
       <diffuse>0.5 0.5 0.5 1</diffuse>
       <specular>0.1 0.1 0.1 1</specular>
@@ -753,7 +753,7 @@
       </attenuation>
       <cast_shadows>0</cast_shadows>
       <direction>0 0 -1</direction>
-    </light>
+    </light> -->
     <model name='ground_plane'>
       <static>1</static>
       <link name='link'>

@@ -108,7 +108,7 @@
     <parent link="link_chassis" />
     <axis xyz="0 0 1" />
     <limit effort="0.26" velocity="20" />
-    <joint_properties damping="0.1" friction="0.1" />
+    <joint_properties damping="0.1" friction="0.2" />
   </joint>
 
   <joint name="caster_joint_12" type="revolute">
@@ -117,7 +117,7 @@
     <parent link="dummy_link_1" />
     <axis xyz="0 1 0" />
     <limit effort="0.26" velocity="20" />
-    <joint_properties damping="0.1" friction="0.1" />
+    <joint_properties damping="0.1" friction="0.2" />
   </joint>
 
   <link name="caster_link_2">
@@ -154,7 +154,7 @@
     <parent link="link_chassis" />
     <axis xyz="0 0 1" />
     <limit effort="0.26" velocity="20" />
-    <joint_properties damping="0.1" friction="0.1" />
+    <joint_properties damping="0.1" friction="0.2" />
   </joint>
 
   <joint name="caster_joint_22" type="revolute">
@@ -163,7 +163,7 @@
     <parent link="dummy_link_2" />
     <axis xyz="0 1 0" />
     <limit effort="0.26" velocity="20" />
-    <joint_properties damping="0.1" friction="0.1" />
+    <joint_properties damping="0.1" friction="0.2" />
   </joint>
   
   <!-- Create wheel right -->  
@@ -198,7 +198,7 @@
     <parent link="link_chassis"/>
     <axis rpy="0 0 0" xyz="${0 * scale} ${1 * scale} ${0 * scale}"/>
     <limit effort="2.6" velocity="20"/>
-    <joint_properties damping="0.1" friction="0.1" />
+    <joint_properties damping="0.1" friction="0.2" />
   </joint>  
     
   <!-- Left Wheel link -->
@@ -233,7 +233,7 @@
     <parent link="link_chassis"/>
     <axis rpy="0 0 0" xyz="0 1 0"/>
     <limit effort="2.6" velocity="20"/>
-    <joint_properties damping="0.1" friction="0.1" />
+    <joint_properties damping="0.1" friction="0.2" />
   </joint>    
 
   <transmission name="tran1">
