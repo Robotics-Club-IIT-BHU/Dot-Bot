@@ -2,14 +2,15 @@
 <launch>
 
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
-        <arg name="world_name" value="$(find dot_gazebo)/world/ps1/ps1_final.world" />
+        <!-- <arg name="world_name" value="$(find dot_gazebo)/world/ps1/ps1_final.world" /> -->
         <arg name="paused" value="false"/>
         <arg name="use_sim_time" value="true"/>
         <arg name="gui" value="true"/>
         <arg name="headless" value="false"/>
         <arg name="debug" value="false"/>
     </include>
-    <param name="robot_description" command="cat '$(find dot_description)/urdf/bot.urdf'" />
+    <param name="robot_description" command="$(find xacro)/xacro 
+                                                        '$(find dot_description)/urdf/bot.urdf.xacro'" />
 
     <arg name="x" default="2"/>
     <arg name="y" default="2"/>
