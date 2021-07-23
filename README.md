@@ -7,7 +7,7 @@ Ros repository for the swarm bots
 cd catkin_ws/src
 git clone git@github.com:Robotics-Club-IIT-BHU/Swarm-Bot.git
 cd Swarm-Bot
-./setup.bash
+./setup.sh
 cd ../..
 catkin build
 ```
