@@ -3,12 +3,17 @@ dot:
         type: joint_state_controller/JointStateController
         publish_rate: 150
 
-    joint1_position_controller:
+    left_joint_position_controller:
         type: effort_controllers/JointPositionController
-        joint: joint_right_wheel
-        pid: {p: 100.0, i: 0.01, d: 10.0} 
+        joint: rim_left_joint
+        pid: {p: 100.0, i: 0.01, d: 10.0}
 
-    joint2_position_controller:
+    back_joint_position_controller:
         type: effort_controllers/JointPositionController
-        joint: joint_left_wheel
+        joint: rim_back_joint
+        pid: {p: 100.0, i: 0.01, d: 10.0}
+
+    right_joint_position_controller:
+        type: effort_controllers/JointPositionController
+        joint: rim_right_joint
         pid: {p: 100.0, i: 0.01, d: 10.0}

@@ -10,7 +10,7 @@
         <arg name="debug" value="false"/>
     </include>
     <param name="robot_description" command="$(find xacro)/xacro 
-                                                        '$(find dot_description)/urdf/bot.urdf.xacro'" />
+                                                        '$(find dot_description)/xacro/main.urdf.xacro'" />
 
     <arg name="x" default="2"/>
     <arg name="y" default="2"/>
@@ -18,5 +18,5 @@
 
     <node name="mybot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
           args="-urdf -param robot_description -model dot -x $(arg x) -y $(arg y) -z $(arg z)" />
-    <include file="$(find dot_control)/launch/bring_up.launch" />
+  <!-- <include file="$(find dot_control)/launch/bring_up.launch" />  -->
 </launch>
