@@ -1,0 +1,33 @@
+{
+    "configurations": [
+        {
+            "browse": {
+                "databaseFilename": "",
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "includePath": [
+                "/home/dhruxy/catkin_ws/devel/include/**",
+                "/opt/ros/melodic/include/**",
+                "/home/dhruxy/catkin_ws/src/april_detection/include/**",
+                "/home/dhruxy/catkin_ws/src/apriltag_ros/apriltag_ros/include/**",
+                "/home/dhruxy/catkin_ws/src/apriltags_ros/apriltags/include/**",
+                "/home/dhruxy/catkin_ws/src/apriltags_ros/apriltags_ros/include/**",
+                "/home/dhruxy/catkin_ws/src/beginner_tutorials/include/**",
+                "/home/dhruxy/catkin_ws/src/Swarm-Bot/dot_control/include/**",
+                "/home/dhruxy/catkin_ws/src/gazebo_demo/include/**",
+                "/home/dhruxy/catkin_ws/src/grid_cam/include/**",
+                "/home/dhruxy/catkin_ws/src/learning_tf2/include/**",
+                "/home/dhruxy/catkin_ws/src/gmapping/include/**",
+                "/home/dhruxy/catkin_ws/src/robot_setup_tf/include/**",
+                "/home/dhruxy/catkin_ws/src/turtlebot3_simulations/turtlebot3_fake/include/**",
+                "/home/dhruxy/catkin_ws/src/turtlebot3_simulations/turtlebot3_gazebo/include/**",
+                "/home/dhruxy/catkin_ws/src/turtlebot3/turtlebot3_slam/include/**",
+                "/home/dhruxy/catkin_ws/src/usb_cam/include/**",
+                "/usr/include/**",
+                "/opt/ros/melodic/include"
+            ],
+            "name": "ROS"
+        }
+    ],
+    "version": 4
+}
