@@ -2,7 +2,7 @@
 <launch>
 
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
-        <arg name="world_name" value="$(find dot_gazebo)/world/ps1/ps1_final.world" />
+        <arg name="world_name" value="$(find dot_gazebo)/world/ps2/ps2_nosignal.world" />
         <arg name="paused" value="false"/>
         <arg name="use_sim_time" value="true"/>
         <arg name="gui" value="true"/>
