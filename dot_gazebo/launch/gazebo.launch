@@ -3,7 +3,7 @@
     <arg name="ps" default="ps2" />
     <arg name="world_file" value="$(find dot_gazebo)/world/ps1/ps1_final.world" 
         if="$(eval arg('ps') == 'ps1')" />
-    <arg name="world_file" value="$(find dot_gazebo)/world/ps2/final_ps2.world" 
+    <arg name="world_file" value="$(find dot_gazebo)/world/ps2/ps2_nosignal.world" 
         if="$(eval arg('ps') == 'ps2')" />
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
         <arg name="world_name" value="$(arg world_file)" />
