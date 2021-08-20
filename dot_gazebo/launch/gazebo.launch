@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
-
+    <arg name="ps" default="ps2" />
+    <arg name="world_file" value="$(find dot_gazebo)/world/ps1/ps1_final.world" 
+        if="$(eval arg('ps') == 'ps1')" />
+    <arg name="world_file" value="$(find dot_gazebo)/world/ps2/final_ps2.world" 
+        if="$(eval arg('ps') == 'ps2')" />
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
-        <arg name="world_name" value="$(find dot_gazebo)/world/ps1/ps1_final.world" />
+        <arg name="world_name" value="$(arg world_file)" />
         <arg name="paused" value="false"/>
         <arg name="use_sim_time" value="true"/>
         <arg name="gui" value="true"/>

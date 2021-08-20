@@ -1,5 +1,6 @@
-<sdf version='1.7'>
-  <world name='default'>
+<?xml version='1.0'?>
+<sdf version='1.6'>
+  <world name='final_ps2'>
     <light name='sun' type='directional'>
       <cast_shadows>1</cast_shadows>
       <pose>0 0 10 0 -0 0</pose>
@@ -2281,9 +2282,9 @@
             </geometry>
             <material>
               <script>
-                <uri>file://media/materials/scripts</uri>
-                <uri>file://media/materials/textures</uri>
-                <name>MyGroundPlane/ps2</name>
+                <uri>file://ps2_ground_plane/materials/scripts</uri>
+                <uri>file://ps2_ground_plane/materials/textures</uri>
+                <name>Ps2GroundPlane/Image</name>
               </script>
             </material>
           </visual>
@@ -4813,7 +4814,7 @@
       <allow_auto_disable>1</allow_auto_disable>
       <pose>-0.006494 -0.008063 0.016008 0 -0 0</pose>
     </model>
-    <state world_name='default'>
+    <state world_name='final_ps2'>
       <sim_time>14 261000000</sim_time>
       <real_time>14 812375785</real_time>
       <wall_time>1628112743 138490455</wall_time>
