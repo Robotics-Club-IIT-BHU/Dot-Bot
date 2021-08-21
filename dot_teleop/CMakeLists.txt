@@ -7,8 +7,17 @@ project(dot_teleop)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
+
+set(Boost_USE_STATIC_LIBS OFF)
+set(Boost_USE_MULTITHREADED ON)
+set(Boost_USE_STATIC_RUNTIME OFF)
+
+find_package(Boost REQUIRED COMPONENTS thread)
+
 find_package(catkin REQUIRED COMPONENTS
   rospy
+  roscpp
+  geometry_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -103,8 +112,8 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES dot_teleop
-#  CATKIN_DEPENDS rospy
-#  DEPENDS system_lib
+  CATKIN_DEPENDS rospy roscpp geometry_msgs
+  DEPENDS boost
 )
 
 ###########
@@ -115,6 +124,7 @@ catkin_package(
 ## Your package locations should be listed before other locations
 include_directories(
 # include
+  ${Boost_INCLUDE_DIRS}
   ${catkin_INCLUDE_DIRS}
 )
 
@@ -132,7 +142,13 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/dot_teleop_node.cpp)
+add_executable(dot_teleop src/dot_key.cpp)
+#add_dependencies(dot_teleop ${catkin_EXPORTED_TARGETS} ${Boost_EXPORTED_TARGETS})
+target_link_libraries(dot_teleop 
+                      ${catkin_LIBRARIES} 
+                      ${Boost_LIBRARIES}) 
 
+                      
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
