@@ -1,0 +1,100 @@
+<launch>
+	<rosparam
+		file="$(find dot_config)/config/control/bot_control.yaml"
+		command="load"
+	/>
+	<include file="$(find dot_gazebo)/launch/parameter.launch"/>
+	<arg
+		name="debug"
+		default="false"
+	/>
+	<arg
+		name="gui"
+		default="true"
+	/>
+	<arg
+		name="headless"
+		default="false"
+	/>
+	<arg
+		name="paused"
+		default="true"
+	/>
+	<arg
+		name="use_sim_time"
+		default="true"
+	/>
+	<arg
+		name="height"
+		default="0"
+	/>
+	<include file="$(find gazebo_ros)/launch/empty_world.launch">
+		<arg
+			name="debug"
+			value="$(arg debug)"
+		/>
+		<arg
+			name="gui"
+			value="$(arg gui)"
+		/>
+		<arg
+			name="paused"
+			value="$(arg paused)"
+		/>
+		<arg
+			name="use_sim_time"
+			value="$(arg use_sim_time)"
+		/>
+		<arg
+			name="headless"
+			value="$(arg headless)"
+		/>
+		<arg
+			name="world_name"
+			value="$(find dot_gazebo)/world/ps1/ps1_final.world"
+		/>
+		<!--arg
+			name="physics"
+			value="simbody"
+		/-->
+
+	</include>
+    
+	<node
+		name="dot_spawner"
+		pkg="gazebo_ros"
+		type="spawn_model"
+		args="-urdf -model robot -param dot/robot_description -model dot -z $(arg height)"
+		ns="dot"
+	/>
+	<node
+		name="robot_state_publisher"
+		pkg="robot_state_publisher"
+		type="robot_state_publisher"
+		respawn="false"
+		output="screen"
+		ns="dot"
+	>
+
+		<param
+			name="publish_frequency"
+			type="double"
+			value="30.0"
+		/>
+		<remap
+			from="/joint_states"
+			to="/dot/joint_states"
+		/>
+
+	</node>
+    <!-- <node
+            name="controller_spawner"
+            pkg="controller_manager"
+            type="spawner"
+            respawn="false"
+            output="screen"
+            args="joint_state_controller left_joint_position_controller back_joint_position_controller right_joint_positoin_controller"
+            ns="/dot"
+        /> -->
+  <include file="$(find dot_control)/launch/bring_up.launch" /> 
+</launch>

@@ -1,0 +1,56 @@
+<launch>
+
+	<!--param
+		name="robot_description"
+		textfile="$(find dot_description)/urdf/description.urdf"
+	/-->
+	<param
+		name="dot/robot_description"
+		command="cat $(find xacro)/xacro '$(find dot_description)/xacro/main.urdf.xacro'"
+	/>
+	<!--param
+		name="dot/parameter/control/D"
+		value="0.0"
+	/>< PID -->
+	<param
+		name="dot/parameter/control/I"
+		value="0.0005"
+	/><!-- PID -->
+	<param
+		name="dot/parameter/control/P"
+		value="5.0"
+	/><!-- PID -->
+	<param
+		name="dot/parameter/initial/x"
+		value="0.0"
+	/>
+	<param
+		name="dot/parameter/initial/y"
+		value="0.0"
+	/>
+	<param
+		name="dot/parameter/initial/theta"
+		value="0.0"
+	/>
+	<param
+		name="dot/parameter/max/omega"
+		value="50.0"
+	/><!-- set by experiments (rad/s) -->
+	<param
+		name="dot/parameter/max/v"
+		value="1.0"
+	/><!-- set by experiments (m/s) -->
+	<param
+		name="dot/parameter/stop/angle"
+		value="0.1047197551196597705355242034774843062905347323976457118988037109375"
+	/><!-- pi / 30 -->
+	<param
+		name="dot/parameter/stop/distance"
+		value="0.001"
+	/>
+	<param
+		name="dot/parameter/wheel/radius"
+		value="0.01905"
+	/>
+
+</launch>
