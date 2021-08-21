@@ -2,7 +2,7 @@
 <launch>
 
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
-        <arg name="world_name" value="$(find dot_gazebo)/world/ps1/ps1_final.world" />
+        <!-- <arg name="world_name" value="$(find dot_gazebo)/world/ps1/ps1_final.world" /> -->
         <arg name="paused" value="false"/>
         <arg name="use_sim_time" value="true"/>
         <arg name="gui" value="true"/>
@@ -18,5 +18,5 @@
 
     <node name="mybot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
           args="-urdf -param robot_description -model dot -x $(arg x) -y $(arg y) -z $(arg z)" />
-  <!-- <include file="$(find dot_control)/launch/bring_up.launch" />  -->
+  <include file="$(find dot_control)/launch/bring_up.launch" /> 
 </launch>
