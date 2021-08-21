@@ -13,5 +13,5 @@
     <remap from="/joint_states" to="/dot/joint_states" />
     
   </node>
-
+  <node name="dot_omni_control" pkg="dot_control" type="omnidrive"/>
 </launch>
