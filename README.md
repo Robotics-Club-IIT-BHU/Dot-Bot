@@ -12,6 +12,7 @@ catkin build
 ```
 # Localization Filter
 
+Reqwuired Package: robot_localization https://github.com/cra-ros-pkg/robot_localization
 Use the odom_ekf.launch file to launch the node of the fusion of imu+encoder data. Reference link: https://roverrobotics.com/blogs/guides/fusing-imu-encoders-with-ros-robot-localization
 Explanation of code: https://github.com/cra-ros-pkg/robot_localization/blob/32896d6d1aaec5a92c3a65e5f16dfc0b859a7d26/params/ekf_template.yaml
 
