@@ -7,3 +7,10 @@ In turtlebot_navigation/launch/includes/move_base.launch.xml , I edited param va
 To launch our bot instead of turtlebot, I changed the launch file in line 47 in turtlebot_stage/launch/turtlebot_in_stage.launch
 
 Now, just use "roslaunch turtlebot_stage turtlebot_in_stage.launch"
+
+Uploaded files:
+               turtlebot_stage
+               turtlebot_navigation
+               turtlebot_bringup
+               relaxed_astar
+               bot.launch
