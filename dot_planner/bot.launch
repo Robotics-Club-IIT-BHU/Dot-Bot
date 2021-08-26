@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+    <param name="robot_description" command="$(find xacro)/xacro 
+                                                        '$(find dot_description)/xacro/main.urdf.xacro'" />
+
+    <arg name="x" default="1"/>
+    <arg name="y" default="1"/>
+    <arg name="z" default="0.5"/>
+
+    <node name="mybot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
+          args="-urdf -param robot_description -model dot -x $(arg x) -y $(arg y) -z $(arg z)" />
+  <include file="$(find dot_control)/launch/bring_up.launch" /> 
+</launch>
