@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <!-- This block of code is to call empty_world.launch file to fire up gazebo with
+                empty world -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find gazebo_demo)/world/lol.world" /> 
+        <arg name="paused" value="false"/>
+        <arg name="use_sim_time" value="true"/>
+        <arg name="gui" value="true"/>
+        <arg name="headless" value="false"/>
+        <arg name="debug" value="false"/>
+    </include>
+
+    <!-- This line loads urdf data of out robot -->
+    <param name="robot_description" command="cat '$(find gazebo_demo)/urdf/bot.urdf'" />
+
+    <!-- Coordinates of bot which we need to spawn -->
+    <arg name="x" default="0"/>
+    <arg name="y" default="0"/>
+    <arg name="z" default="0.5"/>
+
+    <!-- Calling spawing node to spawn our robot -->
+    <node name="mybot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
+          args="-urdf -param robot_description -model bot -x $(arg x) -y $(arg y) -z $(arg z)" />
+
+</launch>
