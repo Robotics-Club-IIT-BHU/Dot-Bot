@@ -8,6 +8,8 @@
   
   <!-- Launching RViz -->
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find dot_planner)/rviz/dot_planner.rviz"/>
-  
+ 
+ <!-- odom publisher -->
+ <node name="gazebo_odom" pkg="dot_odom" type="dot_odom"/>  
 
 </launch>
