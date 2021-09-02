@@ -1,5 +1,9 @@
 <?xml version="1.0"?>
 <launch>
+  <arg name="scan_topic"  default="/dot/laser_scan" />
+  <arg name="base_frame"  default="base_link"/>
+  <arg name="odom_frame"  default="odom"/>
+  
   <!-- Launching the simulation  -->
   <include file="$(find dot_gazebo)/launch/gazebo.launch" />
 
@@ -11,5 +15,13 @@
  
  <!-- odom publisher -->
  <node name="gazebo_odom" pkg="dot_odom" type="dot_odom"/>  
-
+ 
+ <!-- mapping server-->
+ <!-- rosrun gmapping slam_gmapping scan:=/dot/laser_scan _odom_frame:=odom -->
+ <node name="build_map" pkg="gmapping" type="slam_gmapping" >
+   <param name="base_frame" value="$(arg base_frame)"/>
+   <param name="odom_frame" value="$(arg odom_frame)"/>
+   <remap from="scan" to="$(arg scan_topic)"/>
+ </node>
+ <!-- For saving rosrun map_server map_saver -f <map_name> -->
 </launch>
