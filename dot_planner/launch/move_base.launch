@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<launch>
+   <!--include file="$(find dot_planner)/launch/dot_planner.launch" /-->
+   <master auto="start"/>
+ <!-- Run the map server --> 
+ <!-- Default map server resolution is 0.05-->
+ <node name="map_server" pkg="map_server" type="map_server" args="$(find dot_map)/map.pgm 0.05"/>
+
+ <!--- Run AMCL --> 
+    <include file="$(find amcl)/examples/amcl_omni.launch" />
+
+   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <rosparam file="$(find dot_planner)/config/costmap_common_params.yaml" command="load" ns="global_costmap" /> 
+    <rosparam file="$(find dot_planner)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find dot_planner)/config/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find dot_planner)/config/global_costmap_params.yaml" command="load" /> 
+    <rosparam file="$(find dot_planner)/config/base_local_planner_params.yaml" command="load" />
+   </node>
+   <!-- node pkg="robot_localization" type="ukf_localization_node" name="ukf_odom_node" output="screen" >
+    <rosparam command="load" file="$(find dot_planner)/config/ukf_template.yaml" />
+   </node -->
+</launch> 
