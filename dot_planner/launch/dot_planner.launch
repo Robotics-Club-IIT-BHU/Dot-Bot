@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Launching the simulation  -->
+  <include file="$(find dot_gazebo)/launch/gazebo.launch" />
+
+  <!-- Launching the teleoperation keyboard node -->
+  <node name="teleop_twist_keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" launch-prefix="gnome-terminal --" />
+  
+  <!-- Launching RViz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find dot_planner)/rviz/dot_planner.rviz"/>
+  
+
+</launch>
