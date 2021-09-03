@@ -16,12 +16,16 @@
     </include>
     <param name="robot_description" command="$(find xacro)/xacro 
                                                         '$(find dot_description)/xacro/main.urdf.xacro'" />
-
-    <arg name="x" default="1"/>
-    <arg name="y" default="1"/>
+    <param name="camera_description" command="cat '$(find dot_gazebo)/urdf/cameras.urdf'" />
+    <arg name="x" default="0"/>
+    <arg name="y" default="0"/>
     <arg name="z" default="0.5"/>
 
     <node name="mybot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
           args="-urdf -param robot_description -model dot -x $(arg x) -y $(arg y) -z $(arg z)" />
+
+    <node name="cameras_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
+          args="-urdf -param camera_description -model cameras -x 0.0 -y 0.0 -z 0.0" />
+    
   <include file="$(find dot_control)/launch/bring_up.launch" /> 
 </launch>
