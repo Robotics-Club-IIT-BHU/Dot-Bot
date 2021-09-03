@@ -5,9 +5,6 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
-        - /RobotModel1
-        - /LaserScan1
-        - /Map1
       Splitter Ratio: 0.5
     Tree Height: 549
   - Class: rviz/Selection
@@ -255,18 +252,19 @@ Visualization Manager:
       Show Names: true
       Tree:
         map:
-          odom:
-            base_link:
-              hokuyo_link:
-                {}
-              imu_link:
-                {}
-              rim_back_link:
-                {}
-              rim_left_link:
-                {}
-              rim_right_link:
-                {}
+          {}
+        odom:
+          base_link:
+            hokuyo_link:
+              {}
+            imu_link:
+              {}
+            rim_back_link:
+              {}
+            rim_left_link:
+              {}
+            rim_right_link:
+              {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -307,6 +305,43 @@ Visualization Manager:
       Unreliable: false
       Use Timestamp: false
       Value: true
+    - Alpha: 1
+      Arrow Length: 0.30000001192092896
+      Axes Length: 0.30000001192092896
+      Axes Radius: 0.009999999776482582
+      Class: rviz/PoseArray
+      Color: 255; 25; 0
+      Enabled: true
+      Head Length: 0.07000000029802322
+      Head Radius: 0.029999999329447746
+      Name: PoseArray
+      Queue Size: 1
+      Shaft Length: 0.23000000417232513
+      Shaft Radius: 0.009999999776482582
+      Shape: Arrow (Flat)
+      Topic: /particlecloud
+      Unreliable: false
+      Value: true
+    - Alpha: 0.699999988079071
+      Class: rviz/Map
+      Color Scheme: map
+      Draw Behind: false
+      Enabled: true
+      Name: Map
+      Topic: /move_base/local_costmap/costmap
+      Unreliable: false
+      Use Timestamp: false
+      Value: true
+    - Alpha: 0.699999988079071
+      Class: rviz/Map
+      Color Scheme: map
+      Draw Behind: false
+      Enabled: false
+      Name: Map
+      Topic: /move_base/global_costmap/costmap
+      Unreliable: false
+      Use Timestamp: false
+      Value: false
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -335,7 +370,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 2.6576786041259766
+      Distance: 1.7916923761367798
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -351,9 +386,9 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.5552031993865967
+      Pitch: 0.6997973322868347
       Target Frame: <Fixed Frame>
-      Yaw: 0.20541197061538696
+      Yaw: 2.8072357177734375
     Saved: ~
 Window Geometry:
   Displays:
