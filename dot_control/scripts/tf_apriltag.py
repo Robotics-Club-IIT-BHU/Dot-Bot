@@ -5,7 +5,9 @@ from visualization_msgs.msg import Marker, MarkerArray
 from apriltag_ros.msg import AprilTagDetectionArray
 from geometry_msgs.msg import PoseStamped
 import tf
+import warnings
 
+warnings.filterwarnings("ignore")
 global marker_arry, visited_ids
 marker_arry = MarkerArray()
 visited_ids = {}
@@ -29,7 +31,7 @@ def tags_callback(msg):
         pose_stamped.pose = pose.pose.pose
 
         try:
-            tranformed_pose_stamped = listener.transformPose('/world', pose_stamped)
+            tranformed_pose_stamped = listener.transformPose('world', pose_stamped)
 
         except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException) as e:
             print(e)
