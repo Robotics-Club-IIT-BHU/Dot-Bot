@@ -60,7 +60,7 @@
 			/>
 
 		</joint>
-
+		
 	</xacro:macro>
 
 </robot>

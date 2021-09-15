@@ -9,9 +9,9 @@ project(dot_planner)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   move_base
-  odom_config_dep
-  sensor_config_dep
-  tf_config_dep
+  #odom_config_dep
+  #sensor_config_dep
+  #tf_config_dep
 )
 
 ## System dependencies are found with CMake's conventions
