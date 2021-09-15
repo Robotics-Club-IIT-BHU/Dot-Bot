@@ -14,4 +14,5 @@
     
   </node>
   <node name="dot_omni_control" pkg="dot_control" type="omnidrive"/>
+  <node name="dot_odom_pub" pkg="dot_control" type="odometry_node" output="screen"/>
 </launch>

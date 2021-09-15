@@ -3,13 +3,18 @@
 #include "geometry_msgs/Twist.h"
 #include <cmath>
 #include <iostream>
+#define PI 3.14159
 
 // Equations are taken from this repo -> https://github.com/GuiRitter/OpenBase
-double vx = 1, vy = 0, wp = 0, L = 1;
+double vx = 0, vy = 0, wp = 0, L = 0.04;
 
 void velocity_callback(const geometry_msgs::Twist& msg){
-    vx = msg.linear.x;
-    vy = msg.linear.y;
+    double Vx = msg.linear.x;
+    double Vy = msg.linear.y;
+    double s = sin(-PI/3);
+    double c = cos(-PI/3);
+    vx = Vx;//*c + Vy*s;
+    vy = Vy;//*s - Vy*c;
     wp = msg.angular.z;
 }
 
@@ -23,7 +28,10 @@ int main(int argc, char** argv){
 
     ros::Subscriber vel_sub = n.subscribe("/cmd_vel", 1000, velocity_callback);
     
-    ros::Rate rate(10);
+    double dt_ = 1.0/100.0;
+
+
+    ros::Rate rate(1.0/dt_);
 
     std_msgs::Float64 lpos, rpos, bpos;
     lpos.data = 0;
@@ -38,9 +46,9 @@ int main(int argc, char** argv){
         v2 = vx + L * wp;
         v3 = L * wp - (vx / 2) + (sqrt(3) * vy / 2);
 
-        lpos.data += v1;
-        bpos.data += v2;
-        rpos.data += v3;
+        lpos.data += 2*PI*v1*dt_;
+        bpos.data += 2*PI*v2*dt_;
+        rpos.data += 2*PI*v3*dt_;
 
         left_pub.publish(lpos);
         right_pub.publish(rpos);
