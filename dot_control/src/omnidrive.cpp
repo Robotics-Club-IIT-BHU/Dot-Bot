@@ -1,6 +1,7 @@
 #include "ros/ros.h"
 #include "std_msgs/Float64.h"
 #include "geometry_msgs/Twist.h"
+#include "sensor_msgs/JointState.h"
 #include <cmath>
 #include <iostream>
 #define PI 3.14159
@@ -16,6 +17,10 @@ void velocity_callback(const geometry_msgs::Twist& msg){
     vx = Vx;//*c + Vy*s;
     vy = Vy;//*s - Vy*c;
     wp = msg.angular.z;
+}
+
+void encoder_callback(const sensor_msgs::JointStates& msg){
+    
 }
 
 int main(int argc, char** argv){
