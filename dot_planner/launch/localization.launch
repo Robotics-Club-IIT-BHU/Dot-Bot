@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+  
+  <arg name="rviz_file"  default="$(find dot_planner)/rviz/localization.rviz" />
+  <include file="$(find dot_planner)/launch/dot_planner.launch" >
+   	<arg name="rviz_file"  value="$(arg rviz_file)" />
+   </include>
+  <!-- Run the EKF localization node-->
+  <node pkg="robot_localization" type="ekf_localization_node" name="ekf_localization">
+  	<rosparam command="load" file="$(find dot_planner)/config/ekf_localization.yaml"/>
+  </node>
+ 
+</launch>

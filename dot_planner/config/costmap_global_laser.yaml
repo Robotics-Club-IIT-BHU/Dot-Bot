@@ -1,0 +1,10 @@
+global_costmap:
+  global_frame: map
+  rolling_window: true
+  track_unknown_space: true
+  robot_base_frame: base_link
+  update_frequency: 5.0
+  static_map: false
+  plugins:
+    - {name: obstacles_laser,           type: "costmap_2d::ObstacleLayer"}
+    - {name: inflation,                 type: "costmap_2d::InflationLayer"}

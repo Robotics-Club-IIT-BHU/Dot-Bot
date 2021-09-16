@@ -1,0 +1,6 @@
+image: ps1_map.pgm 
+resolution: 0.00234375 #meters/pixel
+origin: [-1.5, -0.5, 0.000000] #x,y,yaw of map
+negate: 0 #white/black free/occupied or reverse
+occupied_thresh: 0.65 #Pixels with occupancy probability greater than this threshold are considered completely occupied
+free_thresh: 0.196 #Pixels with occupancy probability less than this threshold are considered completely free
