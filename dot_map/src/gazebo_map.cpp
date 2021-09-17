@@ -46,7 +46,7 @@ namespace gazebo_map {
 
     map_trans.header.stamp = ros::Time::now();
     map_trans.header.frame_id = "map";
-    map_trans.child_frame_id = "odom";
+    map_trans.child_frame_id = "base_link";
     map_trans.transform.translation.x =pp_.x;
     map_trans.transform.translation.y =pp_.y;
     map_trans.transform.translation.z =pp_.z;
@@ -70,7 +70,7 @@ namespace gazebo_map {
     map.pose.pose.orientation = geo_Quat ;
 
     //set the velocity
-    map.child_frame_id = "odom";
+    map.child_frame_id = "base_link";
     map.twist.twist.linear.x = current_Twist_.linear.x ;
     map.twist.twist.linear.y = current_Twist_.linear.y ;
     map.twist.twist.linear.z = current_Twist_.linear.z ;

@@ -7,7 +7,7 @@ int main(int argc, char** argv){
     ros::init(argc, argv, "omnidrive");
     ros::NodeHandle n;
     omnidrive::drive controller(n);
-    ros::Rate rate(10);
+    ros::Rate rate(100);
     while(ros::ok()){
         //std::cout << "SENDING DATA\n";
         //ROS_INFO_STREAM_THROTTLE(2.0,"Sending Data ROS INFO");
