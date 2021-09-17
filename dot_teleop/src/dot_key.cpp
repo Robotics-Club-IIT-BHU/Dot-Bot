@@ -37,8 +37,8 @@ DotTeleop::DotTeleop():
   ph_("~"),
   linear_(0),
   angular_(0),
-  l_scale_(1.0),
-  a_scale_(1.0)
+  l_scale_(1),
+  a_scale_(10)
 {
   ph_.param("scale_angular", a_scale_, a_scale_);
   ph_.param("scale_linear", l_scale_, l_scale_);
@@ -123,19 +123,19 @@ void DotTeleop::keyLoop()
     {
       case KEYCODE_L:
         ROS_DEBUG("LEFT");
-        angular_ = 1.0;
+        angular_ = 1;
         break;
       case KEYCODE_R:
         ROS_DEBUG("RIGHT");
-        angular_ = -1.0;
+        angular_ = -1;
         break;
       case KEYCODE_U:
         ROS_DEBUG("UP");
-        linear_ = 1.0;
+        linear_ = 1;
         break;
       case KEYCODE_D:
         ROS_DEBUG("DOWN");
-        linear_ = -1.0;
+        linear_ = -1;
         break;
     }
     boost::mutex::scoped_lock lock(publish_mutex_);
