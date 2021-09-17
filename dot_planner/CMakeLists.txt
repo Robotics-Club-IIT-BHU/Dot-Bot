@@ -8,10 +8,17 @@ project(dot_planner)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
+<<<<<<< HEAD
   move_base
   #odom_config_dep
   #sensor_config_dep
   #tf_config_dep
+=======
+ dot_control
+ dot_map
+ dot_teleop
+ dot_gazebo
+>>>>>>> 8e70787086acf45c23a0426211b95061d9190193
 )
 
 ## System dependencies are found with CMake's conventions
