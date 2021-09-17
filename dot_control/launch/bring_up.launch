@@ -11,8 +11,11 @@
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
     respawn="false" output="screen">
     <remap from="/joint_states" to="/dot/joint_states" />
-    
   </node>
+<<<<<<< HEAD
   <node name="dot_omni_control" pkg="dot_control" type="omnidrive"/>
   <node name="dot_odom_pub" pkg="dot_control" type="odometry_node" output="screen"/>
+=======
+  <node name="dot_omni_control" pkg="dot_control" type="omnidrive" output="screen"/>
+>>>>>>> 478a6ea8b9bab941ad1338ffb022e1dac8587a1a
 </launch>

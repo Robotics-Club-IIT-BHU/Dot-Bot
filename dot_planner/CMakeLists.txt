@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(dot_control)
+project(dot_planner)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -7,7 +7,12 @@ project(dot_control)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs geometry_msgs sensor_msgs gazebo_msgs tf)
+find_package(catkin REQUIRED COMPONENTS
+ dot_control
+ dot_map
+ dot_teleop
+ dot_gazebo
+)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -99,9 +104,9 @@ find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs geometry_msgs sens
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-  INCLUDE_DIRS include
-#  LIBRARIES dot_control
-  CATKIN_DEPENDS geometry_msgs nav_msgs roscpp tf
+#  INCLUDE_DIRS include
+#  LIBRARIES dot_2dnav
+#  CATKIN_DEPENDS move_base odom_config_dep sensor_config_dep tf_config_dep
 #  DEPENDS system_lib
 )
 
@@ -112,13 +117,13 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
- include
-${catkin_INCLUDE_DIRS}
+# include
+  ${catkin_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/dot_control.cpp
+#   src/${PROJECT_NAME}/dot_2dnav.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -129,14 +134,7 @@ ${catkin_INCLUDE_DIRS}
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/dot_control_node.cpp)
-<<<<<<< HEAD
-add_executable(omnidrive src/omnidrive.cpp)
-add_executable(odometry_node src/odometry.cpp)
-=======
-add_executable(omnidrive src/omnidrive_node.cpp src/omnidrive.cpp )
->>>>>>> 478a6ea8b9bab941ad1338ffb022e1dac8587a1a
-target_link_libraries(omnidrive ${catkin_LIBRARIES})
+# add_executable(${PROJECT_NAME}_node src/dot_2dnav_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -149,9 +147,9 @@ target_link_libraries(omnidrive ${catkin_LIBRARIES})
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(odometry_node
-   ${catkin_LIBRARIES}
- )
+# target_link_libraries(${PROJECT_NAME}_node
+#   ${catkin_LIBRARIES}
+# )
 
 #############
 ## Install ##
@@ -200,7 +198,7 @@ target_link_libraries(odometry_node
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_dot_control.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_dot_2dnav.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
