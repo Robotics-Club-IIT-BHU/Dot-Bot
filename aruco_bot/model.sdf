@@ -1,0 +1,1698 @@
+<?xml version='1.0'?>
+<sdf version='1.7'>
+  <model name='botxx'>
+    <model name='Apriltag36_11_00000'>
+      <link name='main'>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='main_Visual'>
+          <geometry>
+            <box>
+              <size>0.15 0.15 0</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://Apriltag36_11_00000/materials/scripts</uri>
+              <uri>model://Apriltag36_11_00000/materials/textures</uri>
+              <name>Apriltag36_11_00000</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+      <static>1</static>
+      <pose>0.005218 -0.008421 0.053673 0 -0 0</pose>
+    </model>
+    <model name='open_base'>
+      <link name='origin_link'>
+        <inertial>
+          <pose>0 0 0.023978 0 -0 0</pose>
+          <mass>0.0856294</mass>
+          <inertia>
+            <ixx>0.00164396</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.00164396</iyy>
+            <iyz>0</iyz>
+            <izz>0.00223946</izz>
+          </inertia>
+        </inertial>
+        <collision name='origin_link_fixed_joint_lump__base_link_collision'>
+          <pose>0 0 0.01905 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/base.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <collision name='origin_link_fixed_joint_lump__supp_cyl_collision_1'>
+          <pose>0 0 0.03155 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.025</length>
+              <radius>0.001</radius>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name='origin_link_fixed_joint_lump__mid_cyl_collision_2'>
+          <pose>0 0 0.04405 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.001</length>
+              <radius>0.04</radius>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name='origin_link_fixed_joint_lump__supp_cyl_2_collision_3'>
+          <pose>0 0 0.05655 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.025</length>
+              <radius>0.001</radius>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name='origin_link_fixed_joint_lump__mid_cyl_2_collision_4'>
+          <pose>0 0 0.06905 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.001</length>
+              <radius>0.04</radius>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name='origin_link_fixed_joint_lump__platform_base_collision_5'>
+          <pose>0 0 0.07005 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.092 0.092 0.002</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode>
+                <kp>1e+07</kp>
+                <kd>1</kd>
+                <max_vel>0</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <friction>
+              <ode>
+                <mu>4</mu>
+                <mu2>4</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='origin_link_fixed_joint_lump__ball_collision_6'>
+          <pose>0 0 0.08305 0 -0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.013</radius>
+            </sphere>
+          </geometry>
+          <surface>
+            <contact>
+              <ode>
+                <kp>1e+07</kp>
+                <kd>1</kd>
+                <max_vel>0</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <friction>
+              <ode>
+                <mu>4</mu>
+                <mu2>4</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='origin_link_fixed_joint_lump__base_link_visual'>
+          <pose>0 0 0.01905 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/base.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='origin_link_fixed_joint_lump__supp_cyl_visual_1'>
+          <pose>0 0 0.03155 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.025</length>
+              <radius>0.001</radius>
+            </cylinder>
+          </geometry>
+        </visual>
+        <visual name='origin_link_fixed_joint_lump__mid_cyl_visual_2'>
+          <pose>0 0 0.04405 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.001</length>
+              <radius>0.04</radius>
+            </cylinder>
+          </geometry>
+        </visual>
+        <visual name='origin_link_fixed_joint_lump__supp_cyl_2_visual_3'>
+          <pose>0 0 0.05655 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.025</length>
+              <radius>0.001</radius>
+            </cylinder>
+          </geometry>
+        </visual>
+        <visual name='origin_link_fixed_joint_lump__mid_cyl_2_visual_4'>
+          <pose>0 0 0.06905 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.001</length>
+              <radius>0.04</radius>
+            </cylinder>
+          </geometry>
+        </visual>
+        <visual name='origin_link_fixed_joint_lump__platform_base_visual_5'>
+          <pose>0 0 0.07005 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.092 0.092 0.002</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <name>Gazebo/Black</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <visual name='origin_link_fixed_joint_lump__ball_visual_6'>
+          <pose>0 0 0.08305 0 -0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.013</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <name>Gazebo/DarkGrey</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <velocity_decay/>
+        <gravity>1</gravity>
+        <velocity_decay/>
+      </link>
+      <joint name='rim_back_joint' type='revolute'>
+        <pose>-0 0 0 0 -0 0</pose>
+        <parent>origin_link</parent>
+        <child>rim_back_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='rim_back_link'>
+        <pose>0 -0.04 0.01905 1.5708 -0 3.14159</pose>
+        <inertial>
+          <pose>0 0 -0.000343 0 -0 0</pose>
+          <mass>0.00835758</mass>
+          <inertia>
+            <ixx>6.63684e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>6.63684e-07</iyy>
+            <iyz>0</iyz>
+            <izz>9.40333e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='rim_back_link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/rim.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='rim_back_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/rim.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <joint name='roller_e_rim_back_joint' type='revolute'>
+        <pose>0 0 -0 0 -0 0</pose>
+        <parent>rim_back_link</parent>
+        <child>roller_e_rim_back_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='roller_e_rim_back_link'>
+        <pose>-0.01355 -0.0345 0.01905 0 -0 3.14159</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.00113845</mass>
+          <inertia>
+            <ixx>2.53776e-08</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-08</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-08</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_e_rim_back_link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='roller_e_rim_back_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <joint name='roller_n_rim_back_joint' type='revolute'>
+        <pose>0 0 0 -0 -0 -0</pose>
+        <parent>rim_back_link</parent>
+        <child>roller_n_rim_back_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='roller_n_rim_back_link'>
+        <pose>0 -0.0345 0.0326 2.35619 -1.57079 0.785396</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.00113845</mass>
+          <inertia>
+            <ixx>2.53776e-08</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-08</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-08</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_n_rim_back_link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='roller_n_rim_back_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <joint name='roller_ne_rim_back_joint' type='revolute'>
+        <pose>0 0 0 0 -0 0</pose>
+        <parent>rim_back_link</parent>
+        <child>roller_ne_rim_back_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='roller_ne_rim_back_link'>
+        <pose>-0.009581 -0.0455 0.028631 2e-06 -0.785398 3.14159</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.00113845</mass>
+          <inertia>
+            <ixx>2.53776e-08</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-08</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-08</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_ne_rim_back_link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='roller_ne_rim_back_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <joint name='roller_nw_rim_back_joint' type='revolute'>
+        <pose>0 0 -0 0 -0 0</pose>
+        <parent>rim_back_link</parent>
+        <child>roller_nw_rim_back_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='roller_nw_rim_back_link'>
+        <pose>0.009581 -0.0455 0.028631 3.14158 -0.785403 1e-06</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.00113845</mass>
+          <inertia>
+            <ixx>2.53776e-08</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-08</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-08</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_nw_rim_back_link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='roller_nw_rim_back_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <joint name='roller_s_rim_back_joint' type='revolute'>
+        <pose>-0 0 -0 0 -0 0</pose>
+        <parent>rim_back_link</parent>
+        <child>roller_s_rim_back_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='roller_s_rim_back_link'>
+        <pose>0 -0.0345 0.0055 2.35619 1.57079 -0.785401</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.00113845</mass>
+          <inertia>
+            <ixx>2.53776e-08</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-08</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-08</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_s_rim_back_link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='roller_s_rim_back_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <joint name='roller_se_rim_back_joint' type='revolute'>
+        <pose>0 0 0 0 -0 0</pose>
+        <parent>rim_back_link</parent>
+        <child>roller_se_rim_back_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='roller_se_rim_back_link'>
+        <pose>-0.009581 -0.0455 0.009469 2e-06 0.785398 -3.14159</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.00113845</mass>
+          <inertia>
+            <ixx>2.53776e-08</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-08</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-08</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_se_rim_back_link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='roller_se_rim_back_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <joint name='roller_sw_rim_back_joint' type='revolute'>
+        <pose>-0 0 -0 0 -0 0</pose>
+        <parent>rim_back_link</parent>
+        <child>roller_sw_rim_back_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='roller_sw_rim_back_link'>
+        <pose>0.009581 -0.0455 0.009469 3.14158 0.785403 -6e-06</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.00113845</mass>
+          <inertia>
+            <ixx>2.53776e-08</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-08</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-08</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_sw_rim_back_link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='roller_sw_rim_back_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <joint name='roller_w_rim_back_joint' type='revolute'>
+        <pose>0 0 -0 0 -0 0</pose>
+        <parent>rim_back_link</parent>
+        <child>roller_w_rim_back_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='roller_w_rim_back_link'>
+        <pose>0.01355 -0.0345 0.01905 3.14159 -3e-06 -3e-06</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.00113845</mass>
+          <inertia>
+            <ixx>2.53776e-08</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-08</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-08</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_w_rim_back_link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='roller_w_rim_back_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <joint name='rim_left_joint' type='revolute'>
+        <pose>0 0 0 0 -0 0</pose>
+        <parent>origin_link</parent>
+        <child>rim_left_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='rim_left_link'>
+        <pose>-0.034641 0.02 0.01905 1.5708 -0 1.0472</pose>
+        <inertial>
+          <pose>0 0 -0.000343 0 -0 0</pose>
+          <mass>0.00835758</mass>
+          <inertia>
+            <ixx>6.63684e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>6.63684e-07</iyy>
+            <iyz>0</iyz>
+            <izz>9.40333e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='rim_left_link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/rim.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='rim_left_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/rim.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <joint name='roller_e_rim_left_joint' type='revolute'>
+        <pose>0 -0 -0 0 -0 0</pose>
+        <parent>rim_left_link</parent>
+        <child>roller_e_rim_left_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='roller_e_rim_left_link'>
+        <pose>-0.023103 0.028985 0.01905 0 -0 1.0472</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.00113845</mass>
+          <inertia>
+            <ixx>2.53776e-08</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-08</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-08</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_e_rim_left_link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='roller_e_rim_left_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <joint name='roller_n_rim_left_joint' type='revolute'>
+        <pose>-0 -0 0 0 -0 0</pose>
+        <parent>rim_left_link</parent>
+        <child>roller_n_rim_left_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='roller_n_rim_left_link'>
+        <pose>-0.029878 0.01725 0.0326 2.35619 -1.57079 -1.30899</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.00113845</mass>
+          <inertia>
+            <ixx>2.53776e-08</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-08</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-08</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_n_rim_left_link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='roller_n_rim_left_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <joint name='roller_ne_rim_left_joint' type='revolute'>
+        <pose>0 0 -0 0 -0 0</pose>
+        <parent>rim_left_link</parent>
+        <child>roller_ne_rim_left_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='roller_ne_rim_left_link'>
+        <pose>-0.034614 0.031047 0.028631 2e-06 -0.785398 1.0472</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.00113845</mass>
+          <inertia>
+            <ixx>2.53776e-08</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-08</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-08</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_ne_rim_left_link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='roller_ne_rim_left_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <joint name='roller_nw_rim_left_joint' type='revolute'>
+        <pose>-0 -0 0 0 -0 0</pose>
+        <parent>rim_left_link</parent>
+        <child>roller_nw_rim_left_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='roller_nw_rim_left_link'>
+        <pose>-0.044195 0.014453 0.028631 3.14158 -0.785403 -2.09439</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.00113845</mass>
+          <inertia>
+            <ixx>2.53776e-08</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-08</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-08</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_nw_rim_left_link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='roller_nw_rim_left_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <joint name='roller_s_rim_left_joint' type='revolute'>
+        <pose>-0 0 -0 -0 -0 -0</pose>
+        <parent>rim_left_link</parent>
+        <child>roller_s_rim_left_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='roller_s_rim_left_link'>
+        <pose>-0.029878 0.01725 0.0055 2.35619 1.57079 -2.87979</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.00113845</mass>
+          <inertia>
+            <ixx>2.53776e-08</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-08</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-08</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_s_rim_left_link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='roller_s_rim_left_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <joint name='roller_se_rim_left_joint' type='revolute'>
+        <pose>0 0 0 0 -0 0</pose>
+        <parent>rim_left_link</parent>
+        <child>roller_se_rim_left_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='roller_se_rim_left_link'>
+        <pose>-0.034614 0.031047 0.009469 2e-06 0.785398 1.0472</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.00113845</mass>
+          <inertia>
+            <ixx>2.53776e-08</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-08</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-08</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_se_rim_left_link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='roller_se_rim_left_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <joint name='roller_sw_rim_left_joint' type='revolute'>
+        <pose>0 0 0 0 -0 0</pose>
+        <parent>rim_left_link</parent>
+        <child>roller_sw_rim_left_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='roller_sw_rim_left_link'>
+        <pose>-0.044195 0.014453 0.009469 3.14158 0.785403 -2.0944</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.00113845</mass>
+          <inertia>
+            <ixx>2.53776e-08</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-08</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-08</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_sw_rim_left_link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='roller_sw_rim_left_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <joint name='roller_w_rim_left_joint' type='revolute'>
+        <pose>0 0 -0 0 -0 0</pose>
+        <parent>rim_left_link</parent>
+        <child>roller_w_rim_left_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='roller_w_rim_left_link'>
+        <pose>-0.036653 0.005515 0.01905 3.14159 -3e-06 -2.09439</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.00113845</mass>
+          <inertia>
+            <ixx>2.53776e-08</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-08</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-08</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_w_rim_left_link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='roller_w_rim_left_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <joint name='rim_right_joint' type='revolute'>
+        <pose>0 0 0 0 -0 0</pose>
+        <parent>origin_link</parent>
+        <child>rim_right_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='rim_right_link'>
+        <pose>0.034641 0.02 0.01905 1.5708 -0 -1.0472</pose>
+        <inertial>
+          <pose>0 0 -0.000343 0 -0 0</pose>
+          <mass>0.00835758</mass>
+          <inertia>
+            <ixx>6.63684e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>6.63684e-07</iyy>
+            <iyz>0</iyz>
+            <izz>9.40333e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='rim_right_link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/rim.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='rim_right_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/rim.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <joint name='roller_e_rim_right_joint' type='revolute'>
+        <pose>-0 0 -0 0 -0 0</pose>
+        <parent>rim_right_link</parent>
+        <child>roller_e_rim_right_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='roller_e_rim_right_link'>
+        <pose>0.036653 0.005515 0.01905 0 0 -1.0472</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.00113845</mass>
+          <inertia>
+            <ixx>2.53776e-08</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-08</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-08</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_e_rim_right_link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='roller_e_rim_right_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <joint name='roller_n_rim_right_joint' type='revolute'>
+        <pose>0 -0 0 0 0 0</pose>
+        <parent>rim_right_link</parent>
+        <child>roller_n_rim_right_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='roller_n_rim_right_link'>
+        <pose>0.029878 0.01725 0.0326 2.35619 -1.57079 2.87979</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.00113845</mass>
+          <inertia>
+            <ixx>2.53776e-08</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-08</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-08</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_n_rim_right_link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='roller_n_rim_right_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <joint name='roller_ne_rim_right_joint' type='revolute'>
+        <pose>-0 0 -0 0 -0 0</pose>
+        <parent>rim_right_link</parent>
+        <child>roller_ne_rim_right_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='roller_ne_rim_right_link'>
+        <pose>0.044195 0.014453 0.028631 2e-06 -0.785398 -1.0472</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.00113845</mass>
+          <inertia>
+            <ixx>2.53776e-08</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-08</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-08</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_ne_rim_right_link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='roller_ne_rim_right_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <joint name='roller_nw_rim_right_joint' type='revolute'>
+        <pose>-0 0 -0 0 0 0</pose>
+        <parent>rim_right_link</parent>
+        <child>roller_nw_rim_right_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='roller_nw_rim_right_link'>
+        <pose>0.034614 0.031047 0.028631 3.14158 -0.785403 2.0944</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.00113845</mass>
+          <inertia>
+            <ixx>2.53776e-08</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-08</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-08</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_nw_rim_right_link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='roller_nw_rim_right_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <joint name='roller_s_rim_right_joint' type='revolute'>
+        <pose>0 -0 0 0 0 0</pose>
+        <parent>rim_right_link</parent>
+        <child>roller_s_rim_right_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='roller_s_rim_right_link'>
+        <pose>0.029878 0.01725 0.0055 2.35619 1.57079 1.30899</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.00113845</mass>
+          <inertia>
+            <ixx>2.53776e-08</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-08</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-08</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_s_rim_right_link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='roller_s_rim_right_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <joint name='roller_se_rim_right_joint' type='revolute'>
+        <pose>-0 0 -0 0 0 0</pose>
+        <parent>rim_right_link</parent>
+        <child>roller_se_rim_right_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='roller_se_rim_right_link'>
+        <pose>0.044195 0.014453 0.009469 2e-06 0.785398 -1.0472</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.00113845</mass>
+          <inertia>
+            <ixx>2.53776e-08</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-08</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-08</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_se_rim_right_link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='roller_se_rim_right_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <joint name='roller_sw_rim_right_joint' type='revolute'>
+        <pose>0 -0 0 0 -0 0</pose>
+        <parent>rim_right_link</parent>
+        <child>roller_sw_rim_right_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='roller_sw_rim_right_link'>
+        <pose>0.034614 0.031047 0.009469 3.14158 0.785403 2.09439</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.00113845</mass>
+          <inertia>
+            <ixx>2.53776e-08</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-08</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-08</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_sw_rim_right_link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='roller_sw_rim_right_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <joint name='roller_w_rim_right_joint' type='revolute'>
+        <pose>-0 0 -0 0 0 0</pose>
+        <parent>rim_right_link</parent>
+        <child>roller_w_rim_right_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='roller_w_rim_right_link'>
+        <pose>0.023103 0.028985 0.01905 3.14159 -3e-06 2.09439</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.00113845</mass>
+          <inertia>
+            <ixx>2.53776e-08</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-08</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-08</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_w_rim_right_link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='roller_w_rim_right_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://bot/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <joint name='rev_x' type='revolute'>
+        <pose>0 0 0 0 -0 0</pose>
+        <parent>origin_link</parent>
+        <child>platform_mid</child>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-0.05</lower>
+            <upper>0.05</upper>
+            <effort>200</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='platform_mid'>
+        <pose>0 0 0.09705 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 1.57 -0 0</pose>
+          <mass>0.001</mass>
+          <inertia>
+            <ixx>0.0001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0001</iyy>
+            <iyz>0</iyz>
+            <izz>0.0012</izz>
+          </inertia>
+        </inertial>
+        <collision name='platform_mid_collision'>
+          <pose>0 0 0 1.57 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.002</length>
+              <radius>0.001</radius>
+            </cylinder>
+          </geometry>
+          <surface>
+            <contact>
+              <ode>
+                <kp>1e+07</kp>
+                <kd>1</kd>
+                <max_vel>0</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <friction>
+              <ode>
+                <mu>4</mu>
+                <mu2>4</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='platform_mid_visual'>
+          <pose>0 0 0 1.57 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.002</length>
+              <radius>0.001</radius>
+            </cylinder>
+          </geometry>
+          <material>
+            <script>
+              <name>Gazebo/White</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+      </link>
+      <joint name='rev_y' type='revolute'>
+        <pose>0 0 -0 0 -0 0</pose>
+        <parent>platform_mid</parent>
+        <child>platform</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-0.05</lower>
+            <upper>0.05</upper>
+            <effort>200</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='platform'>
+        <pose>0 0 0.09805 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.002</mass>
+          <inertia>
+            <ixx>0.0006</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0006</iyy>
+            <iyz>0</iyz>
+            <izz>0.0012</izz>
+          </inertia>
+        </inertial>
+        <collision name='platform_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.092 0.092 0.0015</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='platform_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.092 0.092 0.002</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <name>apriltag/material</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+      </link>
+      <static>0</static>
+      <plugin name='gazebo_ros_control' filename='libgazebo_ros_control.so'>
+        <robotNamespace>/dot</robotNamespace>
+      </plugin>
+      <pose>-0.005222 0.008423 -0.053673 0 -0 0</pose>
+    </model>
+    <joint name='platform_JOINT_0' type='fixed'>
+      <parent>open_base::platform</parent>
+      <child>Apriltag36_11_00000::main</child>
+      <pose>0 0 0 0 -0 0</pose>
+      <physics>
+        <ode>
+          <limit>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </limit>
+          <suspension>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </suspension>
+        </ode>
+      </physics>
+    </joint>
+    <static>0</static>
+    <allow_auto_disable>1</allow_auto_disable>
+  </model>
+</sdf>
