@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<launch>
+  
+  <arg name="rviz_file"  default="$(find dot_planner)/rviz/dot_planner.rviz" />
+  <!-- Launching the simulation  -->
+  <include file="$(find dot_gazebo)/launch/gazebo.launch" />
+
+  <!-- Launching the teleoperation keyboard node -->
+  <node name="teleop_keyboard" pkg="dot_teleop" type="dot_teleop" launch-prefix="gnome-terminal --" />
+  
+  <!-- Launching RViz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rviz_file)"/>
+ 
+ <!-- odom publisher -->
+ <node name="gazebo_map" pkg="dot_map" type="dot_map"/>  
+ 
+</launch>

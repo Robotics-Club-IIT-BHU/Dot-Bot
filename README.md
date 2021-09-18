@@ -1,5 +1,7 @@
 # Swarm-Bot
-Ros repository for the swarm bots
+Ros repository for the swarm bots Simulations
+
+For Hardware code visit [Swarmbot-Hardware](https://github.com/Robotics-Club-IIT-BHU/Swarm-Bot-Hardware)
 
 # Setup guidelines 
 
