@@ -12,6 +12,16 @@
 #define KEYCODE_D 0x42
 #define KEYCODE_Q 0x71
 
+#define KEYI 105
+#define KEYK 107
+#define KEYJ 106
+#define KEYL 108
+#define KEYO 111
+#define KEYM 109
+#define KEYU 117
+#define KEY_COM 44
+#define KEY_DOT 46
+
 class DotTeleop
 {
 public:
@@ -23,27 +33,28 @@ private:
 
   
   ros::NodeHandle nh_,ph_;
-  double linear_, angular_;
+  double linear_x_, linear_y_, angular_;
   ros::Time first_publish_;
   ros::Time last_publish_;
   double l_scale_, a_scale_;
   ros::Publisher vel_pub_;
-  void publish(double, double);
+  void publish(double, double, double);
   boost::mutex publish_mutex_;
 
 };
 
 DotTeleop::DotTeleop():
   ph_("~"),
-  linear_(0),
+  linear_x_(0),
+  linear_y_(0),
   angular_(0),
   l_scale_(1),
-  a_scale_(10)
+  a_scale_(1)
 {
   ph_.param("scale_angular", a_scale_, a_scale_);
   ph_.param("scale_linear", l_scale_, l_scale_);
 
-  vel_pub_ = nh_.advertise<geometry_msgs::Twist>("cmd_vel", 1);
+  vel_pub_ = nh_.advertise<geometry_msgs::Twist>("/dot/cmd_vel", 1);
 }
 
 int kfd = 0;
@@ -84,7 +95,7 @@ void DotTeleop::watchdog()
   boost::mutex::scoped_lock lock(publish_mutex_);
   if ((ros::Time::now() > last_publish_ + ros::Duration(0.15)) && 
       (ros::Time::now() > first_publish_ + ros::Duration(0.50)))
-    publish(0, 0);
+    publish(0, 0, 0);
 }
 
 void DotTeleop::keyLoop()
@@ -103,8 +114,10 @@ void DotTeleop::keyLoop()
 
   puts("Reading from keyboard");
   puts("---------------------------");
-  puts("Use arrow keys to move the Dot.");
-
+  puts("Moving around:");
+  puts("u    i    o");
+  puts("j    k    l");
+  puts("CTRL-C to quit");
 
   while (ros::ok())
   {
@@ -115,46 +128,51 @@ void DotTeleop::keyLoop()
       exit(-1);
     }
 
-
-    linear_=angular_=0;
+    linear_x_=linear_y_=angular_=0;
     ROS_DEBUG("value: 0x%02X\n", c);
   
     switch(c)
     {
-      case KEYCODE_L:
+      case KEYJ:
         ROS_DEBUG("LEFT");
-        angular_ = 1;
+        linear_y_ = 1;
         break;
-      case KEYCODE_R:
+      case KEYL:
         ROS_DEBUG("RIGHT");
-        angular_ = -1;
+        linear_y_ = -1;
         break;
-      case KEYCODE_U:
+      case KEYI:
         ROS_DEBUG("UP");
-        linear_ = 1;
+        linear_x_ = 1;
         break;
-      case KEYCODE_D:
+      case KEYK:
         ROS_DEBUG("DOWN");
-        linear_ = -1;
+        linear_x_ = -1;
         break;
+      case KEYO:
+        ROS_DEBUG("CLOCK");
+        angular_ = -1;
+      case KEYU:
+        ROS_DEBUG("ANTICLOCK");
+        angular_=1; 
     }
     boost::mutex::scoped_lock lock(publish_mutex_);
     if (ros::Time::now() > last_publish_ + ros::Duration(1.0)) { 
       first_publish_ = ros::Time::now();
     }
     last_publish_ = ros::Time::now();
-    publish(angular_, linear_);
+    publish(angular_, linear_x_, linear_y_);
   }
 
   return;
 }
 
-void DotTeleop::publish(double angular, double linear)  
+void DotTeleop::publish(double angular, double linear_x, double linear_y)  
 {
     geometry_msgs::Twist vel;
     vel.angular.z = a_scale_*angular;
-    vel.linear.x = l_scale_*linear;
-
+    vel.linear.x = l_scale_*linear_x;
+    vel.linear.y = l_scale_*linear_y;
     vel_pub_.publish(vel);    
 
 

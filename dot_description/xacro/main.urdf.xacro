@@ -78,7 +78,6 @@
 		xyz="0.03464101615 0.02 0"
 		rpy="1.570796326794896 0 -1.047197551196597"
 	/>
-<<<<<<< HEAD
 	<!-- <xacro:rim_macro
 		name="left"
 		color="0.3 0 0"
@@ -97,7 +96,6 @@
 		xyz="-0.0433012702 -0.025 -0.025"
 		rpy="1.570796326794896 0 -1.047197551196597"
 	/> -->
-=======
 	<!-- Block Laser -->
   <joint name="hokuyo_joint" type="fixed">
     <axis xyz="0 1 0" />
@@ -204,7 +202,7 @@
       <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
         <topicName>/dot/imu</topicName>
         <bodyName>imu_link</bodyName>
-        <updateRateHZ>10.0</updateRateHZ>
+        <updateRateHZ>100.0</updateRateHZ>
         <gaussianNoise>0.0</gaussianNoise>
         <xyzOffset>0 0 0</xyzOffset>
         <rpyOffset>0 0 0</rpyOffset>
@@ -215,7 +213,6 @@
     </sensor>
   </gazebo>
   
->>>>>>> 478a6ea8b9bab941ad1338ffb022e1dac8587a1a
 	<gazebo>
 
 		<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">

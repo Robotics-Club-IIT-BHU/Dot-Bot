@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
     <arg name="ps" default="ps1" />
-    <arg name="world_file" value="$(find dot_gazebo)/world/ps1/ps1_apriltag.world" 
+    <arg name="world_file" value="$(find dot_gazebo)/world/ps1/ps1_nosignal.world" 
         if="$(eval arg('ps') == 'ps1')" />
     <arg name="world_file" value="$(find dot_gazebo)/world/ps2/ps2_nosignal.world" 
         if="$(eval arg('ps') == 'ps2')" />
