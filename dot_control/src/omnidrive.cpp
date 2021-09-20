@@ -52,10 +52,9 @@ namespace omnidrive{
     vx = 0; vy = 0; wp = 0;
     odom_theta=0;odom_x=0;odom_y=0;
     tfListenerObj=new tf2_ros::TransformListener(tfBuffer);
-    file_storage.open("state_log.csv", std::ios::app);
-    file_storage << "odom_x,odom_y,odom_theta,calc_x,calc_y,calc_theta" << std::endl;
+    // file_storage.open("state_log.csv", std::ios::app);
+    // file_storage << "odom_x,odom_y,odom_theta,calc_x,calc_y,calc_theta" << std::endl;
   
-    //ROS_INFO_STREAM_THROTTLE(2.0,"Successfully set up ros omni drive");
   }
   void drive::imuCallBack(const sensor_msgs::Imu::ConstPtr& msg){
     tf::Quaternion q(
@@ -130,7 +129,7 @@ namespace omnidrive{
     odom_y += Y * duration;
     odom_theta += theta * duration;
 
-    file_storage<<xref<<","<<yref<<","<<thetaref<<","<<odom_x<<","<<odom_y<<","<<odom_theta<< std::endl;
+    //file_storage<<xref<<","<<yref<<","<<thetaref<<","<<odom_x<<","<<odom_y<<","<<odom_theta<< std::endl;
     
 
     publishOdom();
@@ -139,7 +138,6 @@ namespace omnidrive{
 
 }
 
-  //set the current velocity as stated in /cmd_vel
   void drive::velocity_callback(const geometry_msgs::Twist& msg){
     //ROS_INFO_STREAM_THROTTLE(2.0,"Got new velocities from cmd_vel");
       
@@ -150,43 +148,17 @@ namespace omnidrive{
   }
   //publish velocity as was stated in the /cmd_vel
   void drive::controlLoop(){
-    //convert velocity from world frame to m frame
-    //get transform from map to base_link using tf to get theta
-    //double vmx,vmy;
-    // geometry_msgs::TransformStamped transformStamped;
-    // try {
-    //   // transformStamped = tfBuffer.lookupTransform("base_link","map", ros::Time(0));
-    //   // geometry_msgs::Quaternion q=transformStamped.transform.rotation;
 
-    //   // double yaw = atan2(2.0*(q.y*q.z + q.w*q.x), q.w*q.w - q.x*q.x - q.y*q.y + q.z*q.z);
-      
-    //   //ROS_INFO_STREAM_THROTTLE(2.0,"Velocity Pulish vmx "<<vmx<<" vmy "<<vmy<<" odom_y "<<odom_y<<" odom_theta "<<odom_theta<<" Yaw "<<yaw);
-    // } catch (tf2::TransformException &exception) {
-    //   ROS_WARN("%s", exception.what());
-    //   //ros::Duration(1.0).sleep();
-    //   //vmx=vx;vmy=vy;
-      // publishOdom();
-    //   return;
-    // }
-
-    
     double vmx=cos(yaw)*vx-sin(yaw)*vy;
     double vmy=-sin(yaw)*vx-cos(yaw)*vy;
     double wmp = wp ;//- yaw;
-    //convert velocity from m frame to velocity of wheels
+    
     double v1, v2, v3;
     v1 = (L * wmp - (vmx / 2) - (sqrt3by2 * vmy));
     v2 = (vmx + L * wmp);
     v3 = (L * wmp - (vmx / 2) + (sqrt3by2 * vmy));
 
-    // v1 = -10;
-    // v2 = 20;
-    // v3 = -10;
-    //ros::Time timeCurrent = ros::Time::nowacch();
-    //double duration = (timeCurrent - timePrevious).toNSec()/1e9;
-    // float duration=0.1;
-    //ROS_INFO_STREAM_THROTTLE(2.0,"v1 "<<v1<<" v2 "<<v2<<" v3 "<<v3<<" duration "<<duration);
-
+  
     lpos.data += 10*v1*dt_/r;
     bpos.data += 10*v2*dt_/r;
     rpos.data += 10*v3*dt_/r;
@@ -197,18 +169,14 @@ namespace omnidrive{
     back_pub.publish(bpos);
 
 
-    //timePrevious = timeCurrent;
   }
 
-  // update the current odom values whenever map is upadted
-  // might never be used
   void drive::updateOdom(const nav_msgs::Odometry& msg){
     //set the current theta to zero
     odom_theta=0;odom_x=0;odom_y=0;
     //ROS_INFO_STREAM_THROTTLE(2.0,"Updated Odom");
   }
 
-  //publish the odom of the bot, i.e. current location w.r.t map
   void drive::publishOdom(){
     //based on velocity add values to theta , x , y,z and send to transform and publish odom
     // ros::Time timeCurrent = ros::Time::now();
@@ -281,8 +249,7 @@ namespace omnidrive{
     odom.twist.twist.angular.x= 0 ;
     odom.twist.twist.angular.y= 0 ;
     odom.twist.twist.angular.z= theta ;
-//
-//    //publish the message
+
     pub_.publish(odom);
   }
   drive::~drive(){
