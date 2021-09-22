@@ -1,9 +1,10 @@
 <launch>
-  <include file="$(find apriltag_ros)/launch/continuous_detection_usbcam2.launch" />
   <arg name="launch_prefix" default="" /> <!-- set to value="gdbserver localhost:10000" for remote debugging -->
-  <arg name="node_namespace" default="apriltag_ros_continuous_node_usbcam1" />
-  <arg name="camera_name" default="usb_cam" />
-  <arg name="camera_frame" default="camera_info" />
+  <arg name="ind_id" default=""/>
+  
+  <arg name="node_namespace" default="apriltag_ros_continuous_node" />
+  <arg name="camera_name" default="camera4" />
+  <arg name="camera_frame" default="camera4" />
   <arg name="image_topic" default="image_raw" />
 
   <!-- Set parameters -->
@@ -19,3 +20,4 @@
     <param name="publish_tag_detections_image" type="bool" value="true" />      <!-- default: true -->
   </node>
 </launch>
+

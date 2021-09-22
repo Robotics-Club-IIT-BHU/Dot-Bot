@@ -1,0 +1,20 @@
+image_width: 640
+image_height: 480
+camera_name: usb_cam3
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [203.718327157626, 0, 319.5, 0, 203.718327157626, 239.5, 0, 0, 1]
+distortion_model: fisheye
+distortion_coefficients:
+  rows: 1
+  cols: 4
+  data: [0, 0, 0, 0]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data: [203.718327157626, 0, 319.5, 0, 0, 203.718327157626, 239.5, 0, 0, 0, 1, 0]
