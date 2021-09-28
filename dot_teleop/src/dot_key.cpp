@@ -152,9 +152,11 @@ void DotTeleop::keyLoop()
       case KEYO:
         ROS_DEBUG("CLOCK");
         angular_ = -1;
+        break;
       case KEYU:
         ROS_DEBUG("ANTICLOCK");
-        angular_=1; 
+        angular_ = 1; 
+        break;
     }
     boost::mutex::scoped_lock lock(publish_mutex_);
     if (ros::Time::now() > last_publish_ + ros::Duration(1.0)) { 

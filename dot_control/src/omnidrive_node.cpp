@@ -6,7 +6,7 @@
 int main(int argc, char** argv){
     ros::init(argc, argv, "omnidrive");
     ros::NodeHandle n("");
-    double hz = 100;
+    double hz = 500;
     omnidrive::drive controller(n, 1.0/hz);
     ros::Rate rate(hz);
     while(ros::ok()){

@@ -27,5 +27,5 @@
     <node name="cameras_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
           args="-urdf -param camera_description -model cameras -x 0.0 -y 0.0 -z 0.0" />
     
-  <include file="$(find dot_control)/launch/bring_up.launch" /> 
+    <include file="$(find dot_control)/launch/bring_up.launch" /> 
 </launch>

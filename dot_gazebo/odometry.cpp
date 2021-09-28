@@ -8,7 +8,6 @@
 
 #include <kdl/frames.hpp>
 
-
 long double duration;
 long double x;
 long double y;
@@ -65,10 +64,10 @@ void onJointStateMessage(const sensor_msgs::JointState::ConstPtr& input){
     v_left  = (theta_left_current  - theta_left_previous ) / duration;
     v_back  = (theta_back_current  - theta_back_previous ) / duration;
     v_right = (theta_right_current - theta_right_previous) / duration;
-    message.v_left  = v_left ;
-    message.v_back  = v_back ;
-    message.v_right = v_right;
-    publisher.publish(message);
+    // message.v_left  = v_left ;
+    // message.v_back  = v_back ;
+    // message.v_right = v_right;
+    // publisher.publish(message);
     timePrevious = timeCurrent;
     theta_left_previous  = theta_left_current ;
     theta_back_previous  = theta_back_current ;
@@ -125,24 +124,9 @@ void onGazeboMessage(const gazebo_msgs::LinkStates::ConstPtr& input){
 int main(int argc, char **argv){
     ros::init(argc, argv, "odometry");
     ros::NodeHandle node;
-    ros::Subscriber subscriber = node.subscribe("/dot/joint_states", 1, onJointStateMessage);
-    ros::Subscriber subscriber1`;
-    {
-        std::string poseCheatString = "pose_cheat";
-        std::string argument;
-        bool poseCheatFound = false;
-        for (int j = 0; j < argc; j++) {
-            argument = std::string(argv[j]);
-            if (poseCheatString.compare(argument) == 0) {
-                poseCheatFound = true;
-            }
-        }
-        if (poseCheatFound) {
-            subscriber1 = node.subscribe("/gazebo/link_states", 1, onGazeboMessage);
-        } else {
-           
-        }
-    }
+    ros::Subscriber subscriber = node.subscribe("/joint_states", 1, updateJoint);
+    ros::Subscriber subscriber1;
+    
     publisherWorld  = node.advertise<geometry_msgs::Pose2D>("pose/world" , 1);
     publisherMobile = node.advertise<geometry_msgs::Pose2D>("pose/mobile", 1);
     ros::spin();

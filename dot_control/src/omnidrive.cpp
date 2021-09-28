@@ -41,8 +41,8 @@ namespace omnidrive{
     vel_sub = n.subscribe("cmd_vel", 1000,  &drive::velocity_callback,this);
     joint_states=n.subscribe("joint_states", 1, &drive::onJointStateMessage, this);
     imu_sub = n.subscribe("imu",1, &drive::imuCallBack, this);
-    gaz_sub = n.subscribe("/gazebo/model_states", 1, &drive::onGazeboMessage, this);
-    map_sub = n.subscribe("/gazebo_map/map", 1000,  &drive::updateOdom,this);
+    // gaz_sub = n.subscribe("/gazebo/model_states", 1, &drive::onGazeboMessage, this);
+    // map_sub = n.subscribe("/gazebo_map/map", 1000,  &drive::updateOdom,this);
     pub_ = n.advertise<nav_msgs::Odometry>("odom", 50) ;
     // publisher = n.advertise<std_msgs::Velocity>("wheel_velocity", 1);
 
@@ -65,7 +65,7 @@ namespace omnidrive{
     tf::Matrix3x3 m(q);
     
     m.getRPY(ro, pit, yaw);
-    odom_theta = yaw;
+    //odom_theta = yaw;
   }
   void drive::onGazeboMessage(const gazebo_msgs::ModelStates::ConstPtr& msg){
     xref = msg->pose[msg->name.size()-1].position.x;
@@ -118,12 +118,12 @@ namespace omnidrive{
     long double v_left0  = v_left  * r;
     long double v_back0  = v_back  * r;
     long double v_right0 = v_right * r;
-    y     = ((2.0 * v_back0) - v_left0 - v_right0) / 3.0;
-    x     = ((1.73 * v_right0) - (1.73 * v_left0)) / 3.0;
-    theta = (v_left0 + v_back0 + v_right0) / (3*0.04);
+    x     = ((2.0 * v_back0) - v_left0 - v_right0) / 3.0;
+    y     = ((1.73 * v_right0) - (1.73 * v_left0)) / 3.0;
+    theta = (v_left0 + v_back0 + v_right0) / (3*L);
 
-    double X = cos(odom_theta)*x + sin(odom_theta)*y;
-    double Y = sin(odom_theta)*x - cos(odom_theta)*y;
+    double X = cos(odom_theta)*x - sin(odom_theta)*y;
+    double Y = sin(odom_theta)*x + cos(odom_theta)*y;
 
     odom_x += X * duration;
     odom_y += Y * duration;
@@ -149,13 +149,11 @@ namespace omnidrive{
   //publish velocity as was stated in the /cmd_vel
   void drive::controlLoop(){
 
-    double vmx=cos(yaw)*vx-sin(yaw)*vy;
-    double vmy=-sin(yaw)*vx-cos(yaw)*vy;
-    double wmp = wp ;//- yaw;
-    
+    double vmx=vx, vmy=vy, wmp=wp;
+
     double v1, v2, v3;
     v1 = (L * wmp - (vmx / 2) - (sqrt3by2 * vmy));
-    v2 = (vmx + L * wmp);
+    v2 = (vmx + (L * wmp));
     v3 = (L * wmp - (vmx / 2) + (sqrt3by2 * vmy));
 
   
