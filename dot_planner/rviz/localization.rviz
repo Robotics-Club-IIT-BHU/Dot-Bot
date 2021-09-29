@@ -66,6 +66,11 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
+        ball:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         base_link:
           Alpha: 1
           Show Axes: false
@@ -81,10 +86,35 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        mid_cyl:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        mid_cyl_2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         origin_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
+        platform:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        platform_base:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        platform_mid:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         rim_back_link:
           Alpha: 1
           Show Axes: false
@@ -220,6 +250,16 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        supp_cyl:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        supp_cyl_2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
       Name: RobotModel
       Robot Description: robot_description
       TF Prefix: ""
@@ -339,7 +379,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 8.607873916625977
+      Distance: 7.554439544677734
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
