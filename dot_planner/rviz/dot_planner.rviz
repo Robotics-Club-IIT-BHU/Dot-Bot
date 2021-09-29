@@ -6,6 +6,7 @@ Panels:
       Expanded:
         - /Global Options1
         - /TF1/Tree1
+        - /Odometry1
       Splitter Ratio: 0.5
     Tree Height: 549
   - Class: rviz/Selection
@@ -62,6 +63,11 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
+        ball:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         base_link:
           Alpha: 1
           Show Axes: false
@@ -77,10 +83,35 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        mid_cyl:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        mid_cyl_2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         origin_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
+        platform:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        platform_base:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        platform_mid:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         rim_back_link:
           Alpha: 1
           Show Axes: false
@@ -216,6 +247,16 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        supp_cyl:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        supp_cyl_2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
       Name: RobotModel
       Robot Description: robot_description
       TF Prefix: ""
@@ -227,6 +268,8 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
+        ball:
+          Value: true
         base_link:
           Value: true
         hokuyo_link:
@@ -235,15 +278,29 @@ Visualization Manager:
           Value: true
         map:
           Value: true
+        mid_cyl:
+          Value: true
+        mid_cyl_2:
+          Value: true
         odom:
           Value: true
         origin_link:
+          Value: true
+        platform:
+          Value: true
+        platform_base:
+          Value: true
+        platform_mid:
           Value: true
         rim_back_link:
           Value: true
         rim_left_link:
           Value: true
         rim_right_link:
+          Value: true
+        supp_cyl:
+          Value: true
+        supp_cyl_2:
           Value: true
       Marker Alpha: 1
       Marker Scale: 0.10000000149011612
@@ -254,17 +311,27 @@ Visualization Manager:
       Tree:
         map:
           odom:
-            base_link:
-              hokuyo_link:
-                {}
-              imu_link:
-                {}
-              rim_back_link:
-                {}
-              rim_left_link:
-                {}
-              rim_right_link:
-                {}
+            origin_link:
+              base_link:
+                hokuyo_link:
+                  {}
+                imu_link:
+                  {}
+                rim_back_link:
+                  {}
+                rim_left_link:
+                  {}
+                rim_right_link:
+                  {}
+                supp_cyl:
+                  mid_cyl:
+                    supp_cyl_2:
+                      mid_cyl_2:
+                        platform_base:
+                          ball:
+                            platform_mid:
+                              platform:
+                                {}
       Update Interval: 0
       Value: true
     - Angle Tolerance: 0.10000000149011612
@@ -285,7 +352,7 @@ Visualization Manager:
           Value: true
         Value: true
       Enabled: true
-      Keep: 100
+      Keep: 20
       Name: Odometry
       Position Tolerance: 0.10000000149011612
       Queue Size: 10
@@ -330,7 +397,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 3.548444986343384
+      Distance: 9.840117454528809
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1

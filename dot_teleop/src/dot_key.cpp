@@ -115,8 +115,8 @@ void DotTeleop::keyLoop()
   puts("Reading from keyboard");
   puts("---------------------------");
   puts("Moving around:");
-  puts("u    i    o");
-  puts("j    k    l");
+  puts("u(ACLK)    i(XXUP)    o(CLCK)");
+  puts("j(LEFT)    k(DOWN)    l(RGHT)");
   puts("CTRL-C to quit");
 
   while (ros::ok())
@@ -129,32 +129,34 @@ void DotTeleop::keyLoop()
     }
 
     linear_x_=linear_y_=angular_=0;
-    ROS_DEBUG("value: 0x%02X\n", c);
+    //ROS_DEBUG("value: 0x%02X\n", c);
   
     switch(c)
     {
       case KEYJ:
         ROS_DEBUG("LEFT");
-        linear_y_ = 1;
+        linear_x_ = 1;
         break;
       case KEYL:
         ROS_DEBUG("RIGHT");
-        linear_y_ = -1;
+        linear_x_ = -1;
         break;
       case KEYI:
         ROS_DEBUG("UP");
-        linear_x_ = 1;
+        linear_y_ = 1;
         break;
       case KEYK:
         ROS_DEBUG("DOWN");
-        linear_x_ = -1;
+        linear_y_ = -1;
         break;
       case KEYO:
         ROS_DEBUG("CLOCK");
-        angular_ = -1;
+        angular_ = -5;
+        break;
       case KEYU:
         ROS_DEBUG("ANTICLOCK");
-        angular_=1; 
+        angular_= 5;
+        break; 
     }
     boost::mutex::scoped_lock lock(publish_mutex_);
     if (ros::Time::now() > last_publish_ + ros::Duration(1.0)) { 

@@ -81,3 +81,10 @@ timePrevious = timeCurrent;
 | Vm   | ![image](https://user-images.githubusercontent.com/56964828/133204879-5d1a5287-3c35-4ca8-b4e6-a9be41d00a0e.png) |                                                              | ![image](https://user-images.githubusercontent.com/56964828/133204738-07dcb033-9dd5-46e9-8d02-7e341eac731a.png) |
 | V    |                                                              | ![image](https://user-images.githubusercontent.com/56964828/133204870-4787a37d-40a4-4760-9776-d41d2f2259c1.png) |                                                              |
 
+M is bots frame
+
+W is worlds frame 
+
+V is velocity of wheels
+
+v1=>left , v2=>back , v3 => right

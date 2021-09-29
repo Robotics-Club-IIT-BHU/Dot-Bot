@@ -17,11 +17,12 @@ long double theta_left_previous;
 long double theta_back_previous;
 long double theta_right_previous;
 long double duration;
-long double v_left;
-long double v_back;
-long double v_right;
-long double x, y, theta;
+long double w_left;
+long double w_back;
+long double w_right;
+long double x, y, theta,X,Y;
 long double wx, wy, wtheta;
+long double odom_yaw;
 
 double xref, yref, thetaref;
 using namespace std;
@@ -65,7 +66,7 @@ namespace omnidrive{
     tf::Matrix3x3 m(q);
     
     m.getRPY(ro, pit, yaw);
-    odom_theta = yaw;
+    odom_yaw = yaw;
   }
   void drive::onGazeboMessage(const gazebo_msgs::ModelStates::ConstPtr& msg){
     xref = msg->pose[msg->name.size()-1].position.x;
@@ -100,9 +101,9 @@ namespace omnidrive{
     rpos.data = theta_right_current;
     bpos.data = theta_back_current;
     duration = (timeCurrent - timePrevious).toSec();
-    v_left  = (theta_left_current  - theta_left_previous ) / duration;
-    v_back  = (theta_back_current  - theta_back_previous ) / duration;
-    v_right = (theta_right_current - theta_right_previous) / duration;
+    w_left  = (theta_left_current  - theta_left_previous ) / duration;
+    w_back  = (theta_back_current  - theta_back_previous ) / duration;
+    w_right = (theta_right_current - theta_right_previous) / duration;
     // std::cout <<"vleft_original " <<current_left_velocity <<" vleft_calculated " << v_left<<std::endl;
     // std::cout <<"vright_original " <<current_right_velocity <<" vright_calculated " << v_right<<std::endl;
     // std::cout <<"vback_original " <<current_back_velocity <<" vback_calculated " << v_back<<std::endl;
@@ -114,22 +115,27 @@ namespace omnidrive{
     theta_left_previous  = theta_left_current ;
     theta_back_previous  = theta_back_current ;
     theta_right_previous = theta_right_current;
-
-    long double v_left0  = v_left  * r;
-    long double v_back0  = v_back  * r;
-    long double v_right0 = v_right * r;
-    y     = ((2.0 * v_back0) - v_left0 - v_right0) / 3.0;
-    x     = ((1.73 * v_right0) - (1.73 * v_left0)) / 3.0;
+    //v1=>left , v2=>back , v3 => right , 10 is the scaling factor
+    long double v_left0  = w_left  * r/10;
+    long double v_back0  = w_back  * r/10;
+    long double v_right0 = w_right * r/10;
+    x     = ((2.0 * v_back0) - v_left0 - v_right0) / 3.0;
+    y     = ((1.73 * v_right0) - (1.73 * v_left0)) / 3.0;
     theta = (v_left0 + v_back0 + v_right0) / (3*0.04);
-
-    double X = cos(odom_theta)*x + sin(odom_theta)*y;
-    double Y = sin(odom_theta)*x - cos(odom_theta)*y;
-
+    
+    //double X = cos(odom_yaw)*x + sin(odom_yaw)*y;
+    //double Y = sin(odom_yaw)*x - cos(odom_yaw)*y;
+    //replacing x with -ve X as compared to real formulas , needs explanation
+    X = -(cos(odom_yaw)*x - sin(odom_yaw)*y);
+    Y = sin(odom_yaw)*x + cos(odom_yaw)*y;
+    
+    //cout<<"Before : odom_x "<<odom_x<<"odom_y "<<odom_y<<" X "<<X<<" Y "<<Y<<" x "<<x<<" y "<<y<<" theta "<<theta<<"\n";
     odom_x += X * duration;
     odom_y += Y * duration;
     odom_theta += theta * duration;
-
-    //file_storage<<xref<<","<<yref<<","<<thetaref<<","<<odom_x<<","<<odom_y<<","<<odom_theta<< std::endl;
+    odom_yaw += theta * duration;
+    //cout<<"After : odom_x "<<odom_x<<"odom_y "<<odom_y<<"X "<<X<<"Y "<<Y<<"odom_theta "<<odom_theta<<"\n";
+    //file_storage<<xref<<","<<yref<<","<<thetaref<<","<<odom_x<<","<<odom_y<<","<<odom_yaw<< std::endl;
     
 
     publishOdom();
@@ -144,20 +150,24 @@ namespace omnidrive{
       vx = msg.linear.x;
       vy = msg.linear.y;
       wp = msg.angular.z;
-      
+      //controlLoop();
   }
   //publish velocity as was stated in the /cmd_vel
   void drive::controlLoop(){
-
-    double vmx=cos(yaw)*vx-sin(yaw)*vy;
-    double vmy=-sin(yaw)*vx-cos(yaw)*vy;
-    double wmp = wp ;//- yaw;
+    //double vmx=cos(yaw)*vx-sin(yaw)*vy;
+    //double vmy=-sin(yaw)*vx-cos(yaw)*vy;
+    //v1=>left , v2=>back , v3 => right
     
+    //replacing x with -ve x as compared to real formulas , needs explanation
+    double vmx=-cos(odom_yaw)*vx+sin(odom_yaw)*vy;
+    double vmy=+sin(odom_yaw)*vx+cos(odom_yaw)*vy;
+    double wmp = wp ;//- yaw;
+    //cout<<" Bot velocities : vmx "<<vmx<<" vmy: "<<vmy<<" wp: "<<wmp<<" odom_yaw "<<odom_yaw<<"\n";
     double v1, v2, v3;
     v1 = (L * wmp - (vmx / 2) - (sqrt3by2 * vmy));
     v2 = (vmx + L * wmp);
     v3 = (L * wmp - (vmx / 2) + (sqrt3by2 * vmy));
-
+    //cout<<" Bot velocities : v1 "<<v1<<" v2: "<<v2<<" v3:"<<v3<<"\n";
   
     lpos.data += 10*v1*dt_/r;
     bpos.data += 10*v2*dt_/r;
@@ -232,9 +242,7 @@ namespace omnidrive{
     odom.header.frame_id = "odom" ;
 
     //set the position
-    cout<<odom_trans.transform.translation.x<<" "
-      <<odom_trans.transform.translation.y<<" "
-      <<odom_trans.transform.translation.z<<"\n";
+    //cout<<odom_trans.transform.translation.x<<" "<<odom_trans.transform.translation.y<<" "<<odom_trans.transform.translation.z<<"\n";
     odom.pose.pose.position.x = odom_trans.transform.translation.x ;
     odom.pose.pose.position.y = odom_trans.transform.translation.y ;
     odom.pose.pose.position.z = odom_trans.transform.translation.z ;
@@ -242,8 +250,8 @@ namespace omnidrive{
 
     //set the velocity
     odom.child_frame_id = "origin_link";
-    odom.twist.twist.linear.x = x ;
-    odom.twist.twist.linear.y = y ;
+    odom.twist.twist.linear.x = X ;
+    odom.twist.twist.linear.y = Y ;
     odom.twist.twist.linear.z = 0 ;
 
     odom.twist.twist.angular.x= 0 ;

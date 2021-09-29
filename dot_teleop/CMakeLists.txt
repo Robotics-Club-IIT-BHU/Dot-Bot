@@ -113,7 +113,7 @@ catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES dot_teleop
   CATKIN_DEPENDS rospy roscpp geometry_msgs
-  DEPENDS boost
+  DEPENDS Boost
 )
 
 ###########
