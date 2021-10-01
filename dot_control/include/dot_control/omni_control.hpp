@@ -44,6 +44,7 @@ namespace omnidrive{
     ros::Publisher right_pub;
     ros::Publisher back_pub;
     std_msgs::Float64 lpos, rpos, bpos;
+    bool enabled_localization;
     std::ofstream file_storage;
     //map and vel subscribe
     ros::Subscriber vel_sub,map_sub, gaz_sub;
@@ -60,6 +61,30 @@ namespace omnidrive{
     tf2_ros::Buffer tfBuffer;
     tf2_ros::TransformListener * tfListenerObj;
 
+    //extra variables
+    std_msgs::Float64 message;
+
+    //ros::Publisher publisher;
+    ros::Subscriber joint_states;
+
+    long double theta_left_current;
+    long double theta_back_current;
+    long double theta_right_current;
+    long double theta_left_previous;
+    long double theta_back_previous;
+    long double theta_right_previous;
+    long double duration;
+    long double w_left;
+    long double w_back;
+    long double w_right;
+    long double x, y, theta,X,Y;
+    long double wx, wy, wtheta;
+    long double odom_yaw;
+
+    double xref, yref, thetaref;
+    ros::Time timeCurrent;
+
+
    public:
     drive(ros::NodeHandle& nodeHandle, double dt);
     void velocity_callback(const geometry_msgs::Twist& msg);
@@ -68,7 +93,6 @@ namespace omnidrive{
     void onJointStateMessage(const sensor_msgs::JointState::ConstPtr& msg);
     void onGazeboMessage(const gazebo_msgs::ModelStates::ConstPtr& msg);
     ~drive();
-    void updateOdom(const nav_msgs::Odometry& msg);
     void publishOdom();
   };
 }

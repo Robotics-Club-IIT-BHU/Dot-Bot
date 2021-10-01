@@ -135,27 +135,27 @@ void DotTeleop::keyLoop()
     {
       case KEYJ:
         ROS_DEBUG("LEFT");
-        linear_x_ = 1;
+        linear_x_ = 0.1;
         break;
       case KEYL:
         ROS_DEBUG("RIGHT");
-        linear_x_ = -1;
+        linear_x_ = -0.1;
         break;
       case KEYI:
         ROS_DEBUG("UP");
-        linear_y_ = 1;
+        linear_y_ = 0.1;
         break;
       case KEYK:
         ROS_DEBUG("DOWN");
-        linear_y_ = -1;
+        linear_y_ = -0.1;
         break;
       case KEYO:
         ROS_DEBUG("CLOCK");
-        angular_ = -5;
+        angular_ = -0.1;
         break;
       case KEYU:
         ROS_DEBUG("ANTICLOCK");
-        angular_= 5;
+        angular_= 0.1;
         break; 
     }
     boost::mutex::scoped_lock lock(publish_mutex_);

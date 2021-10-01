@@ -2,8 +2,13 @@
 <launch>
   
   <arg name="rviz_file"  default="$(find dot_planner)/rviz/localization.rviz" />
+  <arg name="use_teleop" default="true"/>
+  <!--arg name="enabled_localization" default="true"/>
+  <param name="enabled_localization" type="bool" value="true" /-->
   <include file="$(find dot_planner)/launch/dot_planner.launch" >
    	<arg name="rviz_file"  value="$(arg rviz_file)" />
+   	<arg name="use_teleop"  value="$(arg use_teleop)" />
+   	<!--arg name="enabled_localization" default="$(arg enabled_localization)"/-->
    </include>
   <!-- Run the EKF localization node-->
   <node pkg="robot_localization" type="ekf_localization_node" name="ekf_localization">

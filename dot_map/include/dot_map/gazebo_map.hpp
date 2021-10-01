@@ -11,7 +11,11 @@
 #include <geometry_msgs/TransformStamped.h>
 #include <tf2/convert.h>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.h>
-
+#include <nav_msgs/Odometry.h>
+#include <tf/transform_broadcaster.h>
+#include <tf2_ros/transform_listener.h>
+#include <tf2/LinearMath/Quaternion.h>
+#include <tf2_ros/transform_broadcaster.h>
 namespace gazebo_map {
 
 /**
@@ -25,6 +29,8 @@ class GazebomapPublisher {
   /** Destructor */
   virtual ~GazebomapPublisher();
   void publishmap();
+  void getMap2Odom(geometry_msgs::TransformStamped Map2BaseLink);
+  void sendTransform(geometry_msgs::TransformStamped Map2BaseLink);
  private:
   ros::NodeHandle nodeHandle_;
   ros::Publisher pub_;
@@ -36,5 +42,12 @@ class GazebomapPublisher {
   geometry_msgs::Twist current_Twist_ ;
   ros::ServiceClient client_;
   tf::TransformBroadcaster map_broadcaster_;
+  bool enabled_localization;
+
+  //tf listener
+  //tf listener
+    tf2_ros::Buffer tfBuffer;
+    tf2_ros::TransformListener * tfListenerObj;
+
 };
 }

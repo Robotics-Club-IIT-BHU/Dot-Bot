@@ -3,35 +3,6 @@
 #include "ros/ros.h"
 #include <sensor_msgs/JointState.h>
 
-
-
-std_msgs::Float64 message;
-
-ros::Publisher publisher;
-ros::Subscriber joint_states;
-
-long double theta_left_current;
-long double theta_back_current;
-long double theta_right_current;
-long double theta_left_previous;
-long double theta_back_previous;
-long double theta_right_previous;
-long double duration;
-long double w_left;
-long double w_back;
-long double w_right;
-long double x, y, theta,X,Y;
-long double wx, wy, wtheta;
-long double odom_yaw;
-
-double xref, yref, thetaref;
-using namespace std;
-
-
-
-ros::Time timeCurrent;
-ros::Time timePrevious;
-
 namespace omnidrive{
   //instantiate various variables
   drive::drive(ros::NodeHandle& nodeHandle, double dt):n(nodeHandle){
@@ -43,7 +14,6 @@ namespace omnidrive{
     joint_states=n.subscribe("joint_states", 1, &drive::onJointStateMessage, this);
     imu_sub = n.subscribe("imu",1, &drive::imuCallBack, this);
     gaz_sub = n.subscribe("/gazebo/model_states", 1, &drive::onGazeboMessage, this);
-    map_sub = n.subscribe("/gazebo_map/map", 1000,  &drive::updateOdom,this);
     pub_ = n.advertise<nav_msgs::Odometry>("odom", 50) ;
     // publisher = n.advertise<std_msgs::Velocity>("wheel_velocity", 1);
 
@@ -53,9 +23,35 @@ namespace omnidrive{
     vx = 0; vy = 0; wp = 0;
     odom_theta=0;odom_x=0;odom_y=0;
     tfListenerObj=new tf2_ros::TransformListener(tfBuffer);
-    // file_storage.open("state_log.csv", std::ios::app);
-    // file_storage << "odom_x,odom_y,odom_theta,calc_x,calc_y,calc_theta" << std::endl;
-  
+
+    //some extra variables
+    ro=0;pit=0;yaw=0;
+
+    theta_left_current=0;
+    theta_back_current=0;
+    theta_right_current=0;
+    theta_left_previous=0;
+    theta_back_previous=0;
+    theta_right_previous=0;
+    duration=0;
+    w_left=0;
+    w_back=0;
+    w_right=0;
+    x=0; y=0; theta=0;X=0;Y=0;
+    wx=0; wy=0; wtheta=0;
+    odom_yaw=0;
+
+    xref=0; yref=0; thetaref=0;
+    timeCurrent=timePrevious=ros::Time::now();
+
+    file_storage.open("/home/state_log.csv", std::ios::app);
+    file_storage << "odom_x,odom_y,odom_theta,calc_x,calc_y,calc_theta" << std::endl;
+    if (!nodeHandle.getParam("enabled_localization", enabled_localization)) {
+    //nodeHandle.getParam(parameter_name, variable)//value of param is trnasferred to variable
+      enabled_localization=false;
+    }
+    enabled_localization=true;
+    //ROS_INFO_STREAM("Enabled localization "<<enabled_localization);
   }
   void drive::imuCallBack(const sensor_msgs::Imu::ConstPtr& msg){
     tf::Quaternion q(
@@ -116,28 +112,25 @@ namespace omnidrive{
     theta_back_previous  = theta_back_current ;
     theta_right_previous = theta_right_current;
     //v1=>left , v2=>back , v3 => right , 10 is the scaling factor
-    long double v_left0  = w_left  * r/10;
-    long double v_back0  = w_back  * r/10;
-    long double v_right0 = w_right * r/10;
-    x     = ((2.0 * v_back0) - v_left0 - v_right0) / 3.0;
-    y     = ((1.73 * v_right0) - (1.73 * v_left0)) / 3.0;
+    long double v_left0  = w_left  * r;
+    long double v_back0  = w_back  * r;
+    long double v_right0 = w_right * r;
+    y     = ((2.0 * v_back0) - v_left0 - v_right0) / 3.0;
+    x     = ((1.73 * v_right0) - (1.73 * v_left0)) / 3.0;
     theta = (v_left0 + v_back0 + v_right0) / (3*0.04);
-    
-    //double X = cos(odom_yaw)*x + sin(odom_yaw)*y;
-    //double Y = sin(odom_yaw)*x - cos(odom_yaw)*y;
-    //replacing x with -ve X as compared to real formulas , needs explanation
-    X = -(cos(odom_yaw)*x - sin(odom_yaw)*y);
-    Y = sin(odom_yaw)*x + cos(odom_yaw)*y;
-    
+    ////replacing x with -ve X as compared to real formulas , needs explanation
+    //X = cos(odom_yaw)*x - sin(odom_yaw)*y;
+    //Y = sin(odom_yaw)*x + cos(odom_yaw)*y;
+    double X = cos(odom_theta)*x + sin(odom_theta)*y;
+    double Y = sin(odom_theta)*x - cos(odom_theta)*y;
     //cout<<"Before : odom_x "<<odom_x<<"odom_y "<<odom_y<<" X "<<X<<" Y "<<Y<<" x "<<x<<" y "<<y<<" theta "<<theta<<"\n";
     odom_x += X * duration;
     odom_y += Y * duration;
     odom_theta += theta * duration;
     odom_yaw += theta * duration;
     //cout<<"After : odom_x "<<odom_x<<"odom_y "<<odom_y<<"X "<<X<<"Y "<<Y<<"odom_theta "<<odom_theta<<"\n";
-    //file_storage<<xref<<","<<yref<<","<<thetaref<<","<<odom_x<<","<<odom_y<<","<<odom_yaw<< std::endl;
+    file_storage<<xref<<","<<yref<<","<<thetaref<<","<<odom_x<<","<<odom_y<<","<<odom_yaw<< std::endl;
     
-
     publishOdom();
 
 
@@ -147,10 +140,10 @@ namespace omnidrive{
   void drive::velocity_callback(const geometry_msgs::Twist& msg){
     //ROS_INFO_STREAM_THROTTLE(2.0,"Got new velocities from cmd_vel");
       
-      vx = msg.linear.x;
-      vy = msg.linear.y;
-      wp = msg.angular.z;
-      //controlLoop();
+      vx = 10*msg.linear.x;
+      vy = 10*msg.linear.y;
+      wp = 50*0.7143*msg.angular.z;
+      //controlLoop();0
   }
   //publish velocity as was stated in the /cmd_vel
   void drive::controlLoop(){
@@ -159,6 +152,7 @@ namespace omnidrive{
     //v1=>left , v2=>back , v3 => right
     
     //replacing x with -ve x as compared to real formulas , needs explanation
+    //cout<<" vx "<<vx<<" vy "<<" wp "<<wp<<"\n";
     double vmx=-cos(odom_yaw)*vx+sin(odom_yaw)*vy;
     double vmy=+sin(odom_yaw)*vx+cos(odom_yaw)*vy;
     double wmp = wp ;//- yaw;
@@ -168,7 +162,6 @@ namespace omnidrive{
     v2 = (vmx + L * wmp);
     v3 = (L * wmp - (vmx / 2) + (sqrt3by2 * vmy));
     //cout<<" Bot velocities : v1 "<<v1<<" v2: "<<v2<<" v3:"<<v3<<"\n";
-  
     lpos.data += 10*v1*dt_/r;
     bpos.data += 10*v2*dt_/r;
     rpos.data += 10*v3*dt_/r;
@@ -179,12 +172,6 @@ namespace omnidrive{
     back_pub.publish(bpos);
 
 
-  }
-
-  void drive::updateOdom(const nav_msgs::Odometry& msg){
-    //set the current theta to zero
-    odom_theta=0;odom_x=0;odom_y=0;
-    //ROS_INFO_STREAM_THROTTLE(2.0,"Updated Odom");
   }
 
   void drive::publishOdom(){
@@ -225,7 +212,7 @@ namespace omnidrive{
 
     odom_trans.header.stamp = ros::Time::now();
     odom_trans.header.frame_id = "odom";
-    odom_trans.child_frame_id = "origin_link";
+    odom_trans.child_frame_id = "base_link";
     odom_trans.transform.translation.x =odom_x;
     odom_trans.transform.translation.y =odom_y;
     odom_trans.transform.translation.z =0;
@@ -233,8 +220,6 @@ namespace omnidrive{
     geometry_msgs::Quaternion geo_Quat ;
     geo_Quat=tf2::toMsg(tf_quat);
     odom_trans.transform.rotation = geo_Quat ;
-
-    br.sendTransform(odom_trans);
 
     //publish odometry over ros
     nav_msgs::Odometry odom ;
@@ -249,7 +234,7 @@ namespace omnidrive{
     odom.pose.pose.orientation = geo_Quat ;
 
     //set the velocity
-    odom.child_frame_id = "origin_link";
+    odom.child_frame_id = "base_link";
     odom.twist.twist.linear.x = X ;
     odom.twist.twist.linear.y = Y ;
     odom.twist.twist.linear.z = 0 ;
@@ -259,6 +244,9 @@ namespace omnidrive{
     odom.twist.twist.angular.z= theta ;
 
     pub_.publish(odom);
+    //if(enabled_localization)
+    //   return;
+    br.sendTransform(odom_trans);
   }
   drive::~drive(){
   }

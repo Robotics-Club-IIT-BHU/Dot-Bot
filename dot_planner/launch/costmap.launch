@@ -3,10 +3,12 @@
   <arg name="rviz_file"  default="$(find dot_planner)/rviz/costmap.rviz" />
   <master auto="start"/>
   <arg name="map_file" default="$(find dot_map)/config/my_map.yaml"/>
+  <arg name="use_teleop" default="true"/>
   
 
    <include file="$(find dot_planner)/launch/localization.launch" >
    	<arg name="rviz_file"  value="$(arg rviz_file)" />
+   	<arg name="use_teleop"  value="$(arg use_teleop)" />
    </include>
   <!-- Run the map server -->
   <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
