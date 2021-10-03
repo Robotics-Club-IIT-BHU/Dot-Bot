@@ -1,0 +1,18 @@
+<launch>
+  <arg name="namesp" default="dot"/>
+  <!-- Load joint controller configurations from YAML file to parameter server -->
+  <group ns="$(arg namesp)">
+    <rosparam file="$(find dot_config)/config/control/bot_control.yaml" command="load"/>
+
+    <!-- load the controllers -->
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+      output="screen" args="joint_state_controller left_joint_position_controller back_joint_position_controller right_joint_position_controller Xaxis_pos_controller Yaxis_pos_controller"/>
+
+    <!-- convert joint states to TF transforms for rviz, etc -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+      respawn="false" output="screen">
+      <remap from="/joint_states" to="/$(arg namesp)/joint_states" />
+    </node>
+    <node name="dot_omni_control" pkg="dot_control" type="omnidrive" output="screen" />
+  </group>
+</launch>

@@ -22,7 +22,8 @@ long double v_back;
 long double v_right;
 long double x, y, theta;
 long double wx, wy, wtheta;
-
+double yaw_offset;
+bool yaw_flag=true;
 double xref, yref, thetaref;
 using namespace std;
 
@@ -65,6 +66,11 @@ namespace omnidrive{
     tf::Matrix3x3 m(q);
     
     m.getRPY(ro, pit, yaw);
+    if(yaw_flag==true){
+      yaw_flag=false;
+      yaw_offset = yaw;
+    }
+    odom_theta = yaw - yaw_offset;
     //odom_theta = yaw;
   }
   void drive::onGazeboMessage(const gazebo_msgs::ModelStates::ConstPtr& msg){
@@ -120,14 +126,14 @@ namespace omnidrive{
     long double v_right0 = v_right * r;
     x     = ((2.0 * v_back0) - v_left0 - v_right0) / 3.0;
     y     = ((1.73 * v_right0) - (1.73 * v_left0)) / 3.0;
-    theta = (v_left0 + v_back0 + v_right0) / (3*L);
-
+    //theta = (v_left0 + v_back0 + v_right0) / (3*L);
+    
     double X = cos(odom_theta)*x - sin(odom_theta)*y;
     double Y = sin(odom_theta)*x + cos(odom_theta)*y;
 
     odom_x += X * duration;
     odom_y += Y * duration;
-    odom_theta += theta * duration;
+    //odom_theta += theta * duration;
 
     //file_storage<<xref<<","<<yref<<","<<thetaref<<","<<odom_x<<","<<odom_y<<","<<odom_theta<< std::endl;
     
