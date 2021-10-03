@@ -4,12 +4,12 @@ camera_name: usb_cam0
 camera_matrix:
   rows: 3
   cols: 3
-  data: [611.1549814728781, 0, 959.5, 0, 611.1549814728781, 539.5, 0, 0, 1]
-distortion_model: fisheye
+  data: [1608.105776687838, 0, 1064.232287098067, 0, 1625.984399111829, 500.0282441810702, 0, 0, 1]
+distortion_model: plumb_bob
 distortion_coefficients:
   rows: 1
-  cols: 4
-  data: [0, 0, 0, 0]
+  cols: 5
+  data: [-0.4801123572837191, 0.1909270429099378, -0.001155784154670791, -0.01157905469862376, 0]
 rectification_matrix:
   rows: 3
   cols: 3
@@ -17,4 +17,4 @@ rectification_matrix:
 projection_matrix:
   rows: 3
   cols: 4
-  data: [456.085807069312, 0, 959.5, 0, 0, 456.085807069312, 539.5, 0, 0, 0, 1, 0]
+  data: [1274.946411132812, 0, 1075.645451061602, 0, 0, 1530.942504882812, 494.1341901775231, 0, 0, 0, 1, 0]
