@@ -51,7 +51,7 @@ namespace omnidrive{
     rpos.data = 0;
     bpos.data = 0;
     vx = 0; vy = 0; wp = 0;
-    odom_theta=0;odom_x=0;odom_y=0;
+    odom_theta=0;odom_x=0.25;odom_y=1;
     tfListenerObj=new tf2_ros::TransformListener(tfBuffer);
     // file_storage.open("state_log.csv", std::ios::app);
     // file_storage << "odom_x,odom_y,odom_theta,calc_x,calc_y,calc_theta" << std::endl;
