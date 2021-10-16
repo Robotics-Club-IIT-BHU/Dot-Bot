@@ -1,0 +1,109 @@
+# # Definitions of tags to detect
+#
+# ## General remarks
+#
+# - All length in meters
+# - Ellipsis (...) signifies that the previous element can be repeated multiple times.
+#
+# ## Standalone tag definitions
+# ### Remarks
+#
+# - name is optional
+#
+# ### Syntax
+#
+# standalone_tags:
+#   [
+#     {id: ID, size: SIZE, name: NAME},
+#     ...
+#   ]
+standalone_tags:
+  [
+# {id: 0, size: 0.052,frame_id: "tag_0"},
+# {id: 1, size: 0.052,frame_id: "tag_1"},
+# {id: 2, size: 0.052,frame_id: "tag_2"},
+# {id: 3, size: 0.052,frame_id: "tag_3"},
+# {id: 4, size: 0.052,frame_id: "tag_4"},
+# {id: 5, size: 0.052,frame_id: "tag_5"},
+# {id: 6, size: 0.052,frame_id: "tag_6"},
+# {id: 7, size: 0.052,frame_id: "tag_7"},
+# {id: 8,  size: 0.052,frame_id: "tag_8"},
+# {id: 9,  size: 0.052,frame_id: "tag_9"},
+# {id: 10,  size: 0.052,frame_id: "tag_10"},
+{id: 11,  size: 0.0931,frame_id: "tag_11"},
+{id: 12, size: 0.0931,frame_id: "tag_12"},
+# {id: 13,  size: 0.052,frame_id: "tag_13"},
+# {id: 14,  size: 0.052,frame_id: "world"},
+# {id: 15,  size: 0.052,frame_id: "tag_15"},
+# {id: 16,  size: 0.052,frame_id: "tag_16"}
+  ]
+# ## Tag bundle definitions
+# ### Remarks
+#
+# - name is optional
+# - x, y, z have default values of 0 thus they are optional
+# - qw has default value of 1 and qx, qy, qz have default values of 0 thus they are optional
+#
+# ### Syntax
+#
+# tag_bundles:
+#   [
+#     {
+#       name: 'CUSTOM_BUNDLE_NAME',
+#       layout:
+#         [
+#           {id: ID, size: SIZE, x: X_POS, y: Y_POS, z: Z_POS, qw: QUAT_W_VAL, qx: QUAT_X_VAL, qy: QUAT_Y_VAL, qz: QUAT_Z_VAL},
+#           ...
+#         ]
+#     },
+#     ...
+#   ]
+# tag_bundles:
+#   [
+#     {
+#       name: 'bot_4',
+#       layout:
+#         [
+#           {id: 4, size: 0.04, x: 0.0, y: 0.0, z: 0.0000, qw: 1.0000, qx: 0.0000, qy: 0.0000, qz: 0.0000},
+#           {id: 5, size: 0.04, x: -0.07, y: -0.08, z: 0.0000, qw: 0.7073883, qx: 0.0000, qy: 0.0000, qz: 0.7068252}
+
+#         ]
+#     },
+#     {
+#       name: 'map_coor',
+#       layout:
+#       [
+#         {id: 14, size: 0.052, x: 0.0, y: 0.0, z: 0.0, qw: 1.00, qx: 0.0, qy: 0.0, qz: 0.0},
+#         {id: 16, size: 0.052, x: -0.072, y: 0.380, z: 0.0, qw: 0.691, qx: 0.0, qy: 0.0, qz: 0.723},
+#         {id: 15, size: 0.052, x: -0.072, y: -0.380, z: 0.0, qw: 0.003, qx: 0.0, qy: 0.0, qz: 0.999},
+#       ]
+#     }
+#     ,
+#         {
+#       name: 'bot_1',
+#       layout:
+#         [
+#           {id: 0, size: 0.04, x: -0.035, y: -0.0375, z: 0.0000, qw: 1.0000, qx: 0.0000, qy: 0.0000, qz: 0.0000},
+#           {id: 1, size: 0.04, x: 0.035, y: 0.0375, z: 0.0000, qw: 0.7074, qx: -0.706, qy: 0.0000, qz: 0.0000}
+
+#         ]
+#     },
+#         {
+#       name: 'bot_3',
+#       layout:
+#         [
+#           {id: 2, size: 0.04, x: -0.035, y: -0.0375, z: 0.0000, qw: 0.7074, qx: -0.706, qy: 0.0000, qz: 0.0000},
+#           {id: 3, size: 0.04, x: 0.035, y: 0.0375, z: 0.0000, qw: 0.0000, qx: 0.0000, qy: 0.0000, qz: 1.0000}
+
+#         ]
+#     },
+#     #     {
+#     #   name: 'bot_2',
+#     #   layout:
+#     #     [
+#     #       {id: 4, size: 0.04, x: 0.035, y: 0.035, z: 0.0000, qw: 1.0000, qx: 0.0000, qy: 0.0000, qz: 0.0000},
+#     #       {id: 5, size: 0.04, x: -0.035, y: -0.035, z: 0.0000, qw: 1.0000, qx: 0.0000, qy: 0.0000, qz: 0.0000}
+
+#     #     ]
+#     # }
+#   ]

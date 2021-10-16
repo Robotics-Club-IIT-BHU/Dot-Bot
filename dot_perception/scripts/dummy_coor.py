@@ -6,7 +6,7 @@ from sensor_msgs.msg import CameraInfo, Image
 pub = None
 
 def image_callback(data):
-    global pub
+    global pub0
     modded = CameraInfo()
     modded.header = data.header
     modded.width = 1920

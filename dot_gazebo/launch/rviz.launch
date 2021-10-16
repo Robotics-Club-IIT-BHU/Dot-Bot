@@ -1,8 +1,15 @@
 <?xml version="1.0"?>
 <launch>
 
-  <param name="robot_description" command="cat '$(find dot_description)/urdf/Bot/model.sdf'"/>
-
+  <param name="dot_1_description" command="$(find xacro)/xacro 
+                                                        '$(find dot_description)/xacro/main.urdf.xacro'" />
+  <param name="dot_2_description" command="$(find xacro)/xacro 
+                                                        '$(find dot_description)/xacro/main.urdf.xacro'" />
+  <param name="dot_3_description" command="$(find xacro)/xacro 
+                                                        '$(find dot_description)/xacro/main.urdf.xacro'" />
+  <param name="dot_4_description" command="$(find xacro)/xacro 
+                                                        '$(find dot_description)/xacro/main.urdf.xacro'" />
+      
   <!-- send fake joint values -->
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
     <param name="use_gui" value="False"/>
