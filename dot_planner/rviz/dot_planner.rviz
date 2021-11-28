@@ -1,13 +1,25 @@
 Panels:
   - Class: rviz/Displays
-    Help Height: 78
+    Help Height: 85
     Name: Displays
     Property Tree Widget:
       Expanded:
         - /Global Options1
         - /TF1/Tree1
+        - /Path1
+        - /Marker1
+        - /Marker2
+        - /Marker3
+        - /Marker4
+        - /Marker5
+        - /Marker6
+        - /Path2
+        - /Path3
+        - /Path4
+        - /Path5
+        - /Path6
       Splitter Ratio: 0.5
-    Tree Height: 549
+    Tree Height: 514
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -62,6 +74,11 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
+        ball:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         base_link:
           Alpha: 1
           Show Axes: false
@@ -77,10 +94,45 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        mid_cyl:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        mid_cyl_2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         origin_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
+        platform:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        platform_base:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        platform_mid:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        platform_tag0:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        platform_tag1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         rim_back_link:
           Alpha: 1
           Show Axes: false
@@ -216,6 +268,16 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        supp_cyl:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        supp_cyl_2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
       Name: RobotModel
       Robot Description: robot_description
       TF Prefix: ""
@@ -227,6 +289,8 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
+        ball:
+          Value: true
         base_link:
           Value: true
         hokuyo_link:
@@ -235,15 +299,33 @@ Visualization Manager:
           Value: true
         map:
           Value: true
+        mid_cyl:
+          Value: true
+        mid_cyl_2:
+          Value: true
         odom:
           Value: true
         origin_link:
+          Value: true
+        platform:
+          Value: true
+        platform_base:
+          Value: true
+        platform_mid:
+          Value: true
+        platform_tag0:
+          Value: true
+        platform_tag1:
           Value: true
         rim_back_link:
           Value: true
         rim_left_link:
           Value: true
         rim_right_link:
+          Value: true
+        supp_cyl:
+          Value: true
+        supp_cyl_2:
           Value: true
       Marker Alpha: 1
       Marker Scale: 0.10000000149011612
@@ -254,17 +336,31 @@ Visualization Manager:
       Tree:
         map:
           odom:
-            base_link:
-              hokuyo_link:
-                {}
-              imu_link:
-                {}
-              rim_back_link:
-                {}
-              rim_left_link:
-                {}
-              rim_right_link:
-                {}
+            origin_link:
+              base_link:
+                hokuyo_link:
+                  {}
+                imu_link:
+                  {}
+                rim_back_link:
+                  {}
+                rim_left_link:
+                  {}
+                rim_right_link:
+                  {}
+                supp_cyl:
+                  mid_cyl:
+                    supp_cyl_2:
+                      mid_cyl_2:
+                        platform_base:
+                          ball:
+                            platform_mid:
+                              platform:
+                                {}
+                              platform_tag0:
+                                {}
+                              platform_tag1:
+                                {}
       Update Interval: 0
       Value: true
     - Angle Tolerance: 0.10000000149011612
@@ -302,6 +398,232 @@ Visualization Manager:
       Topic: /dot/odom
       Unreliable: false
       Value: true
+    - Alpha: 0.699999988079071
+      Class: rviz/Map
+      Color Scheme: map
+      Draw Behind: false
+      Enabled: true
+      Name: Map
+      Topic: /map
+      Unreliable: false
+      Use Timestamp: false
+      Value: true
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz/Path
+      Color: 25; 255; 0
+      Enabled: true
+      Head Diameter: 0.30000001192092896
+      Head Length: 0.20000000298023224
+      Length: 0.30000001192092896
+      Line Style: Lines
+      Line Width: 0.029999999329447746
+      Name: Path
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Pose Color: 255; 85; 255
+      Pose Style: None
+      Queue Size: 10
+      Radius: 0.029999999329447746
+      Shaft Diameter: 0.10000000149011612
+      Shaft Length: 0.10000000149011612
+      Topic: /dot1/path
+      Unreliable: false
+      Value: true
+    - Class: rviz/Image
+      Enabled: false
+      Image Topic: /camera4/image_raw
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: Image
+      Normalize Range: true
+      Queue Size: 2
+      Transport Hint: raw
+      Unreliable: false
+      Value: false
+    - Class: rviz/Image
+      Enabled: false
+      Image Topic: /tag_detections_image
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: Image
+      Normalize Range: true
+      Queue Size: 2
+      Transport Hint: raw
+      Unreliable: false
+      Value: false
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /dot1/marker
+      Name: Marker
+      Namespaces:
+        /: true
+      Queue Size: 100
+      Value: true
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /dot2/marker
+      Name: Marker
+      Namespaces:
+        /: true
+      Queue Size: 100
+      Value: true
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /dot3/marker
+      Name: Marker
+      Namespaces:
+        /: true
+      Queue Size: 100
+      Value: true
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: dot4/marker
+      Name: Marker
+      Namespaces:
+        /: true
+      Queue Size: 100
+      Value: true
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: dot5/marker
+      Name: Marker
+      Namespaces:
+        /: true
+      Queue Size: 100
+      Value: true
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: dot6/marker
+      Name: Marker
+      Namespaces:
+        /: true
+      Queue Size: 100
+      Value: true
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz/Path
+      Color: 32; 74; 135
+      Enabled: true
+      Head Diameter: 0.30000001192092896
+      Head Length: 0.20000000298023224
+      Length: 0.30000001192092896
+      Line Style: Lines
+      Line Width: 0.029999999329447746
+      Name: Path
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Pose Color: 255; 85; 255
+      Pose Style: None
+      Queue Size: 10
+      Radius: 0.029999999329447746
+      Shaft Diameter: 0.10000000149011612
+      Shaft Length: 0.10000000149011612
+      Topic: /dot2/path
+      Unreliable: false
+      Value: true
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz/Path
+      Color: 164; 0; 0
+      Enabled: true
+      Head Diameter: 0.30000001192092896
+      Head Length: 0.20000000298023224
+      Length: 0.30000001192092896
+      Line Style: Lines
+      Line Width: 0.029999999329447746
+      Name: Path
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Pose Color: 255; 85; 255
+      Pose Style: None
+      Queue Size: 10
+      Radius: 0.029999999329447746
+      Shaft Diameter: 0.10000000149011612
+      Shaft Length: 0.10000000149011612
+      Topic: /dot3/path
+      Unreliable: false
+      Value: true
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz/Path
+      Color: 114; 159; 207
+      Enabled: true
+      Head Diameter: 0.30000001192092896
+      Head Length: 0.20000000298023224
+      Length: 0.30000001192092896
+      Line Style: Lines
+      Line Width: 0.029999999329447746
+      Name: Path
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Pose Color: 255; 85; 255
+      Pose Style: None
+      Queue Size: 10
+      Radius: 0.029999999329447746
+      Shaft Diameter: 0.10000000149011612
+      Shaft Length: 0.10000000149011612
+      Topic: /dot4/path
+      Unreliable: false
+      Value: true
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz/Path
+      Color: 173; 127; 168
+      Enabled: true
+      Head Diameter: 0.30000001192092896
+      Head Length: 0.20000000298023224
+      Length: 0.30000001192092896
+      Line Style: Lines
+      Line Width: 0.029999999329447746
+      Name: Path
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Pose Color: 255; 85; 255
+      Pose Style: None
+      Queue Size: 10
+      Radius: 0.029999999329447746
+      Shaft Diameter: 0.10000000149011612
+      Shaft Length: 0.10000000149011612
+      Topic: /dot5/path
+      Unreliable: false
+      Value: true
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz/Path
+      Color: 252; 233; 79
+      Enabled: true
+      Head Diameter: 0.30000001192092896
+      Head Length: 0.20000000298023224
+      Length: 0.30000001192092896
+      Line Style: Lines
+      Line Width: 0.029999999329447746
+      Name: Path
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Pose Color: 255; 85; 255
+      Pose Style: None
+      Queue Size: 10
+      Radius: 0.029999999329447746
+      Shaft Diameter: 0.10000000149011612
+      Shaft Length: 0.10000000149011612
+      Topic: /dot6/path
+      Unreliable: false
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -330,7 +652,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 3.548444986343384
+      Distance: 2.2911226749420166
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -338,17 +660,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 0.3453194200992584
-        Y: 0.8301547169685364
-        Z: 0.3898109495639801
+        X: 0.04124204069375992
+        Y: -0.06118923798203468
+        Z: 0.8906717300415039
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.4297977089881897
+      Pitch: 1.5697963237762451
       Target Frame: <Fixed Frame>
-      Yaw: 4.782261848449707
+      Yaw: 4.712264537811279
     Saved: ~
 Window Geometry:
   Displays:
@@ -356,7 +678,9 @@ Window Geometry:
   Height: 846
   Hide Left Dock: false
   Hide Right Dock: false
-  QMainWindow State: 000000ff00000000fd000000040000000000000156000002b0fc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003d000002b0000000c900fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f000002b0fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073010000003d000002b0000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000004f30000003efc0100000002fb0000000800540069006d00650100000000000004f3000002eb00fffffffb0000000800540069006d0065010000000000000450000000000000000000000282000002b000000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Image:
+    collapsed: false
+  QMainWindow State: 000000ff00000000fd0000000400000000000001cc0000029efc020000000afb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006e00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c00610079007301000000470000029e000000f100fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000000a0049006d00610067006500000002a70000003e0000001900fffffffb0000000a0049006d006100670065000000015f000001860000001900ffffff000000010000010f0000029efc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a0056006900650077007301000000470000029e000000c200fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000005bd00000041fc0100000002fb0000000800540069006d00650100000000000005bd0000037100fffffffb0000000800540069006d00650100000000000004500000000000000000000002d40000029e00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -365,6 +689,6 @@ Window Geometry:
     collapsed: false
   Views:
     collapsed: false
-  Width: 1267
-  X: 306
-  Y: 27
+  Width: 1469
+  X: 422
+  Y: 0

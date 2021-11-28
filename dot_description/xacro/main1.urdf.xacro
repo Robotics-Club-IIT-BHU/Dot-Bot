@@ -1,0 +1,668 @@
+<?xml version="1.0"?>
+<robot
+	xmlns:xacro="http://www.ros.org/wiki/xacro"
+	name="open_base"
+>
+
+	<xacro:include filename="$(find dot_description)/xacro/rim.urdf.xacro"/>
+
+	<link name="origin_link"/>
+	<link name="base_link">
+
+	<inertial>
+
+		<mass value="0.07862944645"/>
+		<inertia
+			ixx="0.00002035985530754"
+			ixy="0"
+			ixz="0"
+			iyy="0.00002035985530754"
+			iyz="0"
+			izz="0.00003945961663220"
+		/>
+
+	</inertial>
+	<visual>
+
+		<geometry>
+
+			<mesh filename="package://dot_description/mesh/base.stl"/>
+
+		</geometry>
+		<material name="base_material">
+
+			<color rgba="1 1 1 1"/>
+
+		</material>
+
+	</visual>
+	<collision>
+
+		<geometry>
+
+			<mesh filename="package://dot_description/mesh/base.stl"/>
+
+		</geometry>
+
+	</collision>
+
+
+	</link>
+	<joint
+		name="base_joint"
+		type="fixed"
+	>
+
+		<parent link="origin_link" />
+		<child link="base_link" />
+		<origin
+			xyz="0 0 0.01905"
+		/>
+
+	</joint>
+	<xacro:rim_macro
+		name="left"
+		color="0.3 0 0"
+		xyz="-0.03464101615 0.02 0"
+		rpy="1.570796326794896 0 1.047197551196597"
+	/>
+	<xacro:rim_macro
+		name="back"
+		color="0 0.3 0"
+		xyz="0 -0.04 0"
+		rpy="1.570796326794896 0 3.141592653589793"
+	/>
+	<xacro:rim_macro
+		name="right"
+		color="0 0 0.3"
+		xyz="0.03464101615 0.02 0"
+		rpy="1.570796326794896 0 -1.047197551196597"
+	/>
+	<!-- <xacro:rim_macro
+		name="left"
+		color="0.3 0 0"
+		xyz="0.0453153894 -0.021139091 -0.025"
+		rpy="1.570796326794896 0 1.047197551196597"
+	/>
+	<xacro:rim_macro
+		name="back"
+		color="0 0.3 0"
+		xyz="-0.001 0.046 -0.025"
+		rpy="1.570796326794896 0 3.141592653589793"
+	/>
+	<xacro:rim_macro
+		name="right"
+		color="0 0 0.3"
+		xyz="-0.0433012702 -0.025 -0.025"
+		rpy="1.570796326794896 0 -1.047197551196597"
+	/> -->
+	<!-- Block Laser -->
+  <joint name="hokuyo_joint" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz="0 0 0.01905" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="hokuyo_link"/>
+  </joint>
+
+  <!-- Hokuyo Laser -->
+  <link name="hokuyo_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+    <box size="0.01 0.01 0.01"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.01 0.01 0.01"/>
+      </geometry>
+    </visual>
+
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+  
+  <!-- hokuyo -->
+  <gazebo reference="hokuyo_link">
+    <sensor type="ray" name="head_hokuyo_sensor">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>false</visualize>
+      <update_rate>40</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>720</samples>
+            <resolution>1</resolution>
+            <min_angle>-1.570796</min_angle>
+            <max_angle>1.570796</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.1</min>
+          <max>30</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <!-- Noise parameters based on published spec for Hokuyo laser
+               achieving "+-30mm" accuracy at range < 10m.  A mean of 0.0m and
+               stddev of 0.01m will put 99.7% of samples within 0.03m of the true
+               reading. -->
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <plugin filename="libgazebo_ros_laser.so" name="gazebo_ros_head_hokuyo_controller">
+        <topicName>/dot/laser_scan</topicName>
+        <frameName>hokuyo_link</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
+  
+  <joint name="imu_joint" type="fixed">
+      <axis xyz="0 0 1" />
+      <origin xyz="0 0 0.015" rpy="0 0 0"/>
+      <parent link="base_link"/>
+      <child link="imu_link"/>
+  </joint>
+  <!-- Imu Link-->
+  <link name="imu_link">
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.01 0.01 0.01"/>
+            </geometry>
+        </collision>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.01 0.01 0.01"/>
+            </geometry>
+        </visual>
+        <inertial>
+            <mass value="0.001" />
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <inertia ixx="0.00000015" ixy="0" ixz="0" iyy="0.00000015" iyz="0" izz="0.00000015" />
+        </inertial>
+  </link>
+    
+  <!--IMU Link gazebo plugin-->
+  <gazebo reference="imu_link">
+    <gravity>true</gravity>
+    <sensor name="imu_sensor" type="imu">
+      <always_on>true</always_on>
+      <update_rate>100</update_rate>
+      <visualize>true</visualize>
+      <topic>__default_topic__</topic>
+      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+        <topicName>/imu/data_raw</topicName>
+        <bodyName>imu_link</bodyName>
+        <updateRateHZ>100.0</updateRateHZ>
+        <gaussianNoise>0.0</gaussianNoise>
+        <xyzOffset>0 0 0</xyzOffset>
+        <rpyOffset>0 0 0</rpyOffset>
+        <frameName>imu_link</frameName>
+        <initialOrientationAsReference>false</initialOrientationAsReference>
+      </plugin>
+      <pose>0 0 0 0 0 0</pose>
+    </sensor>
+  </gazebo>
+  
+	<gazebo>
+
+		<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+
+			<robotNamespace>/dot</robotNamespace>
+
+		</plugin>
+	</gazebo>
+
+
+<link name="supp_cyl">
+
+	<!-- <inertial>
+
+		<mass value="0.04"/>
+		<inertia
+			ixx="2.08e-06"
+			ixy="0"
+			ixz="0"
+			iyy="2.08e-06"
+			iyz="0"
+			izz="1.67e-09"
+		/>
+
+	</inertial> -->
+	<visual>
+
+		<geometry>
+
+			<cylinder radius="0.001" length="0.025"/>
+
+		</geometry>
+		<material name="base_material">
+
+			<color rgba="1 1 1 1"/>
+
+		</material>
+	
+	</visual>
+	<collision>
+
+		<geometry>
+
+			<cylinder radius="0.001" length="0.025"/>
+
+		</geometry>
+
+	</collision>
+
+	</link>
+
+
+<link name="mid_cyl">
+
+	<!-- <inertial>
+
+		<mass value="0.07862944645"/>
+		<inertia
+			ixx="0.00002035985530754"
+			ixy="0"
+			ixz="0"
+			iyy="0.00002035985530754"
+			iyz="0"
+			izz="0.00003945961663220"
+		/>
+
+	</inertial> -->
+	<visual>
+
+		<geometry>
+
+			<cylinder radius="0.04" length="0.001"/>
+
+		</geometry>
+		<material name="base_material">
+
+			<color rgba="1 1 1 1"/>
+
+		</material>
+	
+	</visual>
+	<collision>
+
+		<geometry>
+
+			<cylinder radius="0.04" length="0.001"/>
+
+		</geometry>
+
+	</collision>
+
+	</link>
+
+<joint name="supp_mid" type="fixed">
+    <origin xyz="0 0 0.0125" rpy="0 0 0"/>
+    <parent link="supp_cyl"/>
+    <child link="mid_cyl"/>
+
+ </joint>
+
+ <joint name="supp_base" type="fixed">
+    <origin xyz="0 0 0.0125" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="supp_cyl"/>
+</joint>
+	<link name="supp_cyl_2">
+
+	<!-- <inertial>
+
+		<mass value="0.04"/>
+		<inertia
+			ixx="2.08e-06"
+			ixy="0"
+			ixz="0"
+			iyy="2.08e-06"
+			iyz="0"
+			izz="1.67e-09"
+		/>
+
+	</inertial> -->
+	<visual>
+
+		<geometry>
+
+			<cylinder radius="0.001" length="0.025"/>
+
+		</geometry>
+		<material name="base_material">
+
+			<color rgba="1 1 1 1"/>
+
+		</material>
+	
+	</visual>
+	<collision>
+
+		<geometry>
+
+			<cylinder radius="0.001" length="0.025"/>
+
+		</geometry>
+
+	</collision>
+
+	</link>
+
+
+<link name="mid_cyl_2">
+
+	<!-- <inertial>
+
+		<mass value="0.07862944645"/>
+		<inertia
+			ixx="0.00002035985530754"
+			ixy="0"
+			ixz="0"
+			iyy="0.00002035985530754"
+			iyz="0"
+			izz="0.00003945961663220"
+		/>
+
+	</inertial> -->
+	<visual>
+
+		<geometry>
+
+			<cylinder radius="0.04" length="0.001"/>
+
+		</geometry>
+		<material name="base_material">
+
+			<color rgba="1 1 1 1"/>
+
+		</material>
+	
+	</visual>
+	<collision>
+
+		<geometry>
+
+			<cylinder radius="0.04" length="0.001"/>
+
+		</geometry>
+
+	</collision>
+
+	</link>
+
+<joint name="supp_mid_2" type="fixed">
+    <origin xyz="0 0 0.0125" rpy="0 0 0"/>
+    <parent link="supp_cyl_2"/>
+    <child link="mid_cyl_2"/>
+
+ </joint>
+
+ <joint name="supp_base_2" type="fixed">
+    <origin xyz="0 0 0.0125" rpy="0 0 0"/>
+    <parent link="mid_cyl"/>
+    <child link="supp_cyl_2"/>
+
+ </joint>
+
+ <joint name="dummy_joint" type="fixed">
+    <parent link="mid_cyl_2"/>
+    <child link="platform_base"/>
+	<origin rpy="0 0 0" xyz="0 0 0.001" />
+</joint>
+
+<link name='platform_base'>
+    <inertial>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <mass value="0.002"/>
+        <inertia ixx="0.0006" ixy="0" ixz="0" iyy="0.0006" iyz="0" izz="0.0012"/>
+    </inertial>
+    <visual>
+        <material name="Cyan">
+            <color rgba="0 1.0 1.0 1.0" />
+        </material>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+            <box size="0.092 0.092 0.002"/>
+        </geometry>
+       
+    </visual>
+    <collision>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+            <box size="0.092 0.092 0.002"/>
+        </geometry>
+    </collision>
+</link>
+<gazebo reference="platform_base">
+    <material>Gazebo/Black</material>
+    <kp>10000000.0</kp>
+    <kd>1.0</kd>
+    <mu1>4.0</mu1>
+    <mu2>4.0</mu2>
+    <maxVel>0.0</maxVel>
+    <minDepth>0.001</minDepth>
+</gazebo>
+
+<joint name="dummy_base" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0.013" />
+    <parent link="platform_base"/>
+    <child link="ball"/>
+</joint>
+
+
+<link name='ball'>
+    <inertial>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <mass value="0.005"/>
+        <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+    </inertial>
+    <visual>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+            <sphere radius="0.013"/>
+        </geometry>
+        <material name="gray">
+            <color rgba="0.7 0.7 0.7 1"/>
+        </material>
+    </visual>
+    <collision>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+            <sphere radius="0.013"/>
+        </geometry>
+    </collision>
+</link>
+
+<gazebo reference="ball">
+    <material>Gazebo/DarkGrey</material>
+    <kp>10000000.0</kp>
+    <kd>1.0</kd>
+    <mu1>4.0</mu1>
+    <mu2>4.0</mu2>
+    <maxVel>0.0</maxVel>
+    <minDepth>0.001</minDepth>
+</gazebo>
+
+<link name='platform_tag0'>
+    <inertial>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <mass value="0.002"/>
+        <inertia ixx="0.0006" ixy="0" ixz="0" iyy="0.0006" iyz="0" izz="0.0012"/>
+    </inertial>
+    <visual>
+        <material name="Cyan">
+            <color rgba="0 1.0 1.0 1.0" />
+        </material>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+            <mesh filename="package://dot_description/mesh/tag2/tag2.dae" scale="0.45 0.45 1"/>
+        </geometry>
+       
+    </visual>
+</link>
+<gazebo reference="platform_tag1">
+    <material>package://dot_description/mesh/tag2/gazebo.material</material>
+    <kp>10000000.0</kp>
+    <kd>1.0</kd>
+    <mu1>4.0</mu1>
+    <mu2>4.0</mu2>
+    <maxVel>0.0</maxVel>
+    <minDepth>0.001</minDepth>
+</gazebo>
+
+
+<link name='platform_tag1'>
+    <inertial>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <mass value="0.002"/>
+        <inertia ixx="0.0006" ixy="0" ixz="0" iyy="0.0006" iyz="0" izz="0.0012"/>
+    </inertial>
+    <visual>
+        <material name="Cyan">
+            <color rgba="0 1.0 1.0 1.0" />
+        </material>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+            <mesh filename="package://dot_description/mesh/tag3/tag3.dae" scale="0.45 0.45 1"/>
+        </geometry>
+       
+    </visual>
+</link>
+<gazebo reference="platform_tag1">
+    <material>package://dot_description/mesh/tag3/gazebo.material</material>
+    <kp>10000000.0</kp>
+    <kd>1.0</kd>
+    <mu1>4.0</mu1>
+    <mu2>4.0</mu2>
+    <maxVel>0.0</maxVel>
+    <minDepth>0.001</minDepth>
+</gazebo>
+
+<link name='platform'>
+    <inertial>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <mass value="0.002"/>
+        <inertia ixx="0.0006" ixy="0" ixz="0" iyy="0.0006" iyz="0" izz="0.0012"/>
+    </inertial>
+    <visual>
+        <material name="Cyan">
+            <color rgba="0 1.0 1.0 1.0" />
+        </material>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+            <box size="0.092 0.092 0.002"/>
+        </geometry>
+       
+    </visual>
+    <collision>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+            <box size="0.092 0.092 0.0015"/>
+        </geometry>
+    </collision>
+</link>
+<gazebo reference="platform">
+    <material>Gazebo/Orange</material>
+    <kp>10000000.0</kp>
+    <kd>1.0</kd>
+    <mu1>4.0</mu1>
+    <mu2>4.0</mu2>
+    <maxVel>0.0</maxVel>
+    <minDepth>0.001</minDepth>
+</gazebo>
+
+
+<link name='platform_mid'>
+    <inertial>
+        <origin rpy="1.57 0 0" xyz="0 0 0"/>
+        <mass value="0.001"/>
+        <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0012"/>
+    </inertial>
+    <visual>
+        <material name="black">
+            <color rgba="0 0 0 1.0" />
+        </material>
+        <origin rpy="1.57 0 0" xyz="0 0 0"/>
+        <geometry>
+            <cylinder radius="0.001" length="0.002" />
+        </geometry>
+    </visual>
+    <collision>
+        <origin rpy="1.57 0 0" xyz="0 0 0"/>
+        <geometry>
+            <cylinder radius="0.001" length="0.002" />
+        </geometry>
+    </collision>
+</link>
+<gazebo reference="platform_mid">
+    <material>Gazebo/White</material>
+    <kp>10000000.0</kp>
+    <kd>1.0</kd>
+    <mu1>4.0</mu1>
+    <mu2>4.0</mu2>
+    <maxVel>0.0</maxVel>
+    <minDepth>0.001</minDepth>
+</gazebo>
+
+
+<joint name='rev_x' type='revolute'>
+    <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.014"/>
+    <parent link="ball"/>
+    <child link="platform_mid"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-0.05" upper="0.05" effort="2e+2" velocity="1" />
+</joint>
+
+<joint name='rev_y' type='revolute'>
+    <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.001"/>
+    <parent link="platform_mid"/>
+    <child link="platform"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-0.05" upper="0.05" effort="2e+2" velocity="1" />
+</joint>
+
+<joint name='fixed_joint0' type='fixed'>
+    <origin rpy="0.0 0.0 0.0" xyz="-0.023 -0.023 0.008"/>
+    <parent link="platform_mid"/>
+    <child link="platform_tag0"/>
+</joint>
+<joint name='fixed_joint1' type='fixed'>
+    <origin rpy="0.0 0.0 0.0" xyz="0.023 0.023 0.008"/>
+    <parent link="platform_mid"/>
+    <child link="platform_tag1"/>
+</joint>
+
+
+<transmission name="simple_trans1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="rev_x">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_x">
+    <mechanicalReducation>50</mechanicalReducation>
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </actuator>
+</transmission>
+
+<transmission name="simple_trans2">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="rev_y">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_y">
+    <mechanicalReducation>50</mechanicalReducation>
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </actuator>
+</transmission>
+</robot>

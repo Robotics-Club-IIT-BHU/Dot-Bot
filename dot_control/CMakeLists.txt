@@ -133,6 +133,8 @@ ${catkin_INCLUDE_DIRS}
 add_executable(omnidrive src/omnidrive_node.cpp src/omnidrive.cpp)
 #add_executable(odometry_node src/odometry.cpp)
 target_link_libraries(omnidrive ${catkin_LIBRARIES})
+add_executable(mymove src/mymove.cpp)
+target_link_libraries(mymove ${catkin_LIBRARIES})
 #target_link_libraries(odometry_node ${catkin_LIBRARIES})
 
 ## Rename C++ executable without prefix

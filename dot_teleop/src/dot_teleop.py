@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 
 import roslib
@@ -65,7 +65,7 @@ if __name__=="__main__":
     settings = termios.tcgetattr(sys.stdin)
     
     rospy.init_node('dot_teleop')
-    pub = rospy.Publisher('~cmd_vel', Twist)
+    pub = rospy.Publisher('/dot/cmd_vel', Twist)
 
     x = 0
     th = 0
@@ -77,8 +77,8 @@ if __name__=="__main__":
     control_speed = 0
     control_turn = 0
     try:
-        print msg
-        print vels(speed,turn)
+        print(msg)
+        print(vels(speed,turn))
         while(1):
             key = getKey()
             if key in moveBindings.keys():
@@ -90,9 +90,9 @@ if __name__=="__main__":
                 turn = turn * speedBindings[key][1]
                 count = 0
 
-                print vels(speed,turn)
+                print(vels(speed,turn))
                 if (status == 14):
-                    print msg
+                    print(msg)
                 status = (status + 1) % 15
             elif key == ' ' or key == 'k' :
                 x = 0
@@ -134,7 +134,7 @@ if __name__=="__main__":
             #print("publihsed: vx: {0}, wz: {1}".format(twist.linear.x, twist.angular.z))
 
     except:
-        print e
+        print(e)
 
     finally:
         twist = Twist()

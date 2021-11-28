@@ -12,4 +12,5 @@
     <remap from="/joint_states" to="/dot/joint_states" />
   </node>
   <node name="dot_omni_control" pkg="dot_control" type="omnidrive" output="screen" ns="dot"/>
+  <node pkg="tf" type="static_transform_publisher" name="map_odom" args="0 0 0 0 0 0 map odom 1"/>
 </launch>
