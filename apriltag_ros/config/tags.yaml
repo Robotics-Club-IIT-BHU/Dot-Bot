@@ -1,0 +1,104 @@
+# # Definitions of tags to detect
+#
+# ## General remarks
+#
+# - All length in meters
+# - Ellipsis (...) signifies that the previous element can be repeated multiple times.
+#
+# ## Standalone tag definitions
+# ### Remarks
+#
+# - name is optional
+#
+# ### Syntax
+#
+# standalone_tags:
+#   [
+#     {id: ID, size: SIZE, name: NAME},
+#     ...
+#   ]
+standalone_tags:
+  [
+{id: 0, size: 0.102,frame_id: "tag_0"},
+{id: 1, size: 0.09,frame_id: "tag_1"},
+{id: 2, size: 0.09,frame_id: "tag_2"},
+{id: 3, size: 0.09,frame_id: "tag_3"},
+{id: 4, size: 0.085,frame_id: "tag_4"},
+{id: 5, size: 0.09,frame_id: "tag_5"},
+{id: 6, size: 0.09,frame_id: "tag_6"},
+{id: 7, size: 0.09,frame_id: "tag_7"},
+{id: 8,  size: 0.04,frame_id: "tag_8"},
+{id: 9,  size: 0.04,frame_id: "tag_9"},
+{id: 10,  size: 0.04,frame_id: "tag_10"},
+{id: 11,  size: 0.04,frame_id: "tag_11"},
+{id: 12, size: 0.052,frame_id: "tag_12"},
+{id: 13,  size: 0.052,frame_id: "tag_13"},
+{id: 14,  size: 0.052,frame_id: "tag_14"},
+{id: 15,  size: 0.052,frame_id: "tag_15"},
+{id: 16,  size: 0.052,frame_id: "tag_16"},
+{id: 17,  size: 0.052,frame_id: "tag_17"},
+{id: 18,  size: 0.052,frame_id: "tag_18"},
+{id: 19,  size: 0.052,frame_id: "tag_19"},
+{id: 20,  size: 0.052,frame_id: "tag_20"},
+{id: 21,  size: 0.052,frame_id: "tag_21"},
+{id: 22,  size: 0.052,frame_id: "tag_22"},
+{id: 23,  size: 0.052,frame_id: "tag_23"},
+{id: 24,  size: 0.052,frame_id: "tag_24"},
+{id: 25,  size: 0.052,frame_id: "tag_25"},
+{id: 26,  size: 0.052,frame_id: "tag_26"},
+ {id: 27,  size: 0.052,frame_id: "tag_27"},
+ {id: 28,  size: 0.052,frame_id: "tag_28"},
+ {id: 29,  size: 0.052,frame_id: "tag_29"},
+{id: 30,  size: 0.052,frame_id: "tag_30"},
+{id: 31,  size: 0.052,frame_id: "tag_31"},
+{id: 32,  size: 0.052,frame_id: "tag_32"},
+{id: 33,  size: 0.052,frame_id: "tag_33"},
+{id: 34,  size: 0.052,frame_id: "tag_34"},
+{id: 35,  size: 0.052,frame_id: "tag_35"},
+{id: 36,  size: 0.052,frame_id: "tag_36"},
+{id: 37,  size: 0.052,frame_id: "tag_37"},
+{id: 38,  size: 0.052,frame_id: "tag_38"},
+{id: 39,  size: 0.052,frame_id: "tag_39"},
+{id: 40,  size: 0.052,frame_id: "tag_40"},
+{id: 41,  size: 0.052,frame_id: "tag_41"},
+{id: 42,  size: 0.052,frame_id: "tag_42"},
+{id: 43,  size: 0.052,frame_id: "tag_43"},
+{id: 44,  size: 0.052,frame_id: "tag_44"},
+{id: 45,  size: 0.052,frame_id: "tag_45"},
+{id: 46,  size: 0.052,frame_id: "tag_46"},
+{id: 47,  size: 0.052,frame_id: "tag_47"},
+{id: 48,  size: 0.052,frame_id: "tag_48"},
+{id: 49,  size: 0.052,frame_id: "tag_49"},
+{id: 50,  size: 0.052,frame_id: "tag_50"},
+{id: 51,  size: 0.052,frame_id: "tag_51"},
+{id: 52,  size: 0.052,frame_id: "tag_52"},
+{id: 53,  size: 0.052,frame_id: "tag_53"},
+{id: 54,  size: 0.052,frame_id: "tag_54"},
+{id: 55,  size: 0.052,frame_id: "tag_55"},
+ 
+ 
+  ]
+# ## Tag bundle definitions
+# ### Remarks
+#
+# - name is optional
+# - x, y, z have default values of 0 thus they are optional
+# - qw has default value of 1 and qx, qy, qz have default values of 0 thus they are optional
+#
+# ### Syntax
+#
+# tag_bundles:
+#   [
+#     {
+#       name: 'CUSTOM_BUNDLE_NAME',
+#       layout:
+#         [
+#           {id: ID, size: SIZE, x: X_POS, y: Y_POS, z: Z_POS, qw: QUAT_W_VAL, qx: QUAT_X_VAL, qy: QUAT_Y_VAL, qz: QUAT_Z_VAL},
+#           ...
+#         ]
+#     },
+#     ...
+#   ]
+tag_bundles:
+  [
+  ]

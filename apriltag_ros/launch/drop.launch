@@ -1,0 +1,11 @@
+<launch>
+<node pkg="tf2_ros" type="static_transform_publisher" name="drop_point1" args="-0.60 -0.60 0.00 0.00 0.00 0.00 0.999 map drop1"/>
+<node pkg="tf2_ros" type="static_transform_publisher" name="drop_point2" args="-0.60 0.00 0.00 0.00 0.00 0.00 0.999 map drop2"/>
+<node pkg="tf2_ros" type="static_transform_publisher" name="drop_point3" args="-0.60 0.60 0.00 0.00 0.00 0.00 0.999 map drop3"/>
+<node pkg="tf2_ros" type="static_transform_publisher" name="drop_point4" args="0.00 -0.60 0.00 0.00 0.00 0.00 0.999 map drop4"/>
+<node pkg="tf2_ros" type="static_transform_publisher" name="drop_point5" args="0.00 0.00 0.00 0.00 0.00 0.00 0.999 map drop5"/>
+<node pkg="tf2_ros" type="static_transform_publisher" name="drop_point6" args="0.00 0.60 0.00 0.00 0.00 0.00 0.999 map drop6"/>
+<node pkg="tf2_ros" type="static_transform_publisher" name="drop_point7" args="0.60 -0.60 0.00 0.00 0.00 0.00 0.999 map drop7"/>
+<node pkg="tf2_ros" type="static_transform_publisher" name="drop_point8" args="0.60 0.00 0.00 0.00 0.00 0.00 0.999 map drop8"/>
+<node pkg="tf2_ros" type="static_transform_publisher" name="drop_point9" args="0.60 0.60 0.00 0.00 0.00 0.00 0.999 map drop9"/>
+</launch>

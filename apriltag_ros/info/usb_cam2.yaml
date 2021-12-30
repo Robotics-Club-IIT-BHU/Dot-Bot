@@ -1,0 +1,52 @@
+# image_width: 640
+# image_height: 480
+# camera_name: narrow_stereo
+# camera_matrix:
+#   rows: 3
+#   cols: 3
+#   data: [266.05763,  -3.98388, 318.36588,
+#            0.     , 266.57843, 238.4423 ,
+#            0.     ,   0.     ,   1.     ]
+# distortion_model: equidistant
+# distortion_coefficients:
+#   rows: 1
+#   cols: 4
+#   data: [0.843522, -1.802508, -3.351016, 3.630709]
+# rectification_matrix:
+#   rows: 3
+#   cols: 3
+#   data: [1., 0., 0.,
+#          0., 1., 0.,
+#          0., 0., 1.]
+# projection_matrix:
+#   rows: 3
+#   cols: 4
+#   data: [266.05763,  -3.98388, 318.36588,   0.     ,
+#            0.     , 266.57843, 238.4423 ,   0.     ,
+#            0.     ,   0.     ,   1.     ,   0.     ]
+image_width: 640
+image_height: 480
+camera_name: narrow_stereo
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [203.71833,   0.     , 319.5    ,
+           0.     , 203.71833, 239.5    ,
+           0.     ,   0.     ,   1.     ]
+distortion_model: equidistant
+distortion_coefficients:
+  rows: 1
+  cols: 4
+  data: [0.000000, 0.000000, 0.000000, 0.000000]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1., 0., 0.,
+         0., 1., 0.,
+         0., 0., 1.]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data: [203.71833,   0.     , 319.5    ,   0.     ,
+           0.     , 203.71833, 239.5    ,   0.     ,
+           0.     ,   0.     ,   1.     ,   0.     ]

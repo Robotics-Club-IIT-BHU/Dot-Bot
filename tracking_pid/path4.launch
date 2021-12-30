@@ -1,0 +1,3 @@
+<launch>
+ <node name="publish_path" pkg="rostopic" type="rostopic" args="pub --latch dot4/path nav_msgs/Path --file=$(find tracking_pid)/trajectories/square.yaml"/>
+</launch>

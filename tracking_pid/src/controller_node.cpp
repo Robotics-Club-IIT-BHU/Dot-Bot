@@ -203,7 +203,7 @@ int main(int argc, char** argv)
   tf2_ros::TransformListener tf_listener(tf_buffer);
 
   double loop_rate;
-  node_priv.param("loop_rate", loop_rate, 20.0);
+  node_priv.param("loop_rate", loop_rate, 50.0);
   ros::Rate rate(loop_rate);
 
   // Wait for frames to be available before starting node

@@ -6,7 +6,7 @@
     <arg name="target_x_acc" default="0.4"/>
     <arg name="target_yaw_vel" default="0.7"/>
     <arg name="target_yaw_acc" default="0.5"/>
-    <arg name="robot_radius" default="0.3"/>
+    <arg name="robot_radius" default="0.11"/>
     <arg name="tool_radius" default="0.2"/>
 
 

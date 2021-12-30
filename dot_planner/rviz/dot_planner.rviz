@@ -5,7 +5,6 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
-        - /TF1/Tree1
         - /Path1
         - /Marker1
         - /Marker2
@@ -18,6 +17,8 @@ Panels:
         - /Path4
         - /Path5
         - /Path6
+        - /TF1
+        - /TF1/Frames1
       Splitter Ratio: 0.5
     Tree Height: 514
   - Class: rviz/Selection
@@ -284,85 +285,6 @@ Visualization Manager:
       Update Interval: 0
       Value: true
       Visual Enabled: true
-    - Class: rviz/TF
-      Enabled: true
-      Frame Timeout: 15
-      Frames:
-        All Enabled: true
-        ball:
-          Value: true
-        base_link:
-          Value: true
-        hokuyo_link:
-          Value: true
-        imu_link:
-          Value: true
-        map:
-          Value: true
-        mid_cyl:
-          Value: true
-        mid_cyl_2:
-          Value: true
-        odom:
-          Value: true
-        origin_link:
-          Value: true
-        platform:
-          Value: true
-        platform_base:
-          Value: true
-        platform_mid:
-          Value: true
-        platform_tag0:
-          Value: true
-        platform_tag1:
-          Value: true
-        rim_back_link:
-          Value: true
-        rim_left_link:
-          Value: true
-        rim_right_link:
-          Value: true
-        supp_cyl:
-          Value: true
-        supp_cyl_2:
-          Value: true
-      Marker Alpha: 1
-      Marker Scale: 0.10000000149011612
-      Name: TF
-      Show Arrows: true
-      Show Axes: true
-      Show Names: true
-      Tree:
-        map:
-          odom:
-            origin_link:
-              base_link:
-                hokuyo_link:
-                  {}
-                imu_link:
-                  {}
-                rim_back_link:
-                  {}
-                rim_left_link:
-                  {}
-                rim_right_link:
-                  {}
-                supp_cyl:
-                  mid_cyl:
-                    supp_cyl_2:
-                      mid_cyl_2:
-                        platform_base:
-                          ball:
-                            platform_mid:
-                              platform:
-                                {}
-                              platform_tag0:
-                                {}
-                              platform_tag1:
-                                {}
-      Update Interval: 0
-      Value: true
     - Angle Tolerance: 0.10000000149011612
       Class: rviz/Odometry
       Covariance:
@@ -380,7 +302,7 @@ Visualization Manager:
           Scale: 1
           Value: true
         Value: true
-      Enabled: true
+      Enabled: false
       Keep: 100
       Name: Odometry
       Position Tolerance: 0.10000000149011612
@@ -397,7 +319,7 @@ Visualization Manager:
         Value: Arrow
       Topic: /dot/odom
       Unreliable: false
-      Value: true
+      Value: false
     - Alpha: 0.699999988079071
       Class: rviz/Map
       Color Scheme: map
@@ -429,7 +351,7 @@ Visualization Manager:
       Radius: 0.029999999329447746
       Shaft Diameter: 0.10000000149011612
       Shaft Length: 0.10000000149011612
-      Topic: /dot1/path
+      Topic: /path
       Unreliable: false
       Value: true
     - Class: rviz/Image
@@ -461,7 +383,7 @@ Visualization Manager:
       Marker Topic: /dot1/marker
       Name: Marker
       Namespaces:
-        /: true
+        {}
       Queue Size: 100
       Value: true
     - Class: rviz/Marker
@@ -469,7 +391,7 @@ Visualization Manager:
       Marker Topic: /dot2/marker
       Name: Marker
       Namespaces:
-        /: true
+        {}
       Queue Size: 100
       Value: true
     - Class: rviz/Marker
@@ -477,7 +399,7 @@ Visualization Manager:
       Marker Topic: /dot3/marker
       Name: Marker
       Namespaces:
-        /: true
+        {}
       Queue Size: 100
       Value: true
     - Class: rviz/Marker
@@ -485,7 +407,7 @@ Visualization Manager:
       Marker Topic: dot4/marker
       Name: Marker
       Namespaces:
-        /: true
+        {}
       Queue Size: 100
       Value: true
     - Class: rviz/Marker
@@ -493,7 +415,7 @@ Visualization Manager:
       Marker Topic: dot5/marker
       Name: Marker
       Namespaces:
-        /: true
+        {}
       Queue Size: 100
       Value: true
     - Class: rviz/Marker
@@ -501,7 +423,7 @@ Visualization Manager:
       Marker Topic: dot6/marker
       Name: Marker
       Namespaces:
-        /: true
+        {}
       Queue Size: 100
       Value: true
     - Alpha: 1
@@ -624,6 +546,63 @@ Visualization Manager:
       Topic: /dot6/path
       Unreliable: false
       Value: true
+    - Class: rviz/TF
+      Enabled: true
+      Frame Timeout: 15
+      Frames:
+        All Enabled: false
+        ball:
+          Value: false
+        base_link:
+          Value: false
+        hokuyo_link:
+          Value: false
+        imu_link:
+          Value: false
+        map:
+          Value: true
+        mid_cyl:
+          Value: false
+        mid_cyl_2:
+          Value: false
+        odom:
+          Value: true
+        origin_link:
+          Value: true
+        platform:
+          Value: false
+        platform_base:
+          Value: false
+        platform_mid:
+          Value: false
+        platform_tag0:
+          Value: false
+        platform_tag1:
+          Value: false
+        rim_back_link:
+          Value: false
+        rim_left_link:
+          Value: false
+        rim_right_link:
+          Value: false
+        supp_cyl:
+          Value: false
+        supp_cyl_2:
+          Value: false
+        world:
+          Value: true
+      Marker Alpha: 1
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Tree:
+        world:
+          map:
+            {}
+      Update Interval: 0
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -652,7 +631,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 2.2911226749420166
+      Distance: 1.1748207807540894
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -670,7 +649,7 @@ Visualization Manager:
       Near Clip Distance: 0.009999999776482582
       Pitch: 1.5697963237762451
       Target Frame: <Fixed Frame>
-      Yaw: 4.712264537811279
+      Yaw: 4.702269077301025
     Saved: ~
 Window Geometry:
   Displays:

@@ -11,11 +11,14 @@ import rospy
 sys.path.insert(0, '../')
 import argparse
 import yaml
+import tf
 from nav_msgs.msg import Path
+from std_msgs.msg import Bool
 from nav_msgs.msg import Odometry
+from std_msgs.msg import String
 from geometry_msgs.msg import PoseWithCovarianceStamped, PoseStamped
 from visualization_msgs.msg import Marker
-from std_msgs.msg import Int8
+from std_msgs.msg import Int16
 from math import fabs
 from itertools import combinations
 from copy import deepcopy
@@ -314,254 +317,300 @@ class CBS(object):
             plan[agent] = path_dict_list
         return plan
 
-path_pub1 = rospy.Publisher('/dot1/path', Path, queue_size=10) 
-path_pub2=rospy.Publisher('/dot2/path', Path, queue_size=10) 
-path_pub3=rospy.Publisher('/dot3/path', Path, queue_size=10) 
-path_pub4=rospy.Publisher('/dot4/path', Path, queue_size=10)
-path_pub5=rospy.Publisher('/dot5/path', Path, queue_size=10)
-path_pub6=rospy.Publisher('/dot6/path', Path, queue_size=10)
+path_pub1 = rospy.Publisher('/dot4/path', Path, queue_size=0,latch=True) 
+path_pub2=rospy.Publisher('/dot2/path', Path, queue_size=0,latch=True) 
+path_pub3=rospy.Publisher('/dot3/path', Path, queue_size=0,latch=True) 
+path_pub4=rospy.Publisher('/dot1/path', Path, queue_size=0,latch=True)
+servo_pub1=rospy.Publisher('/dot4/drop', String, queue_size=1,latch=True)
+servo_pub2=rospy.Publisher('/dot2/drop', String, queue_size=1,latch=True)
+servo_pub3=rospy.Publisher('/dot3/drop', String, queue_size=1,latch=True)
+servo_pub4=rospy.Publisher('/dot1/drop', String, queue_size=1,latch=True)
         
 def publish_plan(solution,ag):
         """
         publish the global plan
         """
-        #print(coords)
-        global coords
-        coords=[]
-        for i in range(0,16):
-          col=[]
-          for j in range(0,16):
-             col.append((-1.143+j*0.1524,1.143-i*0.1524))
-          coords.append(col)
+        
+        global coords,coords2
           
         msg = Path()
         msg.header.frame_id = "map"
         msg.header.stamp = rospy.Time.now()
         for p in solution[ag]:
             pose = PoseStamped()
-            coor=coords[p['x']][p['y']]
+            pose.header.frame_id='map'
+            pose.header.stamp=rospy.Time.now()
+            coor=coords2[p['x']][p['y']]
             pose.pose.position.x = coor[0]
             pose.pose.position.y = coor[1]
-#            print(p['x'],p['y'])
+            print(p['x'],p['y'])
             pose.pose.position.z = 0
             pose.pose.orientation.x = 0
             pose.pose.orientation.y = 0
             pose.pose.orientation.z = 0
-            pose.pose.orientation.w = 0
+            pose.pose.orientation.w = 1
             msg.poses.append(pose)
                        
-        rospy.loginfo("Publishing Plan...")
+        rospy.loginfo("Publiing Plan...")
+        # print(msg)
         return msg
         
 
-gc=[(1,10),(5,0),(10,0),(9,7),(4,5),(3,1)]
+gc=[(4,1),(6,1),(1,2),(7,2)]
 ptg={
-'m':[(2,2),(3,2),(4,2),(5,2),(5,3),(5,4),(5,5),(4,5),(3,5),(2,5),(2,4),(2,3)],
-'d':[(2,6),(3,6),(4,6),(5,6),(5,7),(5,8),(5,9),(4,9),(3,9),(2,9),(2,8),(2,7)],
-'k':[(2,10),(3,10),(4,10),(5,10),(5,11),(5,12),(5,13),(4,13),(3,13),(2,13),(2,12),(2,11)],
-'c':[(6,2),(7,2),(8,2),(9,2),(9,3),(9,4),(9,5),(8,5),(8,4),(8,3),(8,2),(7,2)],
-'b':[(6,6),(7,6),(8,6),(9,6),(9,7),(9,8),(9,9),(8,9),(7,9),(6,9),(6,8),(6,7)],
-'h':[(6,10),(7,10),(8,10),(9,10),(9,11),(9,12),(9,13),(8,13),(7,13),(6,13),(6,12),(6,11)],
-'p':[(10,2),(11,2),(12,2),(13,2),(13,3),(13,4),(13,5),(12,5),(11,5),(10,5),(10,4),(10,3)],
-'a':[(10,6),(11,6),(12,6),(13,6),(13,7),(13,8),(13,9),(12,9),(12,8),(12,7),(12,6),(11,6)],
-'j':[(10,10),(11,10),(12,10),(13,10),(13,11),(13,12),(13,13),(12,13),(11,13),(10,13),(10,12),(10,11)]
+'m':[(2,1),(3,2),(1,2),(2,3)],
+'d':[(2,3),(3,4),(1,4),(2,5)],
+'k':[(2,5),(3,6),(1,6),(2,7)],
+'c':[(4,1),(5,2),(3,2),(4,3)],
+'b':[(4,3),(5,4),(3,4),(4,5)],
+'h':[(4,5),(5,6),(3,6),(4,7)],
+'p':[(6,1),(5,2),(7,2),(6,3)],
+'a':[(6,3),(5,4),(7,4),(6,5)],
+'j':[(6,5),(5,6),(7,6),(6,7)]
      }
-pkg1=['c','b','k','m','m','m','c','k','k']
-pkg2=['c','b','k','m','c','b','m','a','p']
-st=[0,0,0,0,0,0]
-tc=[(6,3),(6,7),(5,0),(10,0),(3,1),(12,1)]
+pkg1=['a','p','m','d','j','m','k','b','k','d','j','d','c','h','d','k','k','k','d','h']
+pkg2=['a','b','k','d','d','b','a','c','h','c','h','b','b','a','b','b','h','c','m','d']
+destbot=['c','p','c','p']
+tp1=len(pkg1)
+tp2=len(pkg2)
+acp={'m':(2,2),'d':(2,4),'k':(2,6),'c':(4,2),'b':(4,4),'h':(4,6),'p':(6,2),'a':(6,4),'j':(6,6)}
+botid=[4,2,3,1]
+st=[0,0,0,0]
+tc=[(0,0),(0,0),(0,0),(0,0)]
 f=0
-mark1_pub=rospy.Publisher("/dot1/marker",Marker,queue_size=1)
-mark2_pub=rospy.Publisher("/dot2/marker",Marker,queue_size=1)
-mark3_pub=rospy.Publisher("/dot3/marker",Marker,queue_size=1)
-mark4_pub=rospy.Publisher("/dot4/marker",Marker,queue_size=1)
-mark5_pub=rospy.Publisher("/dot5/marker",Marker,queue_size=1)
-mark6_pub=rospy.Publisher("/dot6/marker",Marker,queue_size=1)
-    
-
+bots=4
+ind1=PoseStamped()
+ind1.header.frame_id='map'
+ind1.pose.position.x=-1.17
+ind1.pose.position.y=0.380
+ind1.pose.orientation.w=1
+ind2=PoseStamped()
+ind2.header.frame_id='map'
+ind2.pose.position.x=-1.15
+ind2.pose.position.y=-0.354
+ind2.pose.orientation.w=1
+ind11=PoseStamped()
+ind11.header.frame_id='map'
+ind11.pose.position.x=-1.105
+ind11.pose.position.y=0.380
+ind11.pose.orientation.w=1
+ind22=PoseStamped()
+ind22.header.frame_id='map'
+ind22.pose.position.x=-1.105
+ind22.pose.position.y=-0.354
+ind22.pose.orientation.w=1
+indy=PoseStamped()
+indx1=PoseStamped()
+indx1.header.frame_id='map'
+indx1.pose.position.x=-0.899
+indx1.pose.position.y=0.380
+indx1.pose.orientation.w=1
+indy1=PoseStamped()
+indy1.header.frame_id='map'
+indy1.pose.position.x=-0.910
+indy1.pose.position.y=-0.360
+indy1.pose.orientation.w=1
+def trajer1(data):
+    global re
+    re[0]=1
+def trajer2(data):
+    global re
+    re[1]=1
+def trajer3(data):
+    global re
+    re[2]=1
+def trajer4(data):
+    global re
+    re[3]=1
+def dropper1(data):
+    global dropping
+    if data.data==1:
+      print("Dropping0 updated 1")
+      dropping[0]=1
+    else:
+        dropping[0]=0
+def dropper2(data):
+    print(data)
+    global dropping
+    if data.data==1:
+      dropping[1]=1
+      print("Dropping1 updated 1")
+    else:
+        dropping[1]=0
+def dropper3(data):
+    print(data)
+    global dropping
+    if data.data==1:
+      dropping[2]=1
+      print("Dropping2 updated 1")
+    else:
+        dropping[2]=0
+def dropper4(data):
+    print(data)
+    global dropping
+    if data.data==1:
+      dropping[3]=1
+      print("Dropping3 updated 1")
+    else:
+        dropping[3]=0
+def sgn(x):
+    if x==0:
+        return 0
+    elif x>0:
+        return 1
+    else:
+        return -1
 def mapper(x1,y1):
-   xd=round((y1-0.1524/2)/0.1524)
-   yd=round((x1-0.1524/2)/0.1524)
-   gx6=7-xd
-   gy6=8+yd
-   return [gx6,gy6]
+   xd=round((y1)/0.3048)
+   yd=round((x1)/0.3048)
+   gx6=4-xd
+   gy6=4+yd
+   return (gx6,gy6)
 
 def imap(x1,y1):
-   return (-1.143+y1*0.1524,1.143-x1*0.1524)
- 
-def mark(m1,m2,m3,m4,m5,m6):
-    global st,mark1_pub,mark2_pub,mark3_pub,mark4_pub,mark5_pub,mark6_pub,gc,tc
-    marker1=Marker()
-    marker1.header.frame_id = "map"
-    marker1.header.stamp = rospy.Time.now()
-    marker1.ns = "/"
-    marker1.id = 0
-    marker1.type = Marker.SPHERE
-    marker1.action=0
-    marker1.scale.x=0.04
-    marker1.scale.y=0.04
-    marker1.scale.z=0.01
-    marker1.color.a = 1.0
-    marker1.color.r = 0.0
-    marker1.color.g = 1.0
-    marker1.color.b = 0.0
-    marker1.pose.position.z=0
-    marker1.pose.orientation.x = 0.0
-    marker1.pose.orientation.y = 0.0
-    marker1.pose.orientation.z = 0.0
-    marker1.pose.orientation.w = 1.0
-    
-    marker2=Marker()
-    marker2.header.frame_id = "map"
-    marker2.header.stamp = rospy.Time.now()
-    marker2.ns = "/"
-    marker2.id = 0
-    marker2.type = Marker.SPHERE
-    marker2.action=0
-    marker2.scale.x=0.04
-    marker2.scale.y=0.04
-    marker2.scale.z=0.01
-    marker2.color.a = 1.0
-    marker2.color.r = 0.0
-    marker2.color.g = 0.0
-    marker2.color.b = 1.0
-    marker2.pose.position.z=0
-    marker2.pose.orientation.x = 0.0
-    marker2.pose.orientation.y = 0.0
-    marker2.pose.orientation.z = 0.0
-    marker2.pose.orientation.w = 1.0
-    
-    marker3=Marker()
-    marker3.header.frame_id = "map"
-    marker3.header.stamp = rospy.Time.now()
-    marker3.ns = "/"
-    marker3.id = 0
-    marker3.type = Marker.SPHERE
-    marker3.action=0
-    marker3.scale.x=0.04
-    marker3.scale.y=0.04
-    marker3.scale.z=0.01
-    marker3.color.a = 1.0
-    marker3.color.r = 1.0
-    marker3.color.g = 0.0
-    marker3.color.b = 0.0
-    marker3.pose.position.z=0
-    marker3.pose.orientation.x = 0.0
-    marker3.pose.orientation.y = 0.0
-    marker3.pose.orientation.z = 0.0
-    marker3.pose.orientation.w = 1.0
-    
-    marker4=Marker()
-    marker4.header.frame_id = "map"
-    marker4.header.stamp = rospy.Time.now()
-    marker4.ns = "/"
-    marker4.id = 0
-    marker4.type = Marker.SPHERE
-    marker4.action=0
-    marker4.scale.x=0.04
-    marker4.scale.y=0.04
-    marker4.scale.z=0.01
-    marker4.color.a = 1.0
-    marker4.color.r = 0.0
-    marker4.color.g = 1.0
-    marker4.color.b = 1.0
-    marker4.pose.position.z=0
-    marker4.pose.orientation.x = 0.0
-    marker4.pose.orientation.y = 0.0
-    marker4.pose.orientation.z = 0.0
-    marker4.pose.orientation.w = 1.0
-    
-    marker5=Marker()
-    marker5.header.frame_id = "map"
-    marker5.header.stamp = rospy.Time.now()
-    marker5.ns = "/"
-    marker5.id = 0
-    marker5.type = Marker.SPHERE
-    marker5.action=0
-    marker5.scale.x=0.04
-    marker5.scale.y=0.04
-    marker5.scale.z=0.01
-    marker5.color.a = 1.0
-    marker5.color.r = 1.0
-    marker5.color.g = 0.0
-    marker5.color.b = 1.0
-    marker5.pose.position.z=0
-    marker5.pose.orientation.x = 0.0
-    marker5.pose.orientation.y = 0.0
-    marker5.pose.orientation.z = 0.0
-    marker5.pose.orientation.w = 1.0
-    
-    marker6=Marker()
-    marker6.header.frame_id = "map"
-    marker6.header.stamp = rospy.Time.now()
-    marker6.ns = "/"
-    marker6.id = 0
-    marker6.type = Marker.SPHERE
-    marker6.action=0
-    marker6.scale.x=0.04
-    marker6.scale.y=0.04
-    marker6.scale.z=0.01
-    marker6.color.a = 1.0
-    marker6.color.r = 1.0
-    marker6.color.g = 1.0
-    marker6.color.b = 0.0
-    marker6.pose.position.z=0
-    marker6.pose.orientation.x = 0.0
-    marker6.pose.orientation.y = 0.0
-    marker6.pose.orientation.z = 0.0
-    marker6.pose.orientation.w = 1.0
-    
-    st=[0,0,0,0,0,0]
-    msgl=[m1,m2,m3,m4,m5,m6]
-    markl=[marker1,marker2,marker3,marker4,marker5,marker6]
-    mark_publ=[mark1_pub,mark2_pub,mark3_pub,mark4_pub,mark5_pub,mark6_pub]
-    lm=[len(m1.poses),len(m2.poses),len(m3.poses),len(m4.poses),len(m5.poses),len(m6.poses)]
-    for i in range(6):
+#    return (-1.143+y1*0.1524,1.143-x1*0.1524)
+    return coords2[x1][y1]
+
+def mark(m1,m2,m3,m4):
+    global st,gc,tc,re,pmsg,bots,dropping,pkg1,pkg2,destbot,path_pub1,path_pub2,servo_pub1,servo_pub2,ind1,ind2,acp,ind11,ind22,indx1,indy1,path_pub3,path_pub4,servo_pub3,servo_pub4
+    pathinitialise()
+    re=[0,0,0,0]
+    dropping=[1,1,1,1]
+    s=0
+    rate=rospy.Rate(20)
+    msgl=[m1,m2,m3,m4]
+    st=[0,0,0,0]
+    path_pub=[path_pub1,path_pub2,path_pub3,path_pub4]
+    servo_pub=[servo_pub1,servo_pub2,servo_pub3,servo_pub4]
+    nopub=[0,0,0,0]
+    lm=[len(m1.poses),len(m2.poses),len(m3.poses),len(m4.poses)]
+    for i in range(bots):
+        offx=0
+        offy=0
+        if not induct(tc[i][0],tc[i][1]) and not preinduct(tc[i][0],tc[i][1]):
+            destin=acp[destbot[i]]
+            dirx=destin[1]-tc[i][1]
+            diry=destin[0]-tc[i][0]
+            print(dirx,diry)
+            if dirx!=0:
+                offx=sgn(dirx)*0.1
+                print("Offsetting x=",offx)
+            if diry!=0:
+                offy=-1*sgn(diry)*0.1
+                print("Offseting y=",offy)
+            msgl[i].poses[lm[i]-1].pose.position.x+=offx
+            msgl[i].poses[lm[i]-1].pose.position.y+=offy
+    for i in range(bots):
        if lm[i]==1:
-          lm[i]=500
-    print(lm)
-    print("least=",min(lm))
-    le=min(lm)
-    for i in range(1,le+1):
-      for j in range(0,6):
-         if(i==lm[j] or lm[j]==500):
+          if gc[i][0]==3 and gc[i][1]==1 and not pkg1:
+              lm[i]=500
+          if gc[i][0]==5 and gc[i][1]==1 and not pkg2:
+              lm[i]=500
+    # print(lm)
+    print("least length=",min(lm))
+    if min(lm)<500:
+     for i in range(1,min(lm)+1):
+      s=0
+      re=[0,0,0,0]
+      dropping=[1,1,1,1]
+      for j in range(bots):
+         if(i==lm[j]):
             st[j]=1
-      for j in range(0,6):
+      pathinitialise()
+      for j in range(bots):
         if st[j]==0:
-          markl[j].pose.position.x=msgl[j].poses[i].pose.position.x
-          markl[j].pose.position.y=msgl[j].poses[i].pose.position.y
+          pmsg[j].poses.append(msgl[j].poses[i-1])
+          pmsg[j].poses.append(msgl[j].poses[i])
           mapped=mapper(msgl[j].poses[i].pose.position.x,msgl[j].poses[i].pose.position.y)
           gc[j]=(mapped[0],mapped[1])
         else:
            imapped=imap(gc[j][0],gc[j][1])
-           markl[j].pose.position.x=imapped[0]
-           markl[j].pose.position.y=imapped[1]
-      for j in range(0,6):
-          mark_publ[j].publish(markl[j])
-      rospy.sleep(0.5)
-    print("st=",st)
-    targetpt()
+           if (gc[j][0]==3 and gc[j][1]==1):
+              pmsg[j].poses.append(msgl[j].poses[i-1])
+              pmsg[j].poses.append(indx1)
+              pmsg[j].poses.append(ind11)
+              pmsg[j].poses.append(ind11)
+              pmsg[j].poses.append(ind1)
+              pmsg[j].poses.append(ind1)
+              pmsg[j].poses.append(ind11)
+              pmsg[j].poses.append(ind11)
+              pmsg[j].poses.append(indx1)
+              pmsg[j].poses.append(msgl[j].poses[i-1])
+           elif gc[j][0]==5 and gc[j][1]==1:
+              pmsg[j].poses.append(msgl[j].poses[i-1])
+              pmsg[j].poses.append(indy1)
+              pmsg[j].poses.append(ind22)
+              pmsg[j].poses.append(ind22)
+              pmsg[j].poses.append(ind2)
+              pmsg[j].poses.append(ind2)
+              pmsg[j].poses.append(ind22)
+              pmsg[j].poses.append(ind22)
+              pmsg[j].poses.append(indy1)
+              pmsg[j].poses.append(msgl[j].poses[i-1])
+           elif gc[j][0]==1 and gc[j][1]==1:
+               nopub[j]=1
+           elif gc[j][0]==7 and gc[j][1]==1:
+               nopub[j]=1
+           else:
+             nopub[j]=1
+             dropping[j]=0
+            #  servo_pub[j].publish(destbot[j]+str(botid[j]))
+            #  print("Servo activated",botid[j])
+      for j in range(bots):
+          if not nopub[j]:
+            path_pub[j].publish(pmsg[j])  
+          elif dropping[j]==0:
+              print("Servo activated",botid[j])
+              servo_pub[j].publish(destbot[j]+str(botid[j]))
+    #   print("s=",s)
+      while s!=bots and not rospy.is_shutdown():
+          s=0
+        #   print("Dropping",dropping)
+        #   print(re)
+          for i in range(bots):
+              if dropping[i]!=1:
+                  continue
+              if nopub[i]==1 and preinduct(gc[i][0],gc[i][1]):
+                  s+=1
+              s+=re[i]
+          rate.sleep()
+      rospy.sleep(1)
+    #   print(s)
+     if not rospy.is_shutdown():
+        print("REcalculating")
+        targetpt()
+    else:
+        print("All delivered")
 
 def dis(x1,y1,x2,y2):
       return abs(x2-x1)+abs(y2-y1)
+def preinduct(x,y):
+    if (x==1 and y==1) or (x==7 and y==1):
+        return True
+    else:
+        return False
 def induct(x,y):
-   if (x==5 and y==0) or (x==10 and y==0):
+   if (x==3 and y==1) or (x==5 and y==1):
        return True
    else:
      return False
 def targetpt():
-    global gc,tc,st,ptg,pkg1,pkg2
+    global gc,tc,st,ptg,pkg1,pkg2,bots,f,tp1,tp2
     ipl=[]
     spl=[]
-#    tc=[(1,14),(3,14),(5,14),(7,14),(9,14),(11,14)]
-    for i in range(6):
+    # print("f=",f)
+    if f==0:
+        for i in range(bots):
+            ipl.append((gc[i],i))
+        f=1
+    for i in range(bots):
       if st[i]==1:
         if induct(gc[i][0],gc[i][1]):
            spl.append((gc[i],i))
         else:
            ipl.append((gc[i],i))
            
-    inductpts=[(5,0),(10,0),(4,1),(11,1),(3,1),(12,1)]
+    inductpts=[(3,1),(5,1),(1,1),(7,1)]
     for p in inductpts:
       mini=500
       g=0
@@ -578,39 +627,72 @@ def targetpt():
          ipl.remove(posj)
        
     for i in spl:
-       if i[0][0]==5 and i[0][1]==0:
+       if i[0][0]==3 and i[0][1]==1:
            if pkg1:
               dest=pkg1[0]
-              print(pkg1[0])
+              print("Picked up package no",tp1-len(pkg1)+1,"from induct 1,Destination =",pkg1[0])
               destlist=ptg[dest]
               for j in destlist:
                   if tc.count(j)==0:
                      targ=j
                      break
               pkg1.pop(0)
+              destbot[i[1]]=dest
            else:
-             targ=(5,0)
+             targ=(3,1)
            tc[i[1]]=targ
-       if i[0][0]==10 and i[0][1]==0:
+       if i[0][0]==5 and i[0][1]==1:
           if pkg2:
              dest=pkg2[0]
-             print(pkg2[0])
+             print("Picked up package no",tp2-len(pkg2)+1,"from induct 2,Destination =",pkg2[0])
              destlist=ptg[dest]
              for j in destlist:
                 if tc.count(j)==0:
                    targ=j
                    break
              pkg2.pop(0)
+             destbot[i[1]]=dest
           else:
-             targ=(10,0)
+             targ=(5,1)
           tc[i[1]]=targ
           
-    print(tc)
     cbscalc()
-   
+
+def statics():
+      tfl=tf.TransformListener()
+      stat=[]
+      for i in range(12,54):
+          stat.append(i)
+      for x in stat:
+          tfl.waitForTransform('map','tag_'+str(x),rospy.Time.now(),rospy.Duration(5.0))
+          (trans,rot)=tfl.lookupTransform('map','tag_'+str(x),rospy.Time(0))
+          stadic[x]=(trans[0],trans[1])
+def mapping():
+    global coords2,coords
+    coords2=[]
+    coords=[]
+    for i in range(0,9):
+          col=[]
+          for j in range(0,9):
+             col.append((-1.143+2*j*0.1524,1.143-2*i*0.1524))
+          coords.append(col)
+
+    tag=14
+    for i in range(1,8):
+      col=[]
+      for j in range(1,8):
+         if(i%2==0 and j%2==0) or (i==0) or (j==0) or (i==8) or (j==8):
+             col.append((0,0))
+             continue
+        #  print(tag)
+         coords[i][j]=(stadic[tag][0],stadic[tag][1])
+         tag+=1
+
+    coords2=coords
 def cbscalc():
-    global gc,tc
+    global gc,tc,bots
     print("Cbs start=",gc)
+    print("Targets=",tc)
     parser = argparse.ArgumentParser()
     parser.add_argument("param", help="input file containing map and obstacles")
     parser.add_argument("output", help="output file with the schedule")
@@ -627,8 +709,8 @@ def cbscalc():
     obstacles = param["map"]["obstacles"]
     agents = param['agents']
     
-    for i in range(0,6):
-       print(agents[0]['start'])
+    for i in range(bots):
+    #    print(agents[0]['start'])
        agents[i]['start']=[gc[i][0],gc[i][1]]
        agents[i]['goal']=[tc[i][0],tc[i][1]]
 #    print(agents)
@@ -641,35 +723,54 @@ def cbscalc():
     msg2=publish_plan(solution,'agent1')
     msg3=publish_plan(solution,'agent2')
     msg4=publish_plan(solution,'agent3')
-    msg5=publish_plan(solution,'agent4')
-    msg6=publish_plan(solution,'agent5')
-    path_pub1.publish(msg1)
-    path_pub2.publish(msg2)
-    path_pub3.publish(msg3)
-    path_pub4.publish(msg4)
-    path_pub5.publish(msg5)
-    path_pub6.publish(msg6)
-    mark(msg1,msg2,msg3,msg4,msg5,msg6)
+    # msg3=publish_plan(solution,'agent2')
+    # msg4=publish_plan(solution,'agent3')
+    # msg5=publish_plan(solution,'agent4')
+    # msg6=publish_plan(solution,'agent5')
+    mark(msg1,msg2,msg3,msg4)
     if not solution:
         print(" Solution not found" )
-  
+def pathinitialise():
+      global pmsg,bots
+      for i in range(bots):
+        pa = Path()
+        pa.header.frame_id = "map"
+        pa.header.stamp = rospy.Time.now()
+        pmsg[i]=pa
+    # print("Pmsg",pmsg[0])
 def main():
-    global f
-#    path_pub = rospy.Publisher('/dot/path', Path, queue_size=1)
-#    odom_call=rospy.Subscriber('/dot/odom',Odometry,odom_callback,queue_size=1)  
-#    m1=rospy.Subscriber('/dot1/marker',Marker,m1_callback,queue_size=1)
-#    m2=rospy.Subscriber('/dot2/marker',Marker,m2_callback,queue_size=1)
-#    m3=rospy.Subscriber('/dot3/marker',Marker,m3_callback,queue_size=1)
-#    m4=rospy.Subscriber('/dot4/marker',Marker,m4_callback,queue_size=1)
-#    m5=rospy.Subscriber('/dot5/marker',Marker,m5_callback,queue_size=1)
-#    m6=rospy.Subscriber('/dot6/marker',Marker,m6_callback,queue_size=1)
-#    recalc=rospy.Subscriber('/recalc',Int8,targetpt,queue_size=1)
-    if f==0:
+   global f
+   traj_call1=rospy.Subscriber('/dot4/trajectory_finished',Bool,trajer1,queue_size=10)
+   traj_call2=rospy.Subscriber('/dot2/trajectory_finished',Bool,trajer2,queue_size=10)
+   traj_call3=rospy.Subscriber('/dot3/trajectory_finished',Bool,trajer3,queue_size=10)
+   traj_call4=rospy.Subscriber('/dot1/trajectory_finished',Bool,trajer4,queue_size=10)
+   drop_call1=rospy.Subscriber('/dot4/dropdone',Int16,dropper1,queue_size=10)
+   drop_call2=rospy.Subscriber('/dot2/dropdone',Int16,dropper2,queue_size=10)
+   drop_call3=rospy.Subscriber('/dot3/dropdone',Int16,dropper3,queue_size=10)
+   drop_call4=rospy.Subscriber('/dot1/dropdone',Int16,dropper4,queue_size=10)
+   pathinitialise()
+   statics()
+   mapping()
+   if f==0:
       targetpt()
-      cbscalc()
-      f=1
 
 if __name__ == "__main__":
     rospy.init_node('talker', anonymous=True)
+    stadic={}
+    pa1=Path()
+    pa1.header.frame_id = "map"
+    pa1.header.stamp = rospy.Time.now()
+    pa2=Path()
+    pa2.header.frame_id="map"
+    pa2.header.stamp=rospy.Time.now()
+    pa3=Path()
+    pa3.header.frame_id="map"
+    pa3.header.stamp=rospy.Time.now()
+    pa4=Path()
+    pa4.header.frame_id="map"
+    pa4.header.stamp=rospy.Time.now()
+    pmsg=[pa1,pa2,pa3,path_pub4]
+    dropping=[1,1,1,1]
+    coords=[[(0.0,0.0)]*9 for i in range(9)]
     main()
     rospy.spin()

@@ -4,7 +4,14 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
+        - /Path1
+        - /Marker1
+        - /TF1
+        - /TF1/Frames1
         - /Odometry1
+        - /Marker2
+        - /Path2
+        - /Marker3
       Splitter Ratio: 0.5
     Tree Height: 561
   - Class: rviz/Selection
@@ -56,8 +63,8 @@ Visualization Manager:
       Head Diameter: 0.30000001192092896
       Head Length: 0.20000000298023224
       Length: 0.30000001192092896
-      Line Style: Lines
-      Line Width: 0.029999999329447746
+      Line Style: Billboards
+      Line Width: 0.05000000074505806
       Name: Path
       Offset:
         X: 0
@@ -68,12 +75,12 @@ Visualization Manager:
       Radius: 0.029999999329447746
       Shaft Diameter: 0.10000000149011612
       Shaft Length: 0.10000000149011612
-      Topic: /path
+      Topic: /dot1/path/viz
       Unreliable: false
       Value: true
     - Class: rviz/Marker
       Enabled: false
-      Marker Topic: /interpolator_viz
+      Marker Topic: /dot1/visualization_marker
       Name: Marker
       Namespaces:
         {}
@@ -84,9 +91,277 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: false
+        dot2/base_link:
+          Value: true
+        dot2/odom:
+          Value: true
+        dot2odom:
+          Value: true
+        dot2origin_link:
+          Value: true
+        dot4/base_link:
+          Value: true
+        dot4/odom:
+          Value: true
+        dot4odom:
+          Value: true
+        dot4origin_link:
+          Value: true
+        drop1:
+          Value: true
+        drop2:
+          Value: true
+        drop3:
+          Value: true
+        drop4:
+          Value: true
+        drop5:
+          Value: true
+        drop6:
+          Value: true
+        drop7:
+          Value: true
+        drop8:
+          Value: true
+        drop9:
+          Value: true
         map:
           Value: true
         path_frame:
+          Value: false
+        tag_0:
+          Value: true
+        tag_1:
+          Value: true
+        tag_12:
+          Value: false
+        tag_13:
+          Value: false
+        tag_14:
+          Value: false
+        tag_15:
+          Value: false
+        tag_16:
+          Value: false
+        tag_17:
+          Value: false
+        tag_18:
+          Value: false
+        tag_19:
+          Value: false
+        tag_20:
+          Value: false
+        tag_21:
+          Value: false
+        tag_22:
+          Value: false
+        tag_23:
+          Value: false
+        tag_24:
+          Value: false
+        tag_25:
+          Value: false
+        tag_26:
+          Value: false
+        tag_27:
+          Value: false
+        tag_28:
+          Value: false
+        tag_29:
+          Value: false
+        tag_30:
+          Value: false
+        tag_31:
+          Value: false
+        tag_32:
+          Value: false
+        tag_33:
+          Value: false
+        tag_34:
+          Value: false
+        tag_35:
+          Value: false
+        tag_36:
+          Value: false
+        tag_37:
+          Value: false
+        tag_38:
+          Value: false
+        tag_39:
+          Value: false
+        tag_40:
+          Value: false
+        tag_41:
+          Value: false
+        tag_42:
+          Value: false
+        tag_43:
+          Value: false
+        tag_44:
+          Value: false
+        tag_45:
+          Value: false
+        tag_46:
+          Value: false
+        tag_47:
+          Value: false
+        tag_48:
+          Value: false
+        tag_49:
+          Value: false
+        tag_50:
+          Value: false
+        tag_51:
+          Value: false
+        tag_52:
+          Value: false
+        tag_53:
+          Value: false
+        usb_cam1_link/parent:
+          Value: true
+        usb_cam1_link/tag_1:
+          Value: true
+        usb_cam1_link/tag_12:
+          Value: true
+        usb_cam1_link/tag_13:
+          Value: true
+        usb_cam1_link/tag_14:
+          Value: true
+        usb_cam1_link/tag_15:
+          Value: true
+        usb_cam1_link/tag_21:
+          Value: true
+        usb_cam1_link/tag_25:
+          Value: true
+        usb_cam1_link/tag_26:
+          Value: true
+        usb_cam1_link/tag_36:
+          Value: true
+        usb_cam1_link/tag_37:
+          Value: true
+        usb_cam2_link/parent:
+          Value: true
+        usb_cam2_link/tag_14:
+          Value: true
+        usb_cam2_link/tag_15:
+          Value: true
+        usb_cam2_link/tag_16:
+          Value: true
+        usb_cam2_link/tag_17:
+          Value: true
+        usb_cam2_link/tag_18:
+          Value: true
+        usb_cam2_link/tag_19:
+          Value: true
+        usb_cam2_link/tag_20:
+          Value: true
+        usb_cam2_link/tag_21:
+          Value: true
+        usb_cam2_link/tag_22:
+          Value: true
+        usb_cam2_link/tag_23:
+          Value: true
+        usb_cam2_link/tag_25:
+          Value: true
+        usb_cam2_link/tag_26:
+          Value: true
+        usb_cam2_link/tag_27:
+          Value: true
+        usb_cam2_link/tag_28:
+          Value: true
+        usb_cam2_link/tag_29:
+          Value: true
+        usb_cam2_link/tag_30:
+          Value: true
+        usb_cam2_link/tag_33:
+          Value: true
+        usb_cam2_link/tag_34:
+          Value: true
+        usb_cam2_link/tag_55:
+          Value: true
+        usb_cam3_link/parent:
+          Value: true
+        usb_cam3_link/tag_22:
+          Value: true
+        usb_cam3_link/tag_24:
+          Value: true
+        usb_cam3_link/tag_28:
+          Value: true
+        usb_cam3_link/tag_30:
+          Value: true
+        usb_cam3_link/tag_33:
+          Value: true
+        usb_cam3_link/tag_55:
+          Value: true
+        usb_cam4_link/parent:
+          Value: true
+        usb_cam4_link/tag_0:
+          Value: true
+        usb_cam4_link/tag_1:
+          Value: true
+        usb_cam4_link/tag_13:
+          Value: true
+        usb_cam4_link/tag_25:
+          Value: true
+        usb_cam4_link/tag_26:
+          Value: true
+        usb_cam4_link/tag_36:
+          Value: true
+        usb_cam4_link/tag_37:
+          Value: true
+        usb_cam4_link/tag_47:
+          Value: true
+        usb_cam4_link/tag_48:
+          Value: true
+        usb_cam5_link/parent:
+          Value: true
+        usb_cam5_link/tag_33:
+          Value: true
+        usb_cam5_link/tag_37:
+          Value: true
+        usb_cam5_link/tag_38:
+          Value: true
+        usb_cam5_link/tag_39:
+          Value: true
+        usb_cam5_link/tag_44:
+          Value: true
+        usb_cam5_link/tag_48:
+          Value: true
+        usb_cam5_link/tag_49:
+          Value: true
+        usb_cam5_link/tag_55:
+          Value: true
+        usb_cam6_link/parent:
+          Value: true
+        usb_cam6_link/tag_33:
+          Value: true
+        usb_cam6_link/tag_37:
+          Value: true
+        usb_cam6_link/tag_38:
+          Value: true
+        usb_cam6_link/tag_39:
+          Value: true
+        usb_cam6_link/tag_40:
+          Value: true
+        usb_cam6_link/tag_41:
+          Value: true
+        usb_cam6_link/tag_42:
+          Value: true
+        usb_cam6_link/tag_44:
+          Value: true
+        usb_cam6_link/tag_45:
+          Value: true
+        usb_cam6_link/tag_46:
+          Value: true
+        usb_cam6_link/tag_48:
+          Value: true
+        usb_cam6_link/tag_49:
+          Value: true
+        usb_cam6_link/tag_50:
+          Value: true
+        usb_cam6_link/tag_51:
+          Value: true
+        usb_cam6_link/tag_52:
           Value: true
       Marker Scale: 1
       Name: TF
@@ -95,8 +370,97 @@ Visualization Manager:
       Show Names: true
       Tree:
         map:
+          dot2/odom:
+            dot2/base_link:
+              {}
+          dot2origin_link:
+            dot2odom:
+              {}
+          dot4/odom:
+            dot4/base_link:
+              {}
+          dot4origin_link:
+            dot4odom:
+              {}
+          drop1:
+            {}
+          drop2:
+            {}
+          drop3:
+            {}
+          drop4:
+            {}
+          drop5:
+            {}
+          drop6:
+            {}
+          drop7:
+            {}
+          drop8:
+            {}
+          drop9:
+            {}
           path_frame:
             {}
+          tag_28:
+            tag_27:
+              tag_22:
+                tag_16:
+                  tag_15:
+                    tag_14:
+                      tag_21:
+                        tag_25:
+                          tag_1:
+                            {}
+                          tag_12:
+                            {}
+                          tag_26:
+                            {}
+                          tag_32:
+                            {}
+                  tag_17:
+                    {}
+              tag_33:
+                {}
+          tag_34:
+            tag_29:
+              tag_23:
+                tag_18:
+                  {}
+              tag_30:
+                tag_31:
+                  tag_24:
+                    tag_20:
+                      tag_19:
+                        {}
+                  tag_35:
+                    {}
+            tag_40:
+              tag_41:
+                tag_42:
+                  {}
+              tag_45:
+                tag_51:
+                  tag_50:
+                    {}
+                  tag_52:
+                    tag_53:
+                      tag_46:
+                        {}
+          tag_39:
+            tag_38:
+              tag_37:
+                tag_36:
+                  tag_0:
+                    {}
+                  tag_13:
+                    {}
+              tag_44:
+                tag_49:
+                  tag_48:
+                    tag_47:
+                      tag_43:
+                        {}
       Update Interval: 0
       Value: true
     - Angle Tolerance: 0.10000000149011612
@@ -150,10 +514,68 @@ Visualization Manager:
       Value: false
     - Class: rviz/Marker
       Enabled: true
-      Marker Topic: /visualization_marker
+      Marker Topic: /dot4/visualization_marker
       Name: Marker
       Namespaces:
-        {}
+        axle point: true
+        control point: true
+        goal point: true
+      Queue Size: 100
+      Value: true
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz/Path
+      Color: 25; 255; 0
+      Enabled: true
+      Head Diameter: 0.30000001192092896
+      Head Length: 0.20000000298023224
+      Length: 0.30000001192092896
+      Line Style: Lines
+      Line Width: 0.029999999329447746
+      Name: Path
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Pose Color: 255; 85; 255
+      Pose Style: None
+      Radius: 0.029999999329447746
+      Shaft Diameter: 0.10000000149011612
+      Shaft Length: 0.10000000149011612
+      Topic: /dot4/path/viz
+      Unreliable: false
+      Value: true
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz/Path
+      Color: 25; 255; 0
+      Enabled: true
+      Head Diameter: 0.30000001192092896
+      Head Length: 0.20000000298023224
+      Length: 0.30000001192092896
+      Line Style: Lines
+      Line Width: 0.029999999329447746
+      Name: Path
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Pose Color: 255; 85; 255
+      Pose Style: None
+      Radius: 0.029999999329447746
+      Shaft Diameter: 0.10000000149011612
+      Shaft Length: 0.10000000149011612
+      Topic: /dot4/path/viz
+      Unreliable: false
+      Value: true
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /dot2/visualization_marker
+      Name: Marker
+      Namespaces:
+        axle point: true
+        control point: true
+        goal point: true
       Queue Size: 100
       Value: true
   Enabled: true
@@ -184,7 +606,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 8.760865211486816
+      Distance: 5.216403007507324
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -199,10 +621,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.6153976321220398
+      Pitch: 1.5147963762283325
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 0.8753979206085205
+      Yaw: 4.555389881134033
     Saved: ~
 Window Geometry:
   Displays:

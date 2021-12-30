@@ -14,8 +14,8 @@ poses:
       frame_id: 'map'
     pose:
       position:
-        x: 0.0
-        y: 0.0
+        x: -0.009
+        y: 0.896
         z: 0.0
       orientation:
         x: 0.0
@@ -31,8 +31,25 @@ poses:
       frame_id: 'map'
     pose:
       position:
-        x: 5.0
+        x: -0.307
+        y: 0.900
+        z: 0.0
+      orientation:
+        x: 0.0
         y: 0.0
+        z: 0.0
+        w: 1.0
+  -
+    header:
+      seq: 2
+      stamp:
+        secs: 0
+        nsecs:         0
+      frame_id: 'map'
+    pose:
+      position:
+        x: -0.302
+        y: 0.600
         z: 0.0
       orientation:
         x: 0.0
@@ -48,8 +65,25 @@ poses:
       frame_id: 'map'
     pose:
       position:
+        x: -0.045
+        y: 0.600
+        z: 0.0
+      orientation:
         x: 0.0
-        y: -1.0
+        y: 0.0
+        z: 0.0
+        w: 1.0
+  -
+    header:
+      seq: 4
+      stamp:
+        secs: 0
+        nsecs:         0
+      frame_id: 'map'
+    pose:
+      position:
+        x: 0.0
+        y: 0.303
         z: 0.0
       orientation:
         x: 0.0
@@ -65,8 +99,25 @@ poses:
       frame_id: 'map'
     pose:
       position:
-        x: 5.0
-        y: -2.0
+        x: -0.295
+        y: 0.303
+        z: 0.0
+      orientation:
+        x: 0.0
+        y: 0.0
+        z: 0.0
+        w: 1.0
+  -
+    header:
+      seq: 6
+      stamp:
+        secs: 0
+        nsecs:         0
+      frame_id: 'map'
+    pose:
+      position:
+        x: -0.302
+        y: 0.600
         z: 0.0
       orientation:
         x: 0.0
@@ -82,8 +133,8 @@ poses:
       frame_id: 'map'
     pose:
       position:
-        x: 0.0
-        y: -3.0
+        x: -0.045
+        y: 0.600
         z: 0.0
       orientation:
         x: 0.0
@@ -99,45 +150,12 @@ poses:
       frame_id: 'map'
     pose:
       position:
-        x: 5.0
-        y: -4.0
+        x: -0.009
+        y: 0.896
         z: 0.0
       orientation:
         x: 0.0
         y: 0.0
         z: 0.0
         w: 1.0
-  -
-    header:
-      seq: 11
-      stamp:
-        secs: 0
-        nsecs:         0
-      frame_id: 'map'
-    pose:
-      position:
-        x: 0.0
-        y: -5.0
-        z: 0.0
-      orientation:
-        x: 0.0
-        y: 0.0
-        z: 0.0
-        w: 1.0
-  -
-    header:
-      seq: 12
-      stamp:
-        secs: 0
-        nsecs:         0
-      frame_id: 'map'
-    pose:
-      position:
-        x: 0.0
-        y: 0.0
-        z: 0.0
-      orientation:
-        x: 0.0
-        y: 0.0
-        z: 0.0
-        w: 1.0
+

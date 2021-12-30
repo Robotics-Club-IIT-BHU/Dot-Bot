@@ -1,0 +1,8 @@
+<launch>
+    <include file="$(find apriltag_ros)/launch/usb_continous_detection.launch">
+        <arg name="ind_id" value="/usb-SunplusIT_Inc_QHM990-HD_Camera_J2021012901-video-index0"/>
+        <arg name="cam_id" value="3"/>
+        <arg name="width" value="640"/>
+        <arg name="height" value="480"/>
+    </include>
+</launch>

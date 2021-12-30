@@ -2,30 +2,47 @@
 
 <launch>
     <arg name="rviz" default="false"/>
+    <arg name="namesp" default="dot"/>
+    <arg name="base_link" value="tag_0" if="$(eval arg('namesp')=='dot2' )"/>
+    <arg name="base_link" value="tag_1" if="$(eval arg('namesp')=='dot4' )"/>
+    <group ns="$(arg namesp)" >
+        <!-- Interpolator -->
+        <node name="interpolator" pkg="tracking_pid" type="path_interpolator">
+            <param name="dotname" value="$(arg namesp)"/>
+	<param name="target_x_vel" value="0.1"/>
+            <param name="target_x_acc" value="2.0"/>
+            <param name="target_yaw_vel" value="0.01"/>
+            <param name="target_yaw_acc" value="0.2"/>
+            <remap from="/path" to="/path"/>
+        </node>
+	
+        <!-- PID controller -->
+        <node name="controller" pkg="tracking_pid" type="controller"  output="screen">
+        <remap from="move_base/cmd_vel" to="cmd_vel"/>
+        <remap from="local_trajectory" to="trajectory"/>
+        <param name="controller_debug_enabled" value="True"/>
+        <param name="l" value="0.0"/>
+	 
+        <param name="base_link_frame" value="$(arg namesp)/center_link" />
+        <param name="track_base_link" value="True"/>
+        <param name="loop_rate" value="15"/>
+        <param name="Ki_long" value="10"/>
+        <param name="Kp_long" value="60"/>
+        <param name="Kd_long" value="5"/>
+        <param name="Ki_lat" value="10"/>
+        <param name="Kp_lat" value="60"/>
+        <param name="Kd_lat" value="5"/>
+        </node>
+     
+        <!-- Test path -->
+        
+        <node pkg="tf" type="static_transform_publisher" args=" 0 0 0 0 0 0 map path_frame 10" name="path_frame_tfpub"/>
 
-    <!-- Interpolator -->
-    <node name="interpolator" pkg="tracking_pid" type="path_interpolator">
-        <param name="target_x_vel" value="0.3"/>
-        <param name="target_x_acc" value="0.2"/>
-    </node>
-
-    <!-- PID controller -->
-    <node name="controller" pkg="tracking_pid" type="controller"  output="screen">
-      <remap from="move_base/cmd_vel" to="/dot/cmd_vel"/>
-      <remap from="local_trajectory" to="trajectory"/>
-      <param name="controller_debug_enabled" value="True"/>
-      <param name="l" value="0.0001"/>
-    </node>
-
-    <!-- Test path -->
-<!--    <node name="publish_path" pkg="rostopic" type="rostopic" args="pub latch /path nav_msgs/Path file=$(find tracking_pid)/trajectories/test_path.yaml"/>-->
-<!--    <node pkg="tf" type="static_transform_publisher" args=" 0 0 0 0 0 0 map path_frame 100" name="path_frame_tfpub"/>-->
-
-    <!-- Rviz -->
-    <node if="$(arg rviz)" name="$(anon rviz)" pkg="rviz" type="rviz" args="-d $(find tracking_pid)/test/tracking_pid/controller.rviz" />
+        <!-- Rviz -->
+        <node if="$(arg rviz)" name="$(anon rviz)" pkg="rviz" type="rviz" args="-d $(find tracking_pid)/test/tracking_pid/controller.rviz" />
 
 
-    <!-- test script -->
-    <test test-name="rostest_tracking_pid_node" pkg="tracking_pid" type="test_tracking_pid_system.py" />
-
+        <!-- test script -->
+        <test test-name="rostest_tracking_pid_node" pkg="tracking_pid" type="test_tracking_pid_system.py" />
+    </group>
 </launch>

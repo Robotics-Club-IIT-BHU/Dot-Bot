@@ -336,7 +336,7 @@ void Controller::selectMode(ControllerMode mode)
   {
   case ControllerMode::frontAxleLateral:
     // Front axle lateral controller (default)
-    l = 0.5;
+    l = 0.0;
     feedback_long_enabled = true;
     feedback_lat_enabled = true;
     feedback_ang_enabled = false;

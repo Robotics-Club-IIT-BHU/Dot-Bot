@@ -3,7 +3,7 @@
 """Accept a ROS navmsgs/Path and publish traj_point to tracking_pid interpolated along the given Path"""
 
 from dynamic_reconfigure.server import Server
-from geometry_msgs.msg import PoseStamped
+from geometry_msgs.msg import PoseStamped,Twist
 from nav_msgs.msg import Path
 from std_msgs.msg import Bool
 from std_srvs.srv import SetBool
@@ -322,6 +322,10 @@ class InterpolatorNode(object):
         self._latest_path_msg = None
         self._path_sub = rospy.Subscriber("path", Path, self._accept_path_from_topic, queue_size=1)
         self._path_pub = rospy.Publisher("path/viz", Path, queue_size=1, latch=True)
+
+        self.botname=rospy.get_param("~botname", "dot")
+        self.botpub=rospy.Publisher(self.botname,Twist,queue_size=1,latch=True)
+        
         self._as = actionlib.SimpleActionServer("follow_path", FollowPathAction, auto_start=False)
         self._as.register_goal_callback(self._accept_goal)
         self._as.start()
@@ -521,7 +525,8 @@ class InterpolatorNode(object):
         if not self._current_section.duration_for_section.is_zero():
             progress_on_section = (duration_on_section / self._current_section.duration_for_section)
         else:
-            rospy.loginfo("Instantaneous completion of 0-length section")
+            rospy.sleep(2.5)
+            print("Harsh wastes tape")
             progress_on_section = 1
 
         tp = self._current_section.interpolate_with_acceleration(rospy.Time.now())
@@ -578,3 +583,4 @@ class InterpolatorNode(object):
             self.reconfigure_client.update_configuration({"l": new_l})
 
             self.enable_srv(True)
+

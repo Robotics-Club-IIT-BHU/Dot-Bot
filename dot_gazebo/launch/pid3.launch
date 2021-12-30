@@ -1,0 +1,8 @@
+<launch>
+     <param name="rviz" value="true" />
+     <include file="$(find tracking_pid)/test/tracking_pid/test_tracking_pid.test">
+        <arg name="namesp" value="dot3"/>
+        <arg name="rviz"  value="true" />
+    </include> 
+
+</launch>

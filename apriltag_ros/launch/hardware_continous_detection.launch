@@ -1,0 +1,141 @@
+<launch>
+    <arg name="wt" default="640"/>
+    <arg name="ht" default="480"/>
+    <!-- <arg name="node_namespace" default="apriltag_ros_continuous_node_usbcam" /> -->
+
+    <!-- <rosparam command="load" file="$(find apriltag_ros)/config/settings.yaml" ns="$(arg node_namespace)" />
+    <rosparam command="load" file="$(find apriltag_ros)/config/tags.yaml" ns="$(arg node_namespace)" /> -->
+    
+    <!-- <include name="$(find apriltag_ros)/launch/usb_continous_detection.launch">
+        <arg name="ind_id" value="0"/>
+    </include> -->
+<!--    <include file="$(find apriltag_ros)/launch/usb_continous_detection.launch">-->
+<!--        <arg name="ind_id" value="0"/>-->
+<!--    </include>-->
+    <!-- <include file="$(ch/usb_continous_detection.launch">
+        <arg name="ind_id" value="/usb-046d_C270_HD_WEBCAM_FDA42360-video-index0"/>
+        <arg name="cam_id" value="4"/>
+        <arg name="width" value="1280"/>
+        <arg name="height" value="720"/> -->
+    <!-- </include>find apriltag_ros)/launch/usb_continous_detection.launch"> -->
+    <!-- <include file="$(find apriltag_ros)/launch/usb_continous_detection.launch">
+        <arg name="ind_id" value="/usb-046d_C270_HD_WEBCAM_29A18260-video-index0"/>
+        <arg name="cam_id" value="1"/>
+        <arg name="width" value="1280"/>
+        <arg name="height" value="720"/>
+    </include>
+    <include file="$(find apriltag_ros)/launch/usb_continous_detection.launch">
+        <arg name="ind_id" value="/usb-SunplusIT_Inc_ZQ-1080_HD_camera_W2021061701-video-index0"/>
+        <arg name="cam_id" value="2"/>
+        <arg name="width" value="640"/>
+        <arg name="height" value="480"/>
+    </include>
+    <include file="$(find apriltag_ros)/launch/usb_continous_detection.launch">
+        <arg name="ind_id" value="/usb-SunplusIT_Inc_QHM990-HD_Camera_J2021012901-video-index0"/>
+        <arg name="cam_id" value="3"/>
+        <arg name="width" value="640"/>
+        <arg name="height" value="480"/>
+    </include>
+    <include file="$(find apriltag_ros)/launch/usb_continous_detection.launch">
+        <arg name="ind_id" value="/usb-046d_C270_HD_WEBCAM_FDA42360-video-index0"/>
+        <arg name="cam_id" value="4"/>
+        <arg name="width" value="1280"/>
+        <arg name="height" value="720"/>
+    </include>
+    <include file="$(find apriltag_ros)/launch/usb_continous_detection.launch">
+        <arg name="ind_id" value="/usb-046d_0825_BA848E20-video-index0"/>
+        <arg name="cam_id" value="5"/>
+        <arg name="width" value="1280"/>
+        <arg name="height" value="720"/>
+    </include>
+    <include file="$(find apriltag_ros)/launch/usb_continous_detection.launch">
+        <arg name="ind_id" value="/usb-SunplusIT_Inc_ZQ-1080_HD_camera_W2021061701-video-index0"/>
+        <arg name="cam_id" value="6"/>
+        <arg name="width" value="640"/>
+        <arg name="height" value="480"/>
+    </include> -->
+
+   <!-- <node type="rviz" name="rviz" pkg="rviz" args="-d $(find apriltag_ros)/config/tag.rviz" /> -->
+   <!-- <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag" args="-0.3048 0 0 0 0 0 1 map tag_15"/> -->
+    <!-- <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag2" args="-0.015 -0.622 0.032 -0.113 -0.031 -0.012 0.993 tag_15 tag_25"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag3" args="-0.595 0.615 0.093 0.053 -0.034 0.005 0.998 tag_15 tag_14"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag4" args="0.315 0.293 -0.006 -0.040 0.021 -0.010 0.999 tag_32 tag_16"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag5" args="-0.606 -0.016 0.001 0.000 0.008 0.015 1.000 tag_15 tag_17"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag6" args="-0.616 -0.618 -0.077 0.018 -0.019 -0.002 1.000 tag_15 tag_20"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag7" args="0.606 0.013 -0.044 -0.012 0.053 0.002 0.999 tag_16 tag_18"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag8" args="0.606 0.009 -0.059 0.008 0.086 0.005 0.996 tag_18 tag_21"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag9" args="0.605 -0.017 0.077 -0.010 -0.037 -0.007 0.999 tag_15 tag_19"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag10" args="0.613 -0.630 0.000 -0.108 0.058 0.006 0.992 tag_15 tag_24"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag11" args="0.617 -0.018 -0.026 -0.005 0.047 -0.017 0.999 tag_19 tag_26"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag12" args="0.603 -0.013 -0.040 -0.010 0.057 -0.015 0.998 tag_24 tag_23"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag13" args="-0.302 0.311 0.066 -0.028 -0.036 0.010 0.999 tag_15 tag_32"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag14" args="-0.264 0.293 0.118 0.055 -0.019 -0.004 0.998 tag_32 tag_14"/>    
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag15" args="0.095 0.484 0.593 0.079 -0.052 -0.024 0.995 tag_32 tag_12"/>   
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag16" args="0.294 0.301 -0.021 -0.028 0.035 0.011 0.999 tag_16 tag_27"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag17" args="0.305 0.306 -0.004 -0.016 0.048 0.010 0.999 tag_18 tag_29"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag31" args="0.292 -0.306 0 0.061 0.021 -0.004 0.998 tag_24 tag_31"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag34" args="-0.241 -0.364 0 -0.001 0.040 -0.011 0.999 tag_17 tag_34"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag30" args="0.280 -0.294 0 -0.071 -0.007 -0.005 0.997 tag_17 tag_30"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag33" args="0.307 -0.293 0 0.023 0.006 -0.017 1.000 tag_20 tag_33"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag28" args="0.311 -0.294 0 0.052 -0.014 -0.010 0.999 tag_25 tag_28"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag29" args="-0.134 -0.213 0.133 -0.014 -0.001 -0.009 1.000 tag_14 tag_13"/> -->
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag1" args="0.308 0.011 0.001 -0.0 -0.002 -0.013 0.999 map tag_34"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag2" args="0.010 0.300 -0.014 -0.038 -0.002 -0.013 0.999 tag_53 tag_46"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag3" args="-0.005 0.288 0.007 -0.023 0.011 0.003 1.000 tag_46 tag_42"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag4" args="-0.295 -0.008 -0.007 -0.007 -0.029 0.006 1.000 tag_42 tag_41"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag5" args="-0.297 0.002 -0.006 0.000 -0.020 0.001 1.000 tag_41 tag_40"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag6" args="-0.300 0.008 0.004 0.005 -0.021 -0.003 1.000 tag_53 tag_52"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag7" args="-0.287 -0.000 -0.007 -0.002 -0.021 -0.006 1.000 tag_52 tag_51"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag8" args="-0.003 0.301 -0.004 -0.028 -0.001 0.008 1.000 tag_51 tag_45"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag9" args="0.297 -0.002 -0.004 0.014 0.016 -0.008 1.000 tag_30 tag_31"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag10" args="-0.010 0.302 0.000 -0.025 0.009 -0.002 1.000 tag_31 tag_24"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag11" args="-0.009 0.296 -0.004 -0.025 -0.001 0.010 1.000 tag_24 tag_20"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag12" args="-0.292 0.005 -0.018 0.007 -0.034 -0.000 0.999 tag_20 tag_19"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag13" args="0.300+ 0.007 0.011 -0.017 0.003 0.004 1.000 tag_29 tag_30"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag14" args="-0.000 0.297 -0.007 -0.017 0.003 0.004 1.000 tag_29 tag_23"/>    
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag15" args="-0.002 0.299 -0.014 0.079 -0.052 -0.024 0.995 tag_23 tag_18"/>   
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag16" args="-0.009 0.302 -0.001 -0.026 0.012 -0.002 1.000 tag_34 tag_29"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="tag_12" args="-0.218 0.074 0.006 0.000 0.009 -0.006 1.000 tag_25 tag_12"/>
+   <node pkg="tf2_ros" type="static_transform_publisher" name="tag_14" args="-0.296 0.009 -0.007 0.007 -0.003 -0.005 1.000 tag_15 tag_14"/>
+   <node pkg="tf2_ros" type="static_transform_publisher" name="tag_15" args="-0.300 -0.003 -0.007 0.008 -0.014 0.003 1.000 tag_16 tag_15"/>
+   <node pkg="tf2_ros" type="static_transform_publisher" name="tag_16" args="-0.001 0.300 0.005 -0.012 -0.001 -0.004 1.000 tag_22 tag_16"/>
+   <node pkg="tf2_ros" type="static_transform_publisher" name="tag_17" args="0.299 -0.004 -0.004 -0.008 0.017 0.005 1.000 tag_16 tag_17"/>
+   <node pkg="tf2_ros" type="static_transform_publisher" name="tag_21" args="-0.000 -0.305 0.005 0.005 0.002 -0.001 1.000 tag_14 tag_21"/>
+   <node pkg="tf2_ros" type="static_transform_publisher" name="tag_22" args="-0.006 0.296 -0.011 -0.025 -0.008 0.006 1.000 tag_27 tag_22"/>
+   <node pkg="tf2_ros" type="static_transform_publisher" name="tag_25" args="0.003 -0.297 0.014 -0.006 -0.022 -0.001 1.000 tag_21 tag_25"/>
+   <node pkg="tf2_ros" type="static_transform_publisher" name="tag_26" args="0.288 -0.001 -0.010 -0.019 0.031 -0.007 0.999 tag_25 tag_26"/>
+   <node pkg="tf2_ros" type="static_transform_publisher" name="tag_27" args="-0.295 0.002 0.027 -0.016 0.030 0.000 0.999 tag_28 tag_27"/>
+   <node pkg="tf2_ros" type="static_transform_publisher" name="tag_28" args="-0.000 0.303 0.00 -0.0 0.0 -0.0 1.000 map tag_28"/>
+   <node pkg="tf2_ros" type="static_transform_publisher" name="tag_32" args="-0.000 -0.305 -0.001 -0.015 0.010 0.002 1.000 tag_25 tag_32"/>
+   <node pkg="tf2_ros" type="static_transform_publisher" name="tag_33" args="0.005 -0.295 -0.003 0.034 -0.008 0.009 0.999 tag_27 tag_33"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag1x" args="-0.005 -0.306 0.007 0.000 0.00 0.00 1.000 map tag_39"/>
+   <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag2x" args="-0.295 0.015 -0.010 0.010 0.002 -0.019 1.000 tag_39 tag_38"/>
+   <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag3x" args="-0.297 0.001 0.004 0.001 -0.008 0.011 1.000 tag_51 tag_50"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag4x" args="0.008 -0.297 0.021 -0.045 0.054 0.017 0.997 tag_44 tag_49"/>
+     <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag5x" args="0.011 -0.303 0.009 0.007 -0.009 0.008 1.000 tag_38 tag_44"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag6x" args="-0.301 -0.010 0.003 0.002 0.008 0.017 1.000 tag_38 tag_37"/>
+   <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag7x" args="-0.288 -0.003 -0.001 0.001 0.005 -0.000 1.000 tag_37 tag_36"/>
+<node pkg="tf2_ros" type="static_transform_publisher" name="world_tag8x" args="-0.294 -0.008 -0.011 -0.001 0.004 -0.004 1.000 tag_49 tag_48"/>
+<node pkg="tf2_ros" type="static_transform_publisher" name="world_tag9x" args="-0.287 -0.001 0.001 0.001 0.012 0.002 1.000 tag_48 tag_47"/>
+<node pkg="tf2_ros" type="static_transform_publisher" name="world_tag1x0" args="0.001 0.301 0.000 0.008 0.001 -0.002 1.000 tag_47 tag_43"/>
+<node pkg="tf2_ros" type="static_transform_publisher" name="world_tag11x" args="-0.224 -0.076 0.003 -0.002 0.001 -0.014 1.000 tag_36 tag_13"/>
+  <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag12x" args="-0.008 -0.295 -0.020 0.036 0.010 0.005 0.999 tag_34 tag_40"/>
+ <node pkg="tf2_ros" type="static_transform_publisher" name="world_tag13x" args="0.301 -0.009 0.004 -0.011 0.020 -0.006 1.000 tag_40 tag_41"/>
+<node pkg="tf2_ros" type="static_transform_publisher" name="world_tag14x" args="0.299 0.007 -0.013 0.011 0.011 -0.007 1.000 tag_41 tag_42"/>
+<node pkg="tf2_ros" type="static_transform_publisher" name="world_tag15x" args="-0.002 -0.292 -0.006 0.026 0.001 -0.002 1.000 tag_40 tag_45"/>
+<node pkg="tf2_ros" type="static_transform_publisher" name="world_tag16x" args="0.004 -0.301 -0.009 0.027 -0.001 -0.002 1.000 tag_45 tag_51"/>
+<node pkg="tf2_ros" type="static_transform_publisher" name="world_tag17x" args="0.286 0.002 -0.009 -0.001 0.028 0.000 1.000 tag_51 tag_52"/>
+<node pkg="tf2_ros" type="static_transform_publisher" name="world_tag18x" args="0.300 -0.004 -0.013 -0.001 0.024 -0.003 1.000 tag_52 tag_53"/>
+<node pkg="tf2_ros" type="static_transform_publisher" name="world_tag19x" args="0.003 -0.299 -0.007 0.030 0.003 0.009 0.999 tag_31 tag_35"/>
+
+<node pkg="tf2_ros" type="static_transform_publisher" name="drop_point1" args="-0.607 -0.607 0.00 0.00 0.00 0.00 0.999 map drop1"/>
+<node pkg="tf2_ros" type="static_transform_publisher" name="drop_point2" args="-0.607 0.00 0.00 0.00 0.00 0.00 0.999 map drop2"/>
+<node pkg="tf2_ros" type="static_transform_publisher" name="drop_point3" args="-0.607 0.607 0.00 0.00 0.00 0.00 0.999 map drop3"/>
+<node pkg="tf2_ros" type="static_transform_publisher" name="drop_point4" args="0.00 -0.607 0.00 0.00 0.00 0.00 0.999 map drop4"/>
+<node pkg="tf2_ros" type="static_transform_publisher" name="drop_point5" args="0.00 0.00 0.00 0.00 0.00 0.00 0.999 map drop5"/>
+<node pkg="tf2_ros" type="static_transform_publisher" name="drop_point6" args="0.00 0.607 0.00 0.00 0.00 0.00 0.999 map drop6"/>
+<node pkg="tf2_ros" type="static_transform_publisher" name="drop_point7" args="0.607 -0.607 0.00 0.00 0.00 0.00 0.999 map drop7"/>
+<node pkg="tf2_ros" type="static_transform_publisher" name="drop_point8" args="0.607 0.00 0.00 0.00 0.00 0.00 0.999 map drop8"/>
+<node pkg="tf2_ros" type="static_transform_publisher" name="drop_point9" args="0.607 0.607 0.00 0.00 0.00 0.00 0.999 map drop9"/>
+    
+</launch>
