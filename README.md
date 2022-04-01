@@ -281,3 +281,16 @@ roslaunch dot_gazebo gazebo.launch ps:=ps2
             └── struct.md
 
             202 directories, 317 files
+# Contributors
+ * Somnath Kumar 
+ * Varad Pandey
+ * Harsh Mahesheka
+ * Sandeepan Ghosh
+ * Ankur Agrawal
+ * Prateek
+ * Surabhit Gupta
+ * Vishwas Chepuri
+ * Pranav Mittal
+ * Aryaman Gupta
+ * Dhruv Agarwal 
+ * Vivek Agarwal
