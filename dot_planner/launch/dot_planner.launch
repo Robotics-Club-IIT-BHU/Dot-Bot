@@ -6,7 +6,7 @@
   <include file="$(find dot_gazebo)/launch/gazebo.launch" />
 
   <!-- Launching the teleoperation keyboard node -->
-  <node name="teleop_keyboard" pkg="dot_teleop" type="dot_teleop" launch-prefix="gnome-terminal --" />
+  <node name="teleop_keyboard" pkg="dot_teleop" type="dot_teleop.py" launch-prefix="gnome-terminal --" />
   
   <!-- Launching RViz -->
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rviz_file)"/>

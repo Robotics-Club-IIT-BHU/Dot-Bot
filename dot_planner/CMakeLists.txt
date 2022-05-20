@@ -12,8 +12,8 @@ find_package(catkin REQUIRED COMPONENTS
  dot_map
  dot_teleop
  dot_gazebo
+ rospy
 )
-
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 

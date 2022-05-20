@@ -5,7 +5,7 @@
 
 
 
-std_msgs::Float64 message;
+std_msgs::Float64 msg2,msg3,msg4;
 
 ros::Publisher publisher;
 ros::Subscriber joint_states;
@@ -26,7 +26,7 @@ double yaw_offset;
 bool yaw_flag=true;
 double xref, yref, thetaref;
 using namespace std;
-
+int g=0;
 
 
 ros::Time timeCurrent;
@@ -71,6 +71,7 @@ namespace omnidrive{
       yaw_offset = yaw;
     }
     odom_theta = yaw - yaw_offset;
+    //cout<<"Theta"<<odom_theta<<"\n";
     //odom_theta = yaw;
   }
   void drive::onGazeboMessage(const gazebo_msgs::ModelStates::ConstPtr& msg){
@@ -124,8 +125,8 @@ namespace omnidrive{
     long double v_left0  = v_left  * r;
     long double v_back0  = v_back  * r;
     long double v_right0 = v_right * r;
-    x     = ((2.0 * v_back0) - v_left0 - v_right0) / 3.0;
-    y     = ((1.73 * v_right0) - (1.73 * v_left0)) / 3.0;
+    x     = ((2.0 * v_back0) - v_left0 - v_right0) / 4;
+    y     = ((sqrt3 * v_right0) - (sqrt3 * v_left0)) / 4;
     //theta = (v_left0 + v_back0 + v_right0) / (3*L);
     
     double X = cos(odom_theta)*x - sin(odom_theta)*y;
@@ -150,24 +151,32 @@ namespace omnidrive{
       vx = msg.linear.x;
       vy = msg.linear.y;
       wp = msg.angular.z;
+      g=1;
       
   }
   //publish velocity as was stated in the /cmd_vel
   void drive::controlLoop(){
 
     double vmx=vx, vmy=vy, wmp=wp;
-
+    vmx=cos(odom_theta)*vx + sin(odom_theta)*vy;
+    vmy= -sin(odom_theta)*vx + cos(odom_theta)*vy;
     double v1, v2, v3;
     v1 = (L * wmp - (vmx / 2) - (sqrt3by2 * vmy));
     v2 = (vmx + (L * wmp));
     v3 = (L * wmp - (vmx / 2) + (sqrt3by2 * vmy));
+//      v1=-(-(1/3.00)*vmx + (2/3.0)*vmy -(1/3.0)*wmp);
+//      v2=-(1/sqrt3)*vmx + (1/sqrt3)*vmy;
+//      v3=(L/3.0)*vmx + (L/3.0)*wmp + (L/3.0)*vmy;
+     //if(g==1)
+      //v1=0.3;v2=0.0;v3=-0.3;
+    //cout<<"v1="<<v1<<"v2="<<v2<<"v3="<<v3<<"\n";
+    lpos.data += 12*v1*dt_/r;
+    bpos.data += 12*v2*dt_/r;
+    rpos.data += 12*v3*dt_/r;
 
-  
-    lpos.data += 10*v1*dt_/r;
-    bpos.data += 10*v2*dt_/r;
-    rpos.data += 10*v3*dt_/r;
-
-   
+    msg2.data=v1;
+    msg3.data=v2;
+    msg4.data=v3;
     left_pub.publish(lpos);
     right_pub.publish(rpos);
     back_pub.publish(bpos);

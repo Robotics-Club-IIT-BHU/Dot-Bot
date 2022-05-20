@@ -66,14 +66,13 @@ class Dot:
                 error *= -1
 
             twt = Twist()
-            twt.linear.x = 0.002 / abs(error) # Linear velocity inversely propotinal to error
+            twt.linear.x = 0#0.002 / abs(error) # Linear velocity inversely propotinal to error
             twt.linear.y = 0
             twt.linear.z = 0
 
             twt.angular.x = 0
             twt.angular.y = 0
-            twt.angular.z = error * 0.5 # angular velocity directly propotinal to error
-
+            twt.angular.z = error * 20.5 # angular velocity directly propotinal to error
             self.vel_pub.publish(twt)
             print(error, self.dist(goal))
 
@@ -94,7 +93,7 @@ class Dot:
         return math.sqrt((goal[0] - self.cur_x) ** 2 + (goal[1] - self.cur_y) ** 2)
         
 
-GOALS = [[0.25, -0.5], [-0.9, -0.5]]
+GOALS = [[0.25, -0.5]]
 
 if __name__ == '__main__':
     try:

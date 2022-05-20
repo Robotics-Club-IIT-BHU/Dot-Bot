@@ -6,7 +6,7 @@ namespace gazebo_map {
   GazebomapPublisher::GazebomapPublisher(ros::NodeHandle &nodeHandle):nodeHandle_(nodeHandle){
     pub_ = nodeHandle_.advertise<nav_msgs::Odometry>("map", 50) ;
     modelName_= (std::string)"dot" ;
-    relativeEntityName_ = (std::string)"nosignal_ps1.world";
+    relativeEntityName_ = (std::string)"nosignal_ps2.world";
     client_ = nodeHandle_.serviceClient<gazebo_msgs::GetModelState>("/gazebo/get_model_state") ;
   }
   void GazebomapPublisher::publishmap(){
